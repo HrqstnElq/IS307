@@ -45,7 +45,7 @@
                 <CollectionView
                     Grid.Row="0"
                     x:Name="lstProducts"
-                    IsGrouped="True"
+                    IsGrouped="False"
                     ItemsSource="{Binding Products}"
                     ItemSizingStrategy="{OnPlatform Android=MeasureAllItems,iOS=MeasureFirstItem}">
                     <CollectionView.ItemsLayout>
@@ -127,18 +127,19 @@
             </Grid>
         </pc:PancakeView>
 
+    
         <Label
-            FontFamily="Material"
-            BackgroundColor="Transparent"
-            Padding="16"
-            FontSize="24"
-            HorizontalOptions="Start"
-            VerticalOptions="Start"
-            Text="{Static res:IconFont.ArrowLeft}"
-            TextColor="DimGray">
+        FontFamily="Material"
+        BackgroundColor="Transparent"
+        Padding="16"
+        FontSize="24"
+        HorizontalOptions="Start"
+        VerticalOptions="Start"
+        Text="{Static res:IconFont.ArrowLeft}"
+        TextColor="DimGray">
             <Label.GestureRecognizers>
                 <TapGestureRecognizer
-                    Command="{Binding GoBackCommand}" />
+                Command="{Binding GoBackCommand}" />
             </Label.GestureRecognizers>
         </Label>
         

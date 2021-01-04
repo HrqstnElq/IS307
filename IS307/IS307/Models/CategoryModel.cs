@@ -11,6 +11,5 @@ namespace IS307.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string PictureUrl { get; set; }
-        public string Code { get; set; }
     }
 }

@@ -1,10 +1,8 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows.Input;
-using Bogus;
+﻿using Bogus;
 using IS307.Models;
-using IS307.Views;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace IS307.ViewModels
@@ -14,9 +12,7 @@ namespace IS307.ViewModels
         private bool productShown;
         private bool hasCartItems;
 
-        public BrandModel Brand { get; set; }
-
-        public ObservableCollection<IGrouping<string, ProductModel>> Products { get; set; }
+        public ObservableCollection<ProductModel> Products { get; set; }
 
         public ObservableCollection<CategoryModel> Categories { get; set; }
 
@@ -50,27 +46,16 @@ namespace IS307.ViewModels
 
         public ICommand GoBackCommand { get; set; }
 
-        public ProductsViewModel(INavigation navigation, BrandModel brand)
+        public ProductsViewModel(INavigation navigation)
         {
-            Brand = brand;
-
-            var categoryFaker = new Faker<CategoryModel>()
-                .RuleFor(x => x.Code, o => o.Lorem.Slug(1))
-                .RuleFor(x => x.Name, o => o.Commerce.Categories(1)[0])
-                .RuleFor(x => x.PictureUrl, o => o.Image.PicsumUrl());
-            Categories = new ObservableCollection<CategoryModel>(categoryFaker.Generate(10));
-
             var productFaker = new Faker<ProductModel>()
                 .RuleFor(x => x.Pricing, o => o.Random.Double(10, 200))
-                .RuleFor(x => x.Category, o => o.PickRandom(Categories.Select(x => x.Name)))
                 .RuleFor(x => x.Name, o => o.Commerce.ProductName())
                 .RuleFor(x => x.PictureUrl, o => o.Image.PicsumUrl());
 
             var items = productFaker.Generate(200);
 
-            Products = new ObservableCollection<IGrouping<string, ProductModel>>(
-                items.GroupBy(x => x.Category)
-                );
+            Products = new ObservableCollection<ProductModel>(items);
 
             ViewProductDetailCommand = new Command<ProductModel>(product =>
             {
@@ -90,10 +75,6 @@ namespace IS307.ViewModels
                 navigation.PopAsync();
             });
 
-            //ViewCartCommand = new Command(() =>
-            //{
-            //    navigation.PushAsync(new CartPage());
-            //});
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

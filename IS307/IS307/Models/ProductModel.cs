@@ -12,5 +12,6 @@ namespace IS307.Models
         public string Name { get; set; }
         public double Pricing { get; set; }
         public string PictureUrl { get; set; }
+        public string Category { get; set; }
     }
 }
