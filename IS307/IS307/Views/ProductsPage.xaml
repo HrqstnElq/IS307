@@ -3,11 +3,10 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pc="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-    xmlns:controls="clr-namespace:IS307.Controls"
     xmlns:res="clr-namespace:IS307.Resources"
     NavigationPage.HasNavigationBar="False"
+    BackgroundColor="White"
     x:Name="root"
-    BackgroundColor="{Binding Brand.ColorCode}"
     x:Class="IS307.Views.ProductsPage">
     <Grid>
         <Grid.Padding>
@@ -27,21 +26,12 @@
             <RowDefinition
                 Height="*" />
         </Grid.RowDefinitions>
-
-        <Image
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            HeightRequest="96"
-            Source="{Binding Brand.HighlightUrl}"
-            Aspect="AspectFit" />
-            
         <pc:PancakeView
             x:Name="container"
             Padding="0"
             Grid.Row="0"
             Grid.RowSpan="2"
             VerticalOptions="EndAndExpand"
-            Margin="0,152,0,-152"
             BackgroundColor="White"
             CornerRadius="20"
             HasShadow="False">
@@ -49,81 +39,15 @@
                 RowSpacing="0">
                 <Grid.RowDefinitions>
                     <RowDefinition
-                        Height="144" />
-                    <RowDefinition
                         Height="*" />
                 </Grid.RowDefinitions>
-                <controls:BrandView
-                    VerticalOptions="Center"
-                    Margin="24,0"
-                    BindingContext="{Binding Brand}" />
 
                 <CollectionView
-                    Grid.Row="1"
+                    Grid.Row="0"
                     x:Name="lstProducts"
                     IsGrouped="True"
-                    Header="{Binding Categories}"
                     ItemsSource="{Binding Products}"
                     ItemSizingStrategy="{OnPlatform Android=MeasureAllItems,iOS=MeasureFirstItem}">
-
-                    <CollectionView.HeaderTemplate>
-                        <DataTemplate>
-                            <Grid >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition
-                                        Height="160" />
-                                </Grid.RowDefinitions>
-                                <CollectionView
-                                    ItemsSource="{Binding .}"
-                                    ItemSizingStrategy="MeasureFirstItem">
-                                    <CollectionView.ItemsLayout>
-                                        <LinearItemsLayout
-                                            ItemSpacing="0"
-                                            Orientation="Horizontal" />
-                                    </CollectionView.ItemsLayout>
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid
-                                                Padding="8"
-                                                BackgroundColor="White">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition
-                                                        Height="144" />
-                                                </Grid.RowDefinitions>
-                                                <pc:PancakeView
-                                                    CornerRadius="20">
-                                                    <StackLayout
-                                                        Spacing="2">
-                                                        <Image
-                                                            Aspect="AspectFit"
-                                                            Margin="16,16,16,0"
-                                                            WidthRequest="72"
-                                                            HeightRequest="96"
-                                                            Source="{Binding PictureUrl}" />
-
-                                                        <Label
-                                                            FontSize="Small"
-                                                            HorizontalTextAlignment="Center"
-                                                            Text="{Binding Name}" />
-                                                    </StackLayout>
-                                                </pc:PancakeView>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </CollectionView.ItemTemplate>
-                                </CollectionView>
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.HeaderTemplate>
-
-                    <CollectionView.GroupHeaderTemplate>
-                        <DataTemplate>
-                            <Label
-                                Padding="24,8"
-                                FontSize="Medium"
-                                FontAttributes="Bold"
-                                Text="{Binding Key}" />
-                        </DataTemplate>
-                    </CollectionView.GroupHeaderTemplate>
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout
                             Span="2"
@@ -150,7 +74,7 @@
 
                                 <Label
                                     Grid.Row="1"
-                                    Margin="24,0"
+                                    Margin="32,0"
                                     MaxLines="2"
                                     FontSize="Small"
                                     VerticalTextAlignment="End"
@@ -158,14 +82,14 @@
 
                                 <StackLayout
                                     Grid.Row="2"
-                                    Margin="24,0"
+                                    Margin="32,0"
                                     Orientation="Horizontal">
                                     <Label
                                         HorizontalOptions="StartAndExpand"
                                         FontAttributes="Bold"
                                         VerticalTextAlignment="Center"
                                         FontSize="Small"
-                                        Text="{Binding Pricing, StringFormat='VND {0:##,0}k'}" />
+                                        Text="{Binding Pricing, StringFormat='{0:##,0}k'}" />
 
                                     <pc:PancakeView
                                         BackgroundColor="AliceBlue"
@@ -218,35 +142,6 @@
             </Label.GestureRecognizers>
         </Label>
         
-        <!--<Grid
-            IsVisible="{Binding HasCartItems}"
-            Margin="16"
-            HorizontalOptions="End"
-            VerticalOptions="End"
-            Grid.RowSpan="2">
-            <Grid.RowDefinitions>
-                <RowDefinition
-                    Height="48" />
-            </Grid.RowDefinitions>
-            <pc:PancakeView
-                BackgroundColor="Black"
-                CornerRadius="24">
-                <Label
-                    Padding="24,0"
-                    VerticalOptions="Center"
-                    Text="View Cart"
-                    TextColor="White"
-                    HorizontalTextAlignment="Center"
-                    FontAttributes="Bold" />
-
-                <pc:PancakeView.GestureRecognizers>
-                    <TapGestureRecognizer
-                        Command="{Binding ViewCartCommand}"
-                        CommandParameter="{Binding ShownProduct}" />
-                </pc:PancakeView.GestureRecognizers>
-            </pc:PancakeView>
-        </Grid>-->
-
         <Grid
             IsVisible="false"
             Grid.Row="0"
@@ -295,7 +190,7 @@
                                 PanUpdated="PanGestureRecognizer_PanUpdated" />
                         </ContentView.GestureRecognizers>
                     </ContentView>
-
+    
                     <Image
                         Grid.Row="1"
                         Aspect="AspectFit"
@@ -327,65 +222,6 @@
                                 <RowDefinition
                                     Height="128" />
                             </Grid.RowDefinitions>
-
-                            <CollectionView>
-                                <CollectionView.ItemsLayout>
-                                    <LinearItemsLayout
-                                        ItemSpacing="0"
-                                        Orientation="Horizontal" />
-                                </CollectionView.ItemsLayout>
-                                <CollectionView.ItemsSource>
-                                    <Array
-                                        Type="{Type x:String}">
-                                        <x:String>1</x:String>
-                                        <x:String>1</x:String>
-                                        <x:String>1</x:String>
-                                        <x:String>1</x:String>
-                                        <x:String>1</x:String>
-                                        <x:String>1</x:String>
-                                        <x:String>1</x:String>
-                                        <x:String>1</x:String>
-                                    </Array>
-                                </CollectionView.ItemsSource>
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid
-                                            RowSpacing="0"
-                                            Padding="0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition
-                                                    Width="112" />
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition
-                                                    Height="80" />
-                                                <RowDefinition
-                                                    Height="32" />
-                                            </Grid.RowDefinitions>
-
-                                            <pc:PancakeView
-                                                Padding="24"
-                                                HorizontalOptions="Center"
-                                                BackgroundColor="AliceBlue"
-                                                CornerRadius="40"
-                                                Grid.Row="0">
-                                                <Image
-                                                    Aspect="AspectFit"
-                                                    VerticalOptions="Center"
-                                                    HorizontalOptions="Center"
-                                                    Source="https://gigamall.com.vn/data/2019/09/20/11493168_Trung-t%C3%A2m-th%C6%B0%C6%A1ng-m%E1%BA%A1i-GIGAMALL-McDonalds-1.jpg" />
-                                            </pc:PancakeView>
-
-                                            <Label
-                                                Grid.Row="1"
-                                                FontSize="Small"
-                                                VerticalOptions="Center"
-                                                HorizontalTextAlignment="Center"
-                                                Text="Big Fun" />
-                                        </Grid>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
                         </Grid>
                     </StackLayout>
                     <Grid
