@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pc="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     xmlns:res="clr-namespace:IS307.Resources"
-    NavigationPage.HasNavigationBar="False"
     BackgroundColor="White"
     x:Name="root"
     x:Class="IS307.Views.ProductsPage">
