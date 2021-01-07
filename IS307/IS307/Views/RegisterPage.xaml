@@ -29,19 +29,19 @@
                         </Grid.RowDefinitions>
                         <Label FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Center" Grid.Row="0" Text="SIGN UP" Margin="0, 0, 0, 50"/>
                         <Frame Grid.Row="1" CornerRadius="30" Padding="0" HasShadow="False"  Margin="0, 0, 0, 20">
-                            <controls:CustomEntry Text="{Binding RegisterModel.Name, Mode=TwoWay}" Placeholder="Your Name" BorderColor="WhiteSmoke" BackgroundColor="WhiteSmoke" FontSize="15" HeightRequest="50" Image="card" ImageAlignment="Right" ImageWidth="20" ImageHeight="20" CornerRadius="30" IsCurvedCornersEnabled="True"/>
+                            <controls:CustomEntry Text="{Binding RegisterModel.name, Mode=TwoWay}" Placeholder="Your Name" BorderColor="WhiteSmoke" BackgroundColor="WhiteSmoke" FontSize="15" HeightRequest="50" Image="card" ImageAlignment="Right" ImageWidth="20" ImageHeight="20" CornerRadius="30" IsCurvedCornersEnabled="True"/>
                         </Frame>
                         <Frame Grid.Row="2" CornerRadius="30" Padding="0" HasShadow="False"  Margin="0, 0, 0, 20">
-                            <controls:CustomEntry Text="{Binding RegisterModel.Username, Mode=TwoWay}" Placeholder="Username" BorderColor="WhiteSmoke" BackgroundColor="WhiteSmoke" FontSize="15" HeightRequest="50" Image="icon_user" ImageAlignment="Right" ImageWidth="20" ImageHeight="20" CornerRadius="30" IsCurvedCornersEnabled="True"/>
+                            <controls:CustomEntry Text="{Binding RegisterModel.username, Mode=TwoWay}" Placeholder="Username" BorderColor="WhiteSmoke" BackgroundColor="WhiteSmoke" FontSize="15" HeightRequest="50" Image="icon_user" ImageAlignment="Right" ImageWidth="20" ImageHeight="20" CornerRadius="30" IsCurvedCornersEnabled="True"/>
                         </Frame>
                         <Frame Grid.Row="3" CornerRadius="30" Padding="0" HasShadow="False"  Margin="0, 0, 0, 20">
-                            <controls:CustomEntry Text="{Binding RegisterModel.Password, Mode=TwoWay}" Placeholder="Password" IsPassword="True" BorderColor="WhiteSmoke" BackgroundColor="WhiteSmoke" FontSize="15" HeightRequest="50" Image="key" ImageAlignment="Right" ImageWidth="20" ImageHeight="20" CornerRadius="30" IsCurvedCornersEnabled="True"/>
+                            <controls:CustomEntry Text="{Binding RegisterModel.password, Mode=TwoWay}" Placeholder="Password" IsPassword="True" BorderColor="WhiteSmoke" BackgroundColor="WhiteSmoke" FontSize="15" HeightRequest="50" Image="key" ImageAlignment="Right" ImageWidth="20" ImageHeight="20" CornerRadius="30" IsCurvedCornersEnabled="True"/>
                         </Frame>
                         <Frame Grid.Row="4" CornerRadius="30" Padding="0" HasShadow="False"  Margin="0, 0, 0, 20">
-                            <controls:CustomEntry Text="{Binding RegisterModel.PasswordConfirm, Mode=TwoWay}" Placeholder="Password Confirm" IsPassword="True" BorderColor="WhiteSmoke" BackgroundColor="WhiteSmoke" FontSize="15" HeightRequest="50" Image="key" ImageAlignment="Right" ImageWidth="20" ImageHeight="20" CornerRadius="30" IsCurvedCornersEnabled="True"/>
+                            <controls:CustomEntry Text="{Binding RegisterModel.passwordConfirm, Mode=TwoWay}" Placeholder="Password Confirm" IsPassword="True" BorderColor="WhiteSmoke" BackgroundColor="WhiteSmoke" FontSize="15" HeightRequest="50" Image="key" ImageAlignment="Right" ImageWidth="20" ImageHeight="20" CornerRadius="30" IsCurvedCornersEnabled="True"/>
                         </Frame>
                         <Button Grid.Row="5" Command="{Binding Register}" CommandParameter="{Binding RegisterModel}" CornerRadius="15" Text="Sign Up" Margin="0, 0, 0, 20" BackgroundColor="#0097e6"/>
-                        <Label Grid.Row="6" HorizontalTextAlignment="Center" Text="Sign Up" TextColor="#0097e6">
+                        <Label Grid.Row="6" HorizontalTextAlignment="Center" Text="Sign In" TextColor="#0097e6">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ShowLogin}" />
                             </Label.GestureRecognizers>

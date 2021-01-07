@@ -1,17 +1,26 @@
 ﻿using IS307.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.Net;
+using System.Net.Http;
+using System.Text;
 
 namespace IS307.Services
 {
-    public static class AccountService
+    public class AccountService
     {
-        public static bool LoginService(LoginModel loginModel)
+        public async Task<string> LoginService(LoginModel loginModel)
         {
-            return true;
+            using(var content = new StringContent(JsonConvert.SerializeObject(loginModel), Encoding.UTF8, "application/json"))
+            {
+                //Singleton.HttpClient.DefaultRequestHeaders.Add("x-auth-token", "1");
+                var response = await Singleton.HttpClient.PostAsync("/user/login", content);
+                if(response.StatusCode == HttpStatusCode.OK)
+                    return JsonConvert.DeserializeObject<LoginResultModel>(await response.Content.ReadAsStringAsync()).token;
+                else
+                    return null;
+                
+            }
         }
 
 
@@ -21,9 +30,26 @@ namespace IS307.Services
         ///  1 : Username already exists
         ///  -1 : Bad request
         /// </returns>
-        public static int RegisterService(RegisterModel registerModel)
+        public async Task<int> RegisterService(RegisterModel registerModel)
         {
-            return 1;
+            using (var content = new StringContent(JsonConvert.SerializeObject(registerModel), Encoding.UTF8, "application/json"))
+            {
+                //Singleton.HttpClient.DefaultRequestHeaders.Add("x-auth-token", "1");
+                var response = await Singleton.HttpClient.PostAsync("/user/register", content);
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    return 0;
+                }
+                else if(response.StatusCode == HttpStatusCode.Forbidden)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
+
+            }
         }
     }
 }

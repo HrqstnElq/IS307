@@ -1,6 +1,5 @@
 ﻿using IS307.Models;
 using IS307.Services;
-using IS307.Views;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -14,35 +13,37 @@ namespace IS307.ViewModels
         public ICommand ShowRegister { get; set; }
         public ICommand Login { get; set; }
 
+        private readonly AccountService AccountService;
         public LoginViewModel(INavigation navigation)
         {
+            AccountService = new AccountService();
+
             LoginData = new LoginModel()
             {
-                Username = "",
-                Password = ""
+                username = "",
+                password = ""
             };
 
-            ShowRegister = new Command(() =>
+            ShowRegister = new Command(async () =>
             {
-                Shell.Current.GoToAsync("//RegisterPage").Wait();
+                await Shell.Current.GoToAsync("//RegisterPage");
             });
 
-            Login = new Command<LoginModel>(data =>
+            Login = new Command<LoginModel>(async (data) =>
             {
-                if (string.IsNullOrEmpty(data.Username) || string.IsNullOrEmpty(data.Password))
+                if (string.IsNullOrEmpty(data.username) || string.IsNullOrEmpty(data.password))
                 {
-                    Application.Current.MainPage.DisplayAlert("Waring !", "Username or password is required", "OK");
+                    await Application.Current.MainPage.DisplayAlert("Waring !", "Username or password is required", "OK");
                 }
                 else
                 {
-                    var result = AccountService.LoginService(data);
-                    if (result)
-                    {
-                        Shell.Current.GoToAsync("//HomePage").Wait();
-                    }
+                    var token = await AccountService.LoginService(data);
+                    if (string.IsNullOrEmpty(token))
+                        await Application.Current.MainPage.DisplayAlert("Error !", "Login fail", "Again");
                     else
                     {
-                        Application.Current.MainPage.DisplayAlert("Error !", "Login fail", "Again");
+                        Application.Current.Properties["token"] = token;
+                        await Shell.Current.GoToAsync("//HomePage");
                     };
                 }
             });

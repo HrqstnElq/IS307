@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace IS307.Models
 {
-    public class LoginModel
+    public class LoginResultModel
     {
-        public string username { get; set; }
-        public string password { get; set; }
+        public string message { get; set; }
+        public string token { get; set; }
     }
 }

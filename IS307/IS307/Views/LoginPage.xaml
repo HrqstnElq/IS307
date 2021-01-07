@@ -27,10 +27,10 @@
                         </Grid.RowDefinitions>
                         <Label FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Center" Grid.Row="0" Text="SIGN IN" Margin="0, 0, 0, 50"/>
                         <Frame Grid.Row="1" CornerRadius="30" Padding="0" HasShadow="False"  Margin="0, 0, 0, 20">
-                            <controls:CustomEntry Text="{Binding LoginData.Username, Mode=TwoWay}" Placeholder="Username" BorderColor="WhiteSmoke" BackgroundColor="WhiteSmoke" FontSize="15" HeightRequest="50" Image="icon_user" ImageAlignment="Right" ImageWidth="20" ImageHeight="20" CornerRadius="30" IsCurvedCornersEnabled="True"/>
+                            <controls:CustomEntry Text="{Binding LoginData.username, Mode=TwoWay}" Placeholder="Username" BorderColor="WhiteSmoke" BackgroundColor="WhiteSmoke" FontSize="15" HeightRequest="50" Image="icon_user" ImageAlignment="Right" ImageWidth="20" ImageHeight="20" CornerRadius="30" IsCurvedCornersEnabled="True"/>
                         </Frame>
                         <Frame Grid.Row="2" CornerRadius="30" Padding="0" HasShadow="False"  Margin="0, 0, 0, 20">
-                            <controls:CustomEntry Text="{Binding LoginData.Password, Mode=TwoWay}" Placeholder="Password" IsPassword="True" BorderColor="WhiteSmoke" BackgroundColor="WhiteSmoke" FontSize="15" HeightRequest="50" Image="key" ImageAlignment="Right" ImageWidth="20" ImageHeight="20" CornerRadius="30" IsCurvedCornersEnabled="True"/>
+                            <controls:CustomEntry Text="{Binding LoginData.password, Mode=TwoWay}" Placeholder="Password" IsPassword="True" BorderColor="WhiteSmoke" BackgroundColor="WhiteSmoke" FontSize="15" HeightRequest="50" Image="key" ImageAlignment="Right" ImageWidth="20" ImageHeight="20" CornerRadius="30" IsCurvedCornersEnabled="True"/>
                         </Frame>
                         <Button Command="{Binding Login}" CommandParameter="{Binding LoginData}" Grid.Row="3" CornerRadius="15" Text="Sign in" Margin="0, 0, 0, 20" BackgroundColor="#1dd1a1"/>
                         <Label Grid.Row="4" HorizontalTextAlignment="Center" Text="Sign Up" TextColor="#0abde3">
