@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SQLite;
 
 namespace IS307.Models
 {
     public class CartItemModel
     {
-        public string ProductId { get; set; }
-        public string ProductName { get; set; }
-        public double Price { get; set; }
-        public int Quantity { get; set; }
+        [PrimaryKey, AutoIncrement]
+        public int ID { get; set; }
+        public string productId { get; set; }
+        public string name { get; set; }
+        public double price { get; set; }
+        public string pictureUrl { get; set; }
+        public int quantity { get; set; }
     }
 }

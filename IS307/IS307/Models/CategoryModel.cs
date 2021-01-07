@@ -8,9 +8,9 @@ namespace IS307.Models
 {
     public class CategoryModel
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string PictureUrl { get; set; }
-        public string Color { get; set; }
+        public int _id { get; set; }
+        public string name { get; set; }
+        public string pictureUrl { get; set; }
+        public string color { get; set; }
     }
 }
