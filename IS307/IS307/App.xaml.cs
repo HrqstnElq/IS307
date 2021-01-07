@@ -1,5 +1,6 @@
 ﻿using IS307.Views;
 using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,6 +15,7 @@ namespace IS307
 
             //DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
+            Shell.Current.GoToAsync("//LoginPage").Wait();
         }
 
         protected override void OnStart()

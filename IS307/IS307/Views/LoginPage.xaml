@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pc="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:controls="clr-namespace:IS307.Controls"
+             x:Class="IS307.Views.LoginPage">
+    <ContentPage.Content>
+        <!-- 1. Market body-->
+        <Grid BackgroundColor="#10ac84">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Image Source="logo.png" />
+            <pc:PancakeView Grid.Row="1" BackgroundColor="White" CornerRadius="25, 25, 0,0" IsClippedToBounds="true" HorizontalOptions="FillAndExpand">
+                <ScrollView VerticalScrollBarVisibility="Never">
+                    <Grid Padding="50,65,50,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Center" Grid.Row="0" Text="SIGN IN" Margin="0, 0, 0, 50"/>
+                        <Frame Grid.Row="1" CornerRadius="30" Padding="0" HasShadow="False"  Margin="0, 0, 0, 20">
+                            <controls:CustomEntry Text="{Binding LoginData.Username, Mode=TwoWay}" Placeholder="Username" BorderColor="WhiteSmoke" BackgroundColor="WhiteSmoke" FontSize="15" HeightRequest="50" Image="icon_user" ImageAlignment="Right" ImageWidth="20" ImageHeight="20" CornerRadius="30" IsCurvedCornersEnabled="True"/>
+                        </Frame>
+                        <Frame Grid.Row="2" CornerRadius="30" Padding="0" HasShadow="False"  Margin="0, 0, 0, 20">
+                            <controls:CustomEntry Text="{Binding LoginData.Password, Mode=TwoWay}" Placeholder="Password" IsPassword="True" BorderColor="WhiteSmoke" BackgroundColor="WhiteSmoke" FontSize="15" HeightRequest="50" Image="key" ImageAlignment="Right" ImageWidth="20" ImageHeight="20" CornerRadius="30" IsCurvedCornersEnabled="True"/>
+                        </Frame>
+                        <Button Command="{Binding Login}" CommandParameter="{Binding LoginData}" Grid.Row="3" CornerRadius="15" Text="Sign in" Margin="0, 0, 0, 20" BackgroundColor="#1dd1a1"/>
+                        <Label Grid.Row="4" HorizontalTextAlignment="Center" Text="Sign Up" TextColor="#0abde3">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ShowRegister}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                </ScrollView>
+            </pc:PancakeView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

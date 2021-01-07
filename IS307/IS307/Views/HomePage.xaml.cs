@@ -26,7 +26,7 @@ namespace IS307.Views
 
         private void ProductsPage_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(ProductsViewModel.ProductShown))
+            if (e.PropertyName == nameof(HomeViewModel.ProductShown))
             {
                 var vm = BindingContext as HomeViewModel;
 
@@ -74,8 +74,8 @@ namespace IS307.Views
                     {
                         itemContainer.TranslateTo(itemContainer.X, originalY + itemContainer.Height * 1.1);
 
-                        (BindingContext as ProductsViewModel).ProductShown = false;
-                        (BindingContext as ProductsViewModel).ShownProduct = null;
+                        (BindingContext as HomeViewModel).ProductShown = false;
+                        (BindingContext as HomeViewModel).ShownProduct = null;
                     }
                     return;
                 default:
