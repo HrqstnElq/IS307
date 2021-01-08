@@ -21,6 +21,12 @@ namespace IS307
         {
             if(cartItem.ID == 0)
             {
+                var item = _database.FindAsync<CartItemModel>(x => x.productId == cartItem.productId).Result;
+                if (item != null)
+                {
+                    item.quantity += cartItem.quantity;
+                    return _database.UpdateAsync(item);
+                }
                 return _database.InsertAsync(cartItem);
             }
             else

@@ -16,7 +16,6 @@ namespace IS307
                     httpClient = new HttpClient();
                     httpClient.BaseAddress = new System.Uri("http://172.20.7.8:3000");
                 }
-
                 return httpClient;
             }
         }

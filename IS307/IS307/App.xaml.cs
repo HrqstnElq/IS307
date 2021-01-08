@@ -25,9 +25,9 @@ namespace IS307
         {
             InitializeComponent();
             //DependencyService.Register<MockDataStore>();
-
             MainPage = new AppShell();
-            Shell.Current.GoToAsync("//LoginPage").Wait();
+            if (Current.Properties["token"] == null)
+                Shell.Current.GoToAsync("//LoginPage").Wait();
         }
 
         protected override void OnStart()
