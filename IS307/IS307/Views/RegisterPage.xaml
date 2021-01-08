@@ -12,7 +12,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Image Source="logo.png" />
-            <pc:PancakeView Grid.Row="1" BackgroundColor="White" CornerRadius="25, 25, 0,0" IsClippedToBounds="true" HorizontalOptions="FillAndExpand">
+            <pc:PancakeView Grid.Row="1" BackgroundColor="#F0F2F5" CornerRadius="25, 25, 0,0" IsClippedToBounds="true" HorizontalOptions="FillAndExpand">
                 <ScrollView VerticalScrollBarVisibility="Never">
                     <Grid Padding="50,65,50,0">
                         <Grid.ColumnDefinitions>

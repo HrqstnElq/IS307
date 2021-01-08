@@ -1,12 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IS307.Views.CreateOrderPage">
+             x:Class="IS307.Views.CreateOrderPage"
+             xmlns:pc="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:res="clr-namespace:IS307.Resources"
+             BackgroundColor="#F0F2F5">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid BackgroundColor="#10ac84">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Text="Create order" FontSize="Title" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White"/>
+            <Label
+                FontFamily="Material"
+                BackgroundColor="Transparent"
+                Padding="16"
+                FontSize="24"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                Text="{Static res:IconFont.ArrowLeft}"
+                TextColor="White">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoBackCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+            <pc:PancakeView Grid.Row="1" BackgroundColor="#F0F2F5" CornerRadius="15, 15, 0,0" IsClippedToBounds="true" HorizontalOptions="FillAndExpand">
+                <Button Text="Create order"  Command="{Binding OrderCommand}"/>
+            </pc:PancakeView>
+
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
