@@ -1,72 +1,40 @@
 ﻿using Bogus;
 using IS307.Models;
+using IS307.Services;
+using IS307.Views;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace IS307.ViewModels
 {
-    class HomeViewModel : INotifyPropertyChanged
+    class HomeViewModel
     {
-        private bool productShown;
-        private bool hasCartItems;
-        public event PropertyChangedEventHandler PropertyChanged;
         public ObservableCollection<ProductModel> Products { get; set; }
+        public ObservableCollection<CategoryModel> Categories { get; set; }
    
-        public ProductModel ShownProduct { get; set; }
-
         public ICommand ViewProductDetailCommand { get; set; }
+        public ICommand ViewProductInCategoryCommand { get; set; }
 
-        public ICommand AddToCartCommand { get; set; }
+        private readonly CategoryService CategoryService = new CategoryService();
+        private readonly ProductService ProductService = new ProductService();
 
-        public ICommand ViewCartCommand { get; set; }
-
-        public bool ProductShown
+        public HomeViewModel(INavigation navigation)
         {
-            get => productShown;
-            set
-            {
-                productShown = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ProductShown)));
-            }
-        }
-
-        public bool HasCartItems
-        {
-            get => hasCartItems;
-            set
-            {
-                hasCartItems = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HasCartItems)));
-            }
-        }
-
-        public HomeViewModel()
-        {
-            var productFaker = new Faker<ProductModel>()
-                .RuleFor(x => x.Pricing, o => o.Random.Double(10, 200))
-                .RuleFor(x => x.Name, o => o.Commerce.ProductName())
-                .RuleFor(x => x.PictureUrl, o => o.Image.PicsumUrl());
-
-            var items = productFaker.Generate(10);
-
-            Products = new ObservableCollection<ProductModel>(items);
-
+            Categories = new ObservableCollection<CategoryModel>(CategoryService.GetAllCategory());
+            Products = new ObservableCollection<ProductModel>(ProductService.GetTopProduct());
             ViewProductDetailCommand = new Command<ProductModel>(product =>
             {
-                ShownProduct = product;
-                ProductShown = true;
-                HasCartItems = true;
+                 navigation.PushAsync(new ProductDetailPage(product));
             });
 
-            AddToCartCommand = new Command<ProductModel>(product =>
+            ViewProductInCategoryCommand = new Command<CategoryModel>(category =>
             {
-                ProductShown = false;
-                ShownProduct = null;
+                navigation.PushAsync(new ProductsPage(category));
             });
-
         }
+
 
     }
 }

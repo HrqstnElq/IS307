@@ -1,5 +1,7 @@
 ﻿using Bogus;
 using IS307.Models;
+using IS307.Services;
+using IS307.Views;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -9,65 +11,29 @@ namespace IS307.ViewModels
 {
     public class ProductsViewModel : INotifyPropertyChanged
     {
-        private bool productShown;
-        private bool hasCartItems;
-
         public ObservableCollection<ProductModel> Products { get; set; }
 
-        public ObservableCollection<CategoryModel> Categories { get; set; }
-
-        public bool ProductShown
-        {
-            get => productShown;
-            set
-            {
-                productShown = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ProductShown)));
-            }
-        }
-
-        public bool HasCartItems
-        {
-            get => hasCartItems;
-            set
-            {
-                hasCartItems = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HasCartItems)));
-            }
-        }
-
-        public ProductModel ShownProduct { get; set; }
+        public CategoryModel Category { get; set; }
 
         public ICommand ViewProductDetailCommand { get; set; }
 
-        public ICommand AddToCartCommand { get; set; }
-
-        public ICommand ViewCartCommand { get; set; }
-
         public ICommand GoBackCommand { get; set; }
+        private readonly ProductService ProductService = new ProductService();
 
-        public ProductsViewModel(INavigation navigation)
+        public ProductsViewModel()
         {
-            var productFaker = new Faker<ProductModel>()
-                .RuleFor(x => x.Pricing, o => o.Random.Double(10, 200))
-                .RuleFor(x => x.Name, o => o.Commerce.ProductName())
-                .RuleFor(x => x.PictureUrl, o => o.Image.PicsumUrl());
+        }
 
-            var items = productFaker.Generate(200);
+        public ProductsViewModel(INavigation navigation, CategoryModel category)
+        {
+            Category = category;
 
-            Products = new ObservableCollection<ProductModel>(items);
+           
+            Products = new ObservableCollection<ProductModel>(ProductService.GetProductInCategory(category.name));
 
             ViewProductDetailCommand = new Command<ProductModel>(product =>
             {
-                ShownProduct = product;
-                ProductShown = true;
-                HasCartItems = true;
-            });
-
-            AddToCartCommand = new Command<ProductModel>(product =>
-            {
-                ProductShown = false;
-                ShownProduct = null;
+                navigation.PushAsync(new ProductDetailPage(product));
             });
 
             GoBackCommand = new Command(() =>
