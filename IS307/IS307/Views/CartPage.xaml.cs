@@ -1,6 +1,4 @@
-﻿using IS307.Models;
-using IS307.ViewModels;
-using System.Collections.ObjectModel;
+﻿using IS307.ViewModels;
 using System.ComponentModel;
 
 using Xamarin.Forms;
@@ -14,15 +12,12 @@ namespace IS307.Views
         public CartPage()
         {
             InitializeComponent();
-            BindingContext = new CartPageViewModel(Navigation);
+            var vm = new CartPageViewModel(Navigation);
+            BindingContext = vm;
             (BindingContext as INotifyPropertyChanged).PropertyChanged += CartPage_PropertyChanged;
-            Models.CreateOrderViewModel.OnOrderSuccess += OrderViewModel_OnOrderSuccess;
-        }
 
-        private void OrderViewModel_OnOrderSuccess(object sender, System.EventArgs e)
-        {
-            DisplayAlert("Success", "Order successfuly", "Ok");
-            Cart.ItemsSource = null;
+            if (vm.CartItems.Count < 1)
+                Cart.ItemsSource = null;
         }
 
         private void CartPage_PropertyChanged(object sender, PropertyChangedEventArgs e)

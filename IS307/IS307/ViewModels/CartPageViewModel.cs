@@ -58,9 +58,12 @@ namespace IS307.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Increment)));
             });
 
-            Order = new Command(() =>
+            Order = new Command(async () =>
             {
-                navigation.PushAsync(new CreateOrderPage());
+                if (CartItems.Count > 0)
+                    await navigation.PushAsync(new CreateOrderPage());
+                else
+                   await App.Current.MainPage.DisplayAlert("Error !", "Cart empty", "Cancel");
             });
         }
 

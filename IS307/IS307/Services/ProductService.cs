@@ -1,10 +1,8 @@
 ﻿using IS307.Models;
 using Newtonsoft.Json;
-using System;
+using System.Net;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IS307.Services
 {
@@ -22,6 +20,31 @@ namespace IS307.Services
             var response = Singleton.HttpClient.GetStringAsync("/product").Result;
             var result = JsonConvert.DeserializeObject<List<ProductModel>>(response);
             return result.Take(15).ToList();
+        }
+
+        public bool IsFavoriteProduct(string ProductId, string token)
+        {
+            Singleton.HttpClient.DefaultRequestHeaders.Add("x-auth-token", token);
+            var respone = Singleton.HttpClient.GetAsync($"/product/checkFavorite/{ProductId}").Result;
+            Singleton.HttpClient.DefaultRequestHeaders.Remove("x-auth-token");
+            
+            if (respone.StatusCode == HttpStatusCode.OK)
+                return true;
+            else
+                return false;
+        }
+        public void FavoriteProduct(string ProductId, string token)
+        {
+            Singleton.HttpClient.DefaultRequestHeaders.Add("x-auth-token", token);
+            Singleton.HttpClient.GetAsync($"/user/favorite/{ProductId}");
+            Singleton.HttpClient.DefaultRequestHeaders.Remove("x-auth-token");
+        }
+
+        public void UnFavoriteProduct(string ProductId, string token)
+        {
+            Singleton.HttpClient.DefaultRequestHeaders.Add("x-auth-token", token);
+            Singleton.HttpClient.DeleteAsync($"/user/favorite/{ProductId}");
+            Singleton.HttpClient.DefaultRequestHeaders.Remove("x-auth-token");
         }
     }
 }

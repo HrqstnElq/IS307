@@ -29,7 +29,7 @@ namespace IS307.ViewModels
 
             ShowLogin = new Command(async () =>
             {
-                await Shell.Current.GoToAsync("//LoginPage");
+                await navigation.PopAsync();
             });
 
             Register = new Command<RegisterModel>(async (data) =>
@@ -58,7 +58,7 @@ namespace IS307.ViewModels
                     else
                     {
                         await Application.Current.MainPage.DisplayAlert("Success !", "Register successfully", "Login");
-                        await Shell.Current.GoToAsync("//LoginPage");
+                        await navigation.PopAsync();
                     }
                 }
             });

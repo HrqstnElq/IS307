@@ -11,12 +11,13 @@
         <ScrollView>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="300"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Frame Grid.Row="1" HasShadow="False" IsClippedToBounds="True" Margin="10, 7" HeightRequest="45" CornerRadius="30" Padding="0">
+            <Image Margin="5" Source="logo_green" Aspect="AspectFit" Scale="2" />
+            <Frame Grid.Row="1" HasShadow="False" IsClippedToBounds="True" Margin="10, 0" HeightRequest="45" CornerRadius="30" Padding="0">
                 <controls:CustomEntry Placeholder="Search" BorderColor="Transparent" BackgroundColor="White" FontSize="15" HeightRequest="60" Image="search" ImageAlignment="Right" ImageWidth="15" ImageHeight="15" CornerRadius="30" IsCurvedCornersEnabled="True"/>
             </Frame>
             <Frame Grid.Row="2" HasShadow="False" CornerRadius="15" BorderColor="Transparent" BackgroundColor="Transparent">
@@ -78,19 +79,19 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="3*" />
                                         <RowDefinition Height="*" />
-                                        <RowDefinition  Height="24" />
+                                        <RowDefinition  Height="30" />
                                     </Grid.RowDefinitions>
                                     <Image  Margin="0, 0, 0, 10" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Center" Source="{Binding pictureUrl}" />
-                                    <Label Grid.Row="1" MaxLines="1" FontSize="Small" VerticalTextAlignment="End" FontAttributes="Bold" Text="{Binding name}" />
+                                    <Label Grid.Row="1" MaxLines="2" FontSize="Small" VerticalTextAlignment="End" FontAttributes="Bold" Text="{Binding name}" />
                                     <StackLayout Grid.Row="2" Orientation="Horizontal">
                                         <Label HorizontalOptions="StartAndExpand" FontAttributes="Bold" VerticalTextAlignment="Center" FontSize="Small" TextColor="#b71540" Text="{Binding price, StringFormat='{0:##,0}.000đ'}" />
-                                        <pc:PancakeView BackgroundColor="AliceBlue" CornerRadius="12">
+                                            <pc:PancakeView BackgroundColor="#c7ecee" CornerRadius="15">
                                             <Grid RowSpacing="0" ColumnSpacing="0">
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="24" />
+                                                    <ColumnDefinition Width="30" />
                                                 </Grid.ColumnDefinitions>
                                                 <Grid.RowDefinitions>
-                                                    <RowDefinition Height="24" />
+                                                    <RowDefinition Height="30" />
                                                 </Grid.RowDefinitions>
                                                 <Label FontFamily="Material" Text="{Static res:IconFont.Plus}" VerticalOptions="Center" HorizontalOptions="Center" />
                                                 <Grid.GestureRecognizers>

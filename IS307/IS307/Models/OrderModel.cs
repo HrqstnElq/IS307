@@ -10,5 +10,6 @@ namespace IS307.Models
     {
         public List<CartItemModel> products { get; set; }
         public string address { get; set; }
+        public string phone { get; set; }
     }
 }

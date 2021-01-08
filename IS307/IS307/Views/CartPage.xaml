@@ -62,12 +62,12 @@
                                 FontAttributes="Bold"
                                 Text="{Binding price, StringFormat='{0:#,###,###}.000đ'}" />
                         </StackLayout>
-                        <Grid Grid.Column="2">
+                        <Grid Grid.Column="2" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="3*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <pc:PancakeView VerticalOptions="Center" Padding="10, 0" Margin="0" BorderColor="DarkGray" BorderThickness="1" CornerRadius="24">
+                            <pc:PancakeView VerticalOptions="Center" Padding="10, 0" Margin="0" BackgroundColor="White" BorderColor="#10ac84" BorderThickness="1" CornerRadius="24">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition />

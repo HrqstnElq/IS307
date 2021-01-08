@@ -1,5 +1,6 @@
 ﻿using IS307.Models;
 using IS307.Services;
+using IS307.Views;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -26,7 +27,7 @@ namespace IS307.ViewModels
 
             ShowRegister = new Command(async () =>
             {
-                await Shell.Current.GoToAsync("//RegisterPage");
+                await navigation.PushAsync(new RegisterPage());
             });
 
             Login = new Command<LoginModel>(async (data) =>
@@ -43,7 +44,7 @@ namespace IS307.ViewModels
                     else
                     {
                         Application.Current.Properties["token"] = token;
-                        await Shell.Current.GoToAsync("//HomePage");
+                        App.Current.MainPage = new AppShell();
                     };
                 }
             });

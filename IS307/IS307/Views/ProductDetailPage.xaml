@@ -47,7 +47,11 @@
                     <StackLayout Grid.Row="4" Margin="20, 0, 20, 0" Orientation="Horizontal">
                         <Label HorizontalOptions="StartAndExpand" FontAttributes="Bold" VerticalTextAlignment="Center" FontSize="Title" TextColor="#b71540" Text="{Binding Product.price, StringFormat='{0:##,0}.000đ'}" />
                         <Frame CornerRadius="100" Padding="10" HasShadow="False">
-                            <Label FontFamily="Material" Text="{Static res:IconFont.HeartOutline}" VerticalOptions="Center" FontSize="Title" TextColor="#d63031" HorizontalOptions="Center" />
+                            <Label x:Name="Heart" FontFamily="Material" Text="{Static res:IconFont.HeartOutline}" VerticalOptions="Center" FontSize="Title" TextColor="#d63031" HorizontalOptions="Center" >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Favorite}" />
+                                </Label.GestureRecognizers>
+                            </Label>
                         </Frame>
                     </StackLayout>
                     

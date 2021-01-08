@@ -23,11 +23,15 @@ namespace IS307
         }
         public App()
         {
+            Current.Properties["token"] = null;
             InitializeComponent();
             //DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
+
             if (Current.Properties["token"] == null)
-                Shell.Current.GoToAsync("//LoginPage").Wait();
+            {
+                Shell.Current.GoToAsync("//LoginPage");
+            }
         }
 
         protected override void OnStart()

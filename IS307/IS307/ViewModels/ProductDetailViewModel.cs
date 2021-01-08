@@ -1,4 +1,5 @@
 ﻿using IS307.Models;
+using IS307.Services;
 using IS307.Views;
 using System;
 using System.Collections.Generic;
@@ -13,24 +14,31 @@ namespace IS307.ViewModels
 {
     public class ProductDetailViewModel : INotifyPropertyChanged
     {
+        public static event EventHandler<EventArgs> AddProductEvent;
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public ICommand GoBackCommand { get; set; }
         public ICommand Increment { get; set; }
         public ICommand Decrement { get; set; }
         public ICommand AddToCart { get; set; }
+        public ICommand Favorite { get; set; }
 
 
         public ProductModel Product { get; set; }
-        public static event EventHandler<EventArgs> AddProductEvent;
         public int Quantity { get; set; } = 1;
+        public bool isFavorite { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        private readonly ProductService productService = new ProductService();
         public ProductDetailViewModel(INavigation navigation)
         {
         }
 
         public ProductDetailViewModel(INavigation navigation, ProductModel productModel)
         {
+            var token = Application.Current.Properties["token"].ToString();
+            
             Product = productModel;
+            isFavorite = productService.IsFavoriteProduct(Product._id, token);
 
             GoBackCommand = new Command(() =>
             {
@@ -54,17 +62,27 @@ namespace IS307.ViewModels
             {
                 App.Database.SaveCart(new CartItemModel()
                 {
+                    productId = Product._id,
                     name = Product.name,
                     pictureUrl = Product.pictureUrl,
                     price = Product.price,
                     quantity = Quantity
                 });
 
-                var a = navigation;
                 AddProductEvent?.Invoke(null, new EventArgs());
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AddToCart)));
             });
 
+            Favorite = new Command(() =>
+            {
+                if (isFavorite)
+                    productService.UnFavoriteProduct(Product._id, token);
+                else
+                    productService.FavoriteProduct(Product._id, token);
+                isFavorite = !isFavorite;
+
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Favorite)));
+            });
         }
 
     }
