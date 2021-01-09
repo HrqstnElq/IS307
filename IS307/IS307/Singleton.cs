@@ -14,7 +14,7 @@ namespace IS307
                 if(httpClient == null)
                 {
                     httpClient = new HttpClient();
-                    httpClient.BaseAddress = new System.Uri("http://172.20.7.8:3000");
+                    httpClient.BaseAddress = new System.Uri("https://ie304-didong-api.herokuapp.com");
                 }
                 return httpClient;
             }
