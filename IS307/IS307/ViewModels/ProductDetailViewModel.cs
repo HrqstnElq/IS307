@@ -12,12 +12,8 @@ using Xamarin.Forms;
 
 namespace IS307.ViewModels
 {
-    public class ProductDetailViewModel : INotifyPropertyChanged
+    public class ProductDetailViewModel : BaseViewModel
     {
-        public static event EventHandler<EventArgs> AddProductEvent;
-        public static event EventHandler<EventArgs> UnFavoriteEvent;
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public ICommand GoBackCommand { get; set; }
         public ICommand Increment { get; set; }
         public ICommand Decrement { get; set; }
@@ -25,21 +21,36 @@ namespace IS307.ViewModels
         public ICommand Favorite { get; set; }
 
 
-        public ProductModel Product { get; set; }
-        public int Quantity { get; set; } = 1;
+        private ProductModel product;
+        public ProductModel Product
+        {
+            get => product;
+            set => SetProperty(ref product, value);
+
+        }
+
+        private int quantity = 1;
+        public int Quantity
+        {
+            get => quantity;
+            set => SetProperty(ref quantity, value);
+        }
         public bool isFavorite { get; set; }
 
         private readonly ProductService productService = new ProductService();
-        public ProductDetailViewModel(INavigation navigation)
-        {
-        }
 
         public ProductDetailViewModel(INavigation navigation, ProductModel productModel)
         {
             var token = Application.Current.Properties["token"].ToString();
-            
-            Product = productModel;
-            isFavorite = productService.IsFavoriteProduct(Product._id, token);
+
+            LoadPageCommand = new Command(async () =>
+            {
+                Product = productModel;
+                isFavorite = await productService.IsFavoriteProduct(Product._id, token);
+                OnPropertyChanged(nameof(Favorite));
+                IsBusy = false;
+            });
+
 
             GoBackCommand = new Command(() =>
             {
@@ -49,14 +60,12 @@ namespace IS307.ViewModels
             Increment = new Command(() =>
             {
                 Quantity = Quantity + 1;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Increment)));
             });
 
 
             Decrement = new Command(() =>
             {
                 Quantity = Quantity < 2 ? Quantity : Quantity - 1;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Decrement)));
             });
 
             AddToCart = new Command(() =>
@@ -69,25 +78,29 @@ namespace IS307.ViewModels
                     price = Product.price,
                     quantity = Quantity
                 });
-
-                AddProductEvent?.Invoke(null, new EventArgs());
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AddToCart)));
+                OnPropertyChanged(nameof(AddToCart));
             });
 
-            Favorite = new Command(async () =>
+            Favorite = new Command(() =>
             {
+                OnPropertyChanged("Loading");
                 if (isFavorite)
                 {
-                    UnFavoriteEvent?.Invoke(this, new EventArgs());
-                    await productService.UnFavoriteProduct(Product._id, token);
+                   productService.UnFavoriteProduct(Product._id, token);
                 }
                 else
+                {
                     productService.FavoriteProduct(Product._id, token);
+                }
+                
                 isFavorite = !isFavorite;
-
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Favorite)));
+                OnPropertyChanged(nameof(Favorite));
+                OnPropertyChanged("Complete");
             });
         }
-
+        public void OnAppearing()
+        {
+            IsBusy = true;
+        }
     }
 }

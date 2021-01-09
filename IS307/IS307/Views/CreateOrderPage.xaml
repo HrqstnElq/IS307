@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IS307.Views.CreateOrderPage"
@@ -6,57 +6,119 @@
              xmlns:res="clr-namespace:IS307.Resources"
              xmlns:controls="clr-namespace:IS307.Controls"
              BackgroundColor="#F0F2F5">
-    <ContentPage.Content>
-        <Grid BackgroundColor="#10ac84">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Label Text="Create order" FontSize="Title" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White"/>
-            <Label
-                FontFamily="Material"
-                BackgroundColor="Transparent"
-                Padding="16"
-                FontSize="24"
-                HorizontalOptions="Start"
-                VerticalOptions="Start"
-                Text="{Static res:IconFont.ArrowLeft}"
-                TextColor="White">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding GoBackCommand}" />
-                </Label.GestureRecognizers>
-            </Label>
-            <pc:PancakeView Grid.Row="1" BackgroundColor="#F0F2F5" CornerRadius="15, 15, 0,0" IsClippedToBounds="true" HorizontalOptions="FillAndExpand">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-                    <StackLayout Grid.Row="0" Orientation="Horizontal" Margin="10, 10, 10, 10">
-                        <Label Text="Total :" Margin="0, 0, 25, 0" HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" FontSize="15" TextColor="Black"/>
-                        <Label Text="{Binding TotalPrice, StringFormat='{0:##,0}.000đ'}" HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="None" FontSize="15" TextColor="Black"/>
-                    </StackLayout>
-                    
-                    <StackLayout Grid.Row="1" Orientation="Horizontal" Margin="10, 0, 10, 10">
-                        <Label Text="Address :" HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" FontSize="15" TextColor="Black"/>
-                        <Frame HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" IsClippedToBounds="True" HeightRequest="45" CornerRadius="30" Padding="0">
-                            <controls:CustomEntry Text="{Binding Order.address, Mode=TwoWay}" Placeholder="Enter your address" BorderColor="Transparent" BackgroundColor="White" FontSize="15" HeightRequest="60" CornerRadius="30" IsCurvedCornersEnabled="True"/>
-                        </Frame>
-                    </StackLayout>
-
-                    <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="10, 0, 10, 10">
-                        <Label Text="Phone :" Margin="0, 0, 15, 0" HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold" FontSize="15" TextColor="Black"/>
-                        <Frame HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" IsClippedToBounds="True" HeightRequest="45" CornerRadius="30" Padding="0">
-                            <controls:CustomEntry Keyboard="Telephone" Text="{Binding Order.phone, Mode=TwoWay}" Placeholder="Enter your phone number" BorderColor="Transparent" BackgroundColor="White" FontSize="15" HeightRequest="60" CornerRadius="30" IsCurvedCornersEnabled="True"/>
-                        </Frame>
-                    </StackLayout>
-
-                    <Button Margin="20" Grid.Row="3" Text="Create order"  Command="{Binding OrderCommand}"/>
-                </Grid>
-            </pc:PancakeView>
-
+  <ContentPage.Content>
+    <Grid BackgroundColor="#10ac84">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="60"></RowDefinition>
+        <RowDefinition Height="*"></RowDefinition>
+      </Grid.RowDefinitions>
+      <Label Text="Tạo đơn hàng"
+             FontSize="Medium"
+             TextColor="White"
+             HorizontalTextAlignment="Center"
+             VerticalOptions="Center"></Label>
+      <Label FontFamily="Material"
+             BackgroundColor="Transparent"
+             Padding="16"
+             FontSize="24"
+             HorizontalOptions="Start"
+             VerticalOptions="Start"
+             Text="{Static res:IconFont.ArrowLeft}"
+             TextColor="White">
+        <Label.GestureRecognizers>
+          <TapGestureRecognizer Command="{Binding GoBackCommand}"></TapGestureRecognizer>
+        </Label.GestureRecognizers>
+      </Label>
+      <pc:PancakeView Grid.Row="1"
+                      BackgroundColor="#F0F2F5"
+                      Padding="5, 20"
+                      CornerRadius="15, 15, 0,0"
+                      IsClippedToBounds="true"
+                      HorizontalOptions="FillAndExpand">
+        <Grid RowSpacing="30">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+          </Grid.RowDefinitions>
+          <StackLayout Grid.Row="0"
+                       Orientation="Horizontal"
+                       Margin="10, 10, 10, 10">
+            <Label Text="Total :"
+                   Margin="0, 0, 25, 0"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"
+                   FontAttributes="Bold"
+                   FontSize="15"
+                   TextColor="Black"></Label>
+            <Label Text="{Binding TotalPrice, StringFormat='{0:##,0}.000đ'}"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"
+                   FontAttributes="None"
+                   FontSize="15"
+                   TextColor="Black"></Label>
+          </StackLayout>
+          <StackLayout Grid.Row="1"
+                       Orientation="Horizontal"
+                       Margin="10, 0, 10, 10">
+            <Label Text="Address :"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"
+                   FontAttributes="Bold"
+                   FontSize="15"
+                   TextColor="Black"></Label>
+            <Frame HasShadow="False"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   IsClippedToBounds="True"
+                   HeightRequest="45"
+                   CornerRadius="30"
+                   Padding="0">
+              <controls:CustomEntry Text="{Binding Order.address, Mode=TwoWay}"
+                                    Placeholder="Enter your address"
+                                    BorderColor="Transparent"
+                                    BackgroundColor="White"
+                                    FontSize="15"
+                                    HeightRequest="60"
+                                    CornerRadius="30"
+                                    IsCurvedCornersEnabled="True"></controls:CustomEntry>
+            </Frame>
+          </StackLayout>
+          <StackLayout Grid.Row="2"
+                       Orientation="Horizontal"
+                       Margin="10, 0, 10, 10">
+            <Label Text="Phone :"
+                   Margin="0, 0, 15, 0"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"
+                   FontAttributes="Bold"
+                   FontSize="15"
+                   TextColor="Black"></Label>
+            <Frame HasShadow="False"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   IsClippedToBounds="True"
+                   HeightRequest="45"
+                   CornerRadius="30"
+                   Padding="0">
+              <controls:CustomEntry Keyboard="Telephone"
+                                    Text="{Binding Order.phone, Mode=TwoWay}"
+                                    Placeholder="Enter your phone number"
+                                    BorderColor="Transparent"
+                                    BackgroundColor="White"
+                                    FontSize="15"
+                                    HeightRequest="60"
+                                    CornerRadius="30"
+                                    IsCurvedCornersEnabled="True"></controls:CustomEntry>
+            </Frame>
+          </StackLayout>
+          <Button Margin="20"
+                  Grid.Row="3"
+                  Text="Create order"
+                  Command="{Binding OrderCommand}"></Button>
         </Grid>
-    </ContentPage.Content>
+      </pc:PancakeView>
+    </Grid>
+  </ContentPage.Content>
 </ContentPage>

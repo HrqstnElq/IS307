@@ -12,21 +12,26 @@ namespace IS307.Views
         public CartPage()
         {
             InitializeComponent();
-            var vm = new CartPageViewModel(Navigation);
-            BindingContext = vm;
+            BindingContext = new CartPageViewModel(Navigation);
             (BindingContext as INotifyPropertyChanged).PropertyChanged += CartPage_PropertyChanged;
-
-            if (vm.CartItems.Count < 1)
-                Cart.ItemsSource = null;
         }
 
         private void CartPage_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             var vm = BindingContext as CartPageViewModel;
-            if (e.PropertyName == nameof(CartPageViewModel.Increment) || e.PropertyName == nameof(CartPageViewModel.Decrement))
+            if (e.PropertyName == nameof(vm.CartItems))
             {
-                Cart.ItemsSource = vm.CartItems;
+                if(vm.CartItems?.Count < 1)
+                {
+                    Cart.ItemsSource = null;
+                }
             }
         }
+
+        protected override void OnAppearing()
+        {
+            (BindingContext as CartPageViewModel).OnAppearing();
+        }
+
     }
 }

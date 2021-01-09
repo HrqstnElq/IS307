@@ -16,14 +16,14 @@
             <Style x:Key="BaseStyle" TargetType="Element">
                 <Setter Property="Shell.BackgroundColor" Value="#F0F2F5" />
                 <Setter Property="Shell.NavBarIsVisible" Value="False" />
-                <Setter Property="Shell.ForegroundColor" Value="#10ac84" />
-                <Setter Property="Shell.TitleColor" Value="#10ac84" />
-                <Setter Property="Shell.DisabledColor" Value="#1dd1a1" />
+                <Setter Property="Shell.ForegroundColor" Value="#2c3e50" />
+                <Setter Property="Shell.TitleColor" Value="#2c3e50" />
+                <Setter Property="Shell.DisabledColor" Value="#2c3e50" />
                 <Setter Property="Shell.UnselectedColor" Value="#636e72" />
                 <Setter Property="Shell.TabBarBackgroundColor" Value="#F0F2F5" />
-                <Setter Property="Shell.TabBarForegroundColor" Value="#10ac84"/>
+                <Setter Property="Shell.TabBarForegroundColor" Value="#2c3e50"/>
                 <Setter Property="Shell.TabBarUnselectedColor" Value="#636e7255"/>
-                <Setter Property="Shell.TabBarTitleColor" Value="#10ac84"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="#2c3e50"/>
             </Style>
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
             <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
@@ -32,7 +32,9 @@
 
     <TabBar>
         <ShellContent Title="Home" Icon="icon_home.png" Route="HomePage" ContentTemplate="{DataTemplate local:HomePage}" />
+        <ShellContent Title="Favorite" Icon="heart.png" Route="FavoritePage" ContentTemplate="{DataTemplate local:FavoritePage}" />
         <ShellContent Title="Cart" Icon="icon_cart.png" Route="CartPage" ContentTemplate="{DataTemplate local:CartPage}" />
+        <ShellContent Title="Order" Icon="clipboard" Route="OrderPage" ContentTemplate="{DataTemplate local:OrderPage}" />
         <ShellContent Title="Account" Icon="icon_user.png" Route="AccountPage" ContentTemplate="{DataTemplate local:AccountPage}" />
     </TabBar>
 

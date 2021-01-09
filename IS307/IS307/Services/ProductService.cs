@@ -9,26 +9,25 @@ namespace IS307.Services
 {
     public class ProductService
     {
-        public List<ProductModel> GetProductInCategory(string Category)
+        public async Task<List<ProductModel>> GetProductInCategory(string Category)
         {
-            var response = Singleton.HttpClient.GetStringAsync($"/product/?category={Category}").Result;
+            var response = await Singleton.HttpClient.GetStringAsync($"/product/?category={Category}");
             var result = JsonConvert.DeserializeObject<List<ProductModel>>(response);
             return result;
         }
 
-        public List<ProductModel> GetTopProduct()
+        public async Task<List<ProductModel>> GetTopProduct()
         {
-            var response = Singleton.HttpClient.GetStringAsync("/product").Result;
+            var response = await Singleton.HttpClient.GetStringAsync("/product");
             var result = JsonConvert.DeserializeObject<List<ProductModel>>(response);
             return result.Take(15).ToList();
         }
 
-        public bool IsFavoriteProduct(string ProductId, string token)
+        public async Task<bool> IsFavoriteProduct(string ProductId, string token)
         {
             Singleton.HttpClient.DefaultRequestHeaders.Add("x-auth-token", token);
-            var respone = Singleton.HttpClient.GetAsync($"/product/checkFavorite/{ProductId}").Result;
+            var respone = await Singleton.HttpClient.GetAsync($"/product/checkFavorite/{ProductId}");
             Singleton.HttpClient.DefaultRequestHeaders.Remove("x-auth-token");
-            
             if (respone.StatusCode == HttpStatusCode.OK)
                 return true;
             else
@@ -41,17 +40,17 @@ namespace IS307.Services
             Singleton.HttpClient.DefaultRequestHeaders.Remove("x-auth-token");
         }
 
-        public async Task UnFavoriteProduct(string ProductId, string token)
+        public void UnFavoriteProduct(string ProductId, string token)
         {
             Singleton.HttpClient.DefaultRequestHeaders.Add("x-auth-token", token);
-            await Singleton.HttpClient.DeleteAsync($"/user/favorite/{ProductId}");
+            Singleton.HttpClient.DeleteAsync($"/user/favorite/{ProductId}");
             Singleton.HttpClient.DefaultRequestHeaders.Remove("x-auth-token");
         }
 
-        public List<ProductModel> GetUserFavoriteProduct(string token)
+        public async Task<List<ProductModel>> GetUserFavoriteProduct(string token)
         {
             Singleton.HttpClient.DefaultRequestHeaders.Add("x-auth-token", token);
-            var response = Singleton.HttpClient.GetStringAsync("/user/favorite").Result;
+            var response = await Singleton.HttpClient.GetStringAsync("/user/favorite");
             var result = JsonConvert.DeserializeObject<List<ProductModel>>(response);
             Singleton.HttpClient.DefaultRequestHeaders.Remove("x-auth-token");
             return result;

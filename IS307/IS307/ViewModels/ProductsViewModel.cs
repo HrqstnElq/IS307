@@ -9,11 +9,21 @@ using Xamarin.Forms;
 
 namespace IS307.ViewModels
 {
-    public class ProductsViewModel : INotifyPropertyChanged
+    public class ProductsViewModel : BaseViewModel
     {
-        public ObservableCollection<ProductModel> Products { get; set; }
+        public ObservableCollection<ProductModel> products; 
+        public ObservableCollection<ProductModel> Products
+        {
+            get => products;
+            set => SetProperty(ref products, value);
+        }
 
-        public CategoryModel Category { get; set; }
+        public CategoryModel category;
+        public CategoryModel Category
+        {
+            get => category;
+            set => SetProperty(ref category, value);
+        }
 
         public ICommand ViewProductDetailCommand { get; set; }
 
@@ -26,10 +36,13 @@ namespace IS307.ViewModels
 
         public ProductsViewModel(INavigation navigation, CategoryModel category)
         {
-            Category = category;
+            LoadPageCommand = new Command(async () =>
+            {
+                Category = category;
+                Products = new ObservableCollection<ProductModel>(await ProductService.GetProductInCategory(category.name));
+                IsBusy = false;
+            });
 
-           
-            Products = new ObservableCollection<ProductModel>(ProductService.GetProductInCategory(category.name));
 
             ViewProductDetailCommand = new Command<ProductModel>(product =>
             {
@@ -42,7 +55,9 @@ namespace IS307.ViewModels
             });
 
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnAppearing()
+        {
+            IsBusy = true;
+        }
     }
 }

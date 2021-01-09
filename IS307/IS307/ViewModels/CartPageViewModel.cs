@@ -1,36 +1,43 @@
-﻿using Bogus;
-using IS307.Models;
+﻿using IS307.Models;
 using IS307.Views;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace IS307.ViewModels
 {
-    public class CartPageViewModel : INotifyPropertyChanged
+    public class CartPageViewModel : BaseViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public ObservableCollection<CartItemModel> CartItems { get; set; }
-        public double TotalPrice { get; set; }
+        private ObservableCollection<CartItemModel> cartItems;
+        public ObservableCollection<CartItemModel> CartItems
+        {
+            get => cartItems;
+            set => SetProperty(ref cartItems, value);
+        }
+        private double totalPrice;
+        public double TotalPrice
+        {
+            get => totalPrice;
+            set => SetProperty(ref totalPrice, value);
+        } 
         public ICommand Increment { get; set; }
         public ICommand Decrement { get; set; }
         public ICommand RemoveCartItem { get; set; }
-        public ICommand Order{ get; set; }
+        public ICommand Order { get; set; }
 
 
         public CartPageViewModel(INavigation navigation)
         {
-            ProductDetailViewModel.AddProductEvent += ProductDetailViewModel_AddProductEvent;
-
-            CartItems = new ObservableCollection<CartItemModel>(App.Database.GetCart().Result);
-            TotalPrice = CartItems.Sum(x => x.price * x.quantity);
+            LoadPageCommand = new Command(async () =>
+            {
+                CartItems = new ObservableCollection<CartItemModel>(await App.Database.GetCart());
+                TotalPrice = CartItems.Sum(x => x.price * x.quantity);
+                OnPropertyChanged(nameof(CartItems));
+                IsBusy = false;
+            });
 
             Increment = new Command<CartItemModel>(async (item) =>
             {
@@ -38,16 +45,14 @@ namespace IS307.ViewModels
                 await App.Database.SaveCart(item);
                 CartItems = new ObservableCollection<CartItemModel>(await App.Database.GetCart());
                 TotalPrice = CartItems.Sum(x => x.price * x.quantity);
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Increment)));
             });
 
             Decrement = new Command<CartItemModel>(async (item) =>
             {
-                item.quantity = item.quantity < 2 ? item.quantity : item.quantity -  1;
+                item.quantity = item.quantity < 2 ? item.quantity : item.quantity - 1;
                 await App.Database.SaveCart(item);
                 CartItems = new ObservableCollection<CartItemModel>(await App.Database.GetCart());
                 TotalPrice = CartItems.Sum(x => x.price * x.quantity);
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Increment)));
             });
 
             RemoveCartItem = new Command<CartItemModel>(async (item) =>
@@ -55,7 +60,6 @@ namespace IS307.ViewModels
                 await App.Database.DeleteCartItem(item);
                 CartItems = new ObservableCollection<CartItemModel>(await App.Database.GetCart());
                 TotalPrice = CartItems.Sum(x => x.price * x.quantity);
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Increment)));
             });
 
             Order = new Command(async () =>
@@ -63,15 +67,13 @@ namespace IS307.ViewModels
                 if (CartItems.Count > 0)
                     await navigation.PushAsync(new CreateOrderPage());
                 else
-                   await App.Current.MainPage.DisplayAlert("Error !", "Cart empty", "Cancel");
+                    await App.Current.MainPage.DisplayAlert("Error !", "Cart empty", "Cancel");
             });
         }
 
-        private void ProductDetailViewModel_AddProductEvent(object sender, EventArgs e)
+        public void OnAppearing()
         {
-            CartItems = new ObservableCollection<CartItemModel>(App.Database.GetCart().Result);
-            TotalPrice = CartItems.Sum(x => x.price * x.quantity);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Increment)));
+            IsBusy = true;
         }
     }
 }

@@ -1,126 +1,160 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:pc="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-    xmlns:res="clr-namespace:IS307.Resources"
-    x:Class="IS307.Views.CartPage"
-    BackgroundColor="#F0F2F5" 
-    x:Name="root"
-    Title="CartPage">
-    <Grid BackgroundColor="#10ac84">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pc="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:res="clr-namespace:IS307.Resources"
+             x:Class="IS307.Views.CartPage"
+             BackgroundColor="#F0F2F5"
+             x:Name="root"
+             Title="CartPage">
+  <RefreshView IsRefreshing="{Binding IsBusy}"
+               Command="{Binding LoadPageCommand}">
+    <ScrollView>
+      <Grid BackgroundColor="#10ac84">
         <Grid.RowDefinitions>
-            <RowDefinition
-                Height="60" />
-            <RowDefinition
-                Height="*" />
+          <RowDefinition Height="60"></RowDefinition>
+          <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label
-            Text="Cart"
-            FontSize="Title"
-            TextColor="White"
-            HorizontalTextAlignment="Center"
-            VerticalOptions="Center" />
-
-        <pc:PancakeView Grid.Row="1" BackgroundColor="#F0F2F5" CornerRadius="15, 15, 0,0" IsClippedToBounds="true" HorizontalOptions="FillAndExpand">
-            <CollectionView x:Name="Cart" ItemsSource="{Binding CartItems}" Footer="Relevant items">
+        <Label Text="Giỏ Hàng"
+               FontSize="Medium"
+               TextColor="White"
+               HorizontalTextAlignment="Center"
+               VerticalOptions="Center"></Label>
+        <pc:PancakeView Grid.Row="1"
+                        BackgroundColor="#F0F2F5"
+                        Padding="5, 20"
+                        CornerRadius="15, 15, 0,0"
+                        IsClippedToBounds="true"
+                        HorizontalOptions="FillAndExpand">
+          <CollectionView x:Name="Cart"
+                          ItemsSource="{Binding CartItems}"
+                          Footer="Relevant items">
             <CollectionView.ItemsLayout>
-                <LinearItemsLayout
-                    Orientation="Vertical"
-                    ItemSpacing="0" />
+              <LinearItemsLayout Orientation="Vertical"
+                                 ItemSpacing="0"></LinearItemsLayout>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
+              <DataTemplate>
+                <Grid Margin="0, 10">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="72"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="144"></ColumnDefinition>
+                  </Grid.ColumnDefinitions>
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="72"></RowDefinition>
+                  </Grid.RowDefinitions>
+                  <Image Margin="16"
+                         Source="{Binding pictureUrl}"
+                         Aspect="AspectFill"></Image>
+                  <StackLayout Spacing="0"
+                               VerticalOptions="Center"
+                               Grid.Column="1">
+                    <Label MaxLines="1"
+                           FontSize="Small"
+                           Text="{Binding name}"></Label>
+                    <Label FontSize="Medium"
+                           FontAttributes="Bold"
+                           Text="{Binding price, StringFormat='{0:#,###,###}.000đ'}"></Label>
+                  </StackLayout>
+                  <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="3*"></ColumnDefinition>
+                      <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <pc:PancakeView VerticalOptions="Center"
+                                    Padding="10, 0"
+                                    Margin="0"
+                                    BackgroundColor="White"
+                                    BorderColor="#10ac84"
+                                    BorderThickness="1"
+                                    CornerRadius="24">
+                      <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition
-                                Width="72" />
-                            <ColumnDefinition
-                                Width="*" />
-                            <ColumnDefinition
-                                Width="144" />
+                          <ColumnDefinition></ColumnDefinition>
+                          <ColumnDefinition></ColumnDefinition>
+                          <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition
-                                Height="72" />
+                          <RowDefinition Height="40"></RowDefinition>
                         </Grid.RowDefinitions>
-
-                        <Image
-                            Margin="16"
-                            Source="{Binding pictureUrl}"
-                            Aspect="AspectFill" />
-
-                        <StackLayout
-                            Spacing="0"
-                            VerticalOptions="Center"
-                            Grid.Column="1">
-                            <Label
-                                FontSize="Medium"
-                                Text="{Binding name}" />
-                            <Label
-                                FontSize="Medium"
-                                FontAttributes="Bold"
-                                Text="{Binding price, StringFormat='{0:#,###,###}.000đ'}" />
-                        </StackLayout>
-                        <Grid Grid.Column="2" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="3*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <pc:PancakeView VerticalOptions="Center" Padding="10, 0" Margin="0" BackgroundColor="White" BorderColor="#10ac84" BorderThickness="1" CornerRadius="24">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition
-                                            Height="40" />
-                                    </Grid.RowDefinitions>
-                                    <Label VerticalTextAlignment="Center" FontFamily="Material" Text="{Static res:IconFont.Minus}" FontSize="20" HorizontalTextAlignment="Center" FontAttributes="Bold" >
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding BindingContext.Decrement, Source={Reference root}}" 
-                                                                 CommandParameter="{Binding .}"/>
-                                            </Label.GestureRecognizers>
-                                        </Label>
-                                    <Label VerticalOptions="Center" Grid.Column="1" Text="{Binding quantity}" HorizontalTextAlignment="Center" FontAttributes="Bold" />
-                                    <Label VerticalTextAlignment="Center" Grid.Column="2" FontFamily="Material" Text="{Static res:IconFont.Plus}" FontSize="20" HorizontalTextAlignment="Center" FontAttributes="Bold" >
-                                        <Label.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding BindingContext.Increment, Source={Reference root}}" 
-                                                                 CommandParameter="{Binding .}"/>
-                                        </Label.GestureRecognizers>
-                                    </Label>
-                                </Grid>
-                            </pc:PancakeView>
-                            <Frame Grid.Column="1" Padding="5" CornerRadius="5" Margin="0" HorizontalOptions="Center" VerticalOptions="Center">
-                                    <Label FontFamily="Material" Text="{Static res:IconFont.Close}" FontAttributes="Bold" TextColor="#ee5253">
-                                        <Label.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding BindingContext.RemoveCartItem, Source={Reference root}}" 
-                                                                 CommandParameter="{Binding .}"/>
-                                        </Label.GestureRecognizers>
-                                    </Label>
-                            </Frame>
-                        </Grid>
-                    </Grid>
-                </DataTemplate>
+                        <Label VerticalTextAlignment="Center"
+                               FontFamily="Material"
+                               Text="{Static res:IconFont.Minus}"
+                               FontSize="20"
+                               HorizontalTextAlignment="Center"
+                               FontAttributes="Bold">
+                          <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BindingContext.Decrement, Source={Reference root}}"
+                                                  CommandParameter="{Binding .}"></TapGestureRecognizer>
+                          </Label.GestureRecognizers>
+                        </Label>
+                        <Label VerticalOptions="Center"
+                               Grid.Column="1"
+                               Text="{Binding quantity}"
+                               HorizontalTextAlignment="Center"
+                               FontAttributes="Bold"></Label>
+                        <Label VerticalTextAlignment="Center"
+                               Grid.Column="2"
+                               FontFamily="Material"
+                               Text="{Static res:IconFont.Plus}"
+                               FontSize="20"
+                               HorizontalTextAlignment="Center"
+                               FontAttributes="Bold">
+                          <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BindingContext.Increment, Source={Reference root}}"
+                                                  CommandParameter="{Binding .}"></TapGestureRecognizer>
+                          </Label.GestureRecognizers>
+                        </Label>
+                      </Grid>
+                    </pc:PancakeView>
+                    <Frame Grid.Column="1"
+                           Padding="5"
+                           CornerRadius="5"
+                           Margin="0"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                      <Label FontFamily="Material"
+                             Text="{Static res:IconFont.Close}"
+                             FontAttributes="Bold"
+                             TextColor="#ee5253">
+                        <Label.GestureRecognizers>
+                          <TapGestureRecognizer Command="{Binding BindingContext.RemoveCartItem, Source={Reference root}}"
+                                                CommandParameter="{Binding .}"></TapGestureRecognizer>
+                        </Label.GestureRecognizers>
+                      </Label>
+                    </Frame>
+                  </Grid>
+                </Grid>
+              </DataTemplate>
             </CollectionView.ItemTemplate>
             <CollectionView.FooterTemplate>
-                <DataTemplate>
-                        <Grid Padding="20">
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <StackLayout Orientation="Horizontal">
-                                <Label HorizontalOptions="StartAndExpand" Text="Total Price :" FontSize="20" FontAttributes="Bold"/>
-                                <Label x:Name="Total" HorizontalOptions="Center" FontSize="20" Text="{Binding BindingContext.TotalPrice, StringFormat='{0:#,###,###}.000đ', Source={Reference root}}"/>
-                            </StackLayout>
-                            <Button Grid.Row="1" Text="Order" CornerRadius="10" Command="{Binding BindingContext.Order, Source={Reference root}}"/>
-                        </Grid>
-                    </DataTemplate>
+              <DataTemplate>
+                <Grid Padding="20">
+                  <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                  </Grid.RowDefinitions>
+                  <StackLayout Orientation="Horizontal">
+                    <Label HorizontalOptions="StartAndExpand"
+                           Text="Total Price :"
+                           FontSize="20"
+                           FontAttributes="Bold"></Label>
+                    <Label x:Name="Total"
+                           HorizontalOptions="Center"
+                           FontSize="20"
+                           Text="{Binding BindingContext.TotalPrice, StringFormat='{0:#,###,###}.000đ', Source={Reference root}}"></Label>
+                  </StackLayout>
+                  <Button Grid.Row="1"
+                          Text="Order"
+                          CornerRadius="10"
+                          Command="{Binding BindingContext.Order, Source={Reference root}}"></Button>
+                </Grid>
+              </DataTemplate>
             </CollectionView.FooterTemplate>
-        </CollectionView>
+          </CollectionView>
         </pc:PancakeView>
-    </Grid>
+      </Grid>
+    </ScrollView>
+  </RefreshView>
 </ContentPage>

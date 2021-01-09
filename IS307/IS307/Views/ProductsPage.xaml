@@ -1,73 +1,107 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:pc="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-    xmlns:res="clr-namespace:IS307.Resources"
-    BackgroundColor="#F0F2F5"
-    x:Name="root"
-    x:Class="IS307.Views.ProductsPage">
-    <Grid BackgroundColor="#10ac84">
-        <Grid.RowDefinitions>
-            <RowDefinition
-                Height="60" />
-            <RowDefinition
-                Height="*" />
-        </Grid.RowDefinitions>
-        <Label Text="{Binding Category.name}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontAttributes="Bold" FontSize="Title"/>
-        <pc:PancakeView Grid.Row="1" BackgroundColor="#F0F2F5" CornerRadius="15, 15, 0,0" IsClippedToBounds="true" HorizontalOptions="FillAndExpand">
-            <CollectionView Margin="10" ItemsSource="{Binding Products}" ItemSizingStrategy="{OnPlatform Android=MeasureAllItems,iOS=MeasureFirstItem}">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Span="2" VerticalItemSpacing="5" HorizontalItemSpacing="5" Orientation="Vertical" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame WidthRequest="170" Padding="10" HasShadow="False" BackgroundColor="White" CornerRadius="10">
-                            <Grid Padding="0,8" RowSpacing="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="3*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition  Height="24" />
-                                </Grid.RowDefinitions>
-                                <Image  Margin="0, 0, 0, 10" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Center" Source="{Binding pictureUrl}" />
-                                <Label Grid.Row="1" MaxLines="1" FontSize="Small" VerticalTextAlignment="End" FontAttributes="Bold" Text="{Binding name}" />
-                                <StackLayout Grid.Row="2" Orientation="Horizontal">
-                                    <Label HorizontalOptions="StartAndExpand" FontAttributes="Bold" VerticalTextAlignment="Center" FontSize="Small" TextColor="#b71540" Text="{Binding price, StringFormat='{0:##,0}.000đ'}" />
-                                    <pc:PancakeView BackgroundColor="AliceBlue" CornerRadius="12">
-                                        <Grid RowSpacing="0" ColumnSpacing="0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="24" />
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="24" />
-                                            </Grid.RowDefinitions>
-                                            <Label FontFamily="Material" Text="{Static res:IconFont.Plus}" VerticalOptions="Center" HorizontalOptions="Center" />
-                                            <Grid.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding BindingContext.ViewProductDetailCommand, Source={Reference root}}" CommandParameter="{Binding .}" />
-                                            </Grid.GestureRecognizers>
-                                        </Grid>
-                                    </pc:PancakeView>
-                                </StackLayout>
-                            </Grid>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </pc:PancakeView>
-       
-        <Label
-        FontFamily="Material"
-        BackgroundColor="Transparent"
-        Padding="16"
-        FontSize="24"
-        HorizontalOptions="Start"
-        VerticalOptions="Start"
-        Text="{Static res:IconFont.ArrowLeft}"
-        TextColor="White">
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer
-                Command="{Binding GoBackCommand}" />
-            </Label.GestureRecognizers>
-        </Label>
-    </Grid>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pc="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:res="clr-namespace:IS307.Resources"
+             BackgroundColor="#F0F2F5"
+             x:Name="root"
+             x:Class="IS307.Views.ProductsPage">
+  <Grid BackgroundColor="#10ac84">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="60"></RowDefinition>
+      <RowDefinition Height="*"></RowDefinition>
+    </Grid.RowDefinitions>
+    <Label Text="{Binding Category.name}"
+           HorizontalOptions="Center"
+           VerticalOptions="Center"
+           TextColor="White"
+           FontAttributes="Bold"
+           FontSize="Title"></Label>
+    <pc:PancakeView Grid.Row="1"
+                    BackgroundColor="#F0F2F5"
+                    CornerRadius="15, 15, 0,0"
+                    IsClippedToBounds="true"
+                    HorizontalOptions="FillAndExpand">
+      <CollectionView Margin="10"
+                      ItemsSource="{Binding Products}"
+                      ItemSizingStrategy="{OnPlatform Android=MeasureAllItems,iOS=MeasureFirstItem}">
+        <CollectionView.ItemsLayout>
+          <GridItemsLayout Span="2"
+                           VerticalItemSpacing="5"
+                           HorizontalItemSpacing="5"
+                           Orientation="Vertical"></GridItemsLayout>
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+          <DataTemplate>
+            <Frame WidthRequest="170"
+                   Padding="10"
+                   HasShadow="False"
+                   BackgroundColor="White"
+                   CornerRadius="10">
+              <Grid Padding="0,8"
+                    RowSpacing="0">
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="3*"></RowDefinition>
+                  <RowDefinition Height="*"></RowDefinition>
+                  <RowDefinition Height="24"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Image Margin="0, 0, 0, 10"
+                       Aspect="AspectFit"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       Source="{Binding pictureUrl}"></Image>
+                <Label Grid.Row="1"
+                       MaxLines="1"
+                       FontSize="Small"
+                       VerticalTextAlignment="End"
+                       FontAttributes="Bold"
+                       Text="{Binding name}"></Label>
+                <StackLayout Grid.Row="2"
+                             Orientation="Horizontal">
+                  <Label HorizontalOptions="StartAndExpand"
+                         FontAttributes="Bold"
+                         VerticalTextAlignment="Center"
+                         FontSize="Small"
+                         TextColor="#b71540"
+                         Text="{Binding price, StringFormat='{0:##,0}.000đ'}"></Label>
+                  <pc:PancakeView BackgroundColor="AliceBlue"
+                                  CornerRadius="12">
+                    <Grid RowSpacing="0"
+                          ColumnSpacing="0">
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="24"></ColumnDefinition>
+                      </Grid.ColumnDefinitions>
+                      <Grid.RowDefinitions>
+                        <RowDefinition Height="24"></RowDefinition>
+                      </Grid.RowDefinitions>
+                      <Label FontFamily="Material"
+                             Text="{Static res:IconFont.Plus}"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center"></Label>
+                      <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BindingContext.ViewProductDetailCommand, Source={Reference root}}"
+                                              CommandParameter="{Binding .}"></TapGestureRecognizer>
+                      </Grid.GestureRecognizers>
+                    </Grid>
+                  </pc:PancakeView>
+                </StackLayout>
+              </Grid>
+            </Frame>
+          </DataTemplate>
+        </CollectionView.ItemTemplate>
+      </CollectionView>
+    </pc:PancakeView>
+    <Label FontFamily="Material"
+           BackgroundColor="Transparent"
+           Padding="16"
+           FontSize="24"
+           HorizontalOptions="Start"
+           VerticalOptions="Start"
+           Text="{Static res:IconFont.ArrowLeft}"
+           TextColor="White">
+      <Label.GestureRecognizers>
+        <TapGestureRecognizer Command="{Binding GoBackCommand}"></TapGestureRecognizer>
+      </Label.GestureRecognizers>
+    </Label>
+  </Grid>
 </ContentPage>

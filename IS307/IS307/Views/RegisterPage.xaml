@@ -1,54 +1,134 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pc="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:controls="clr-namespace:IS307.Controls"
              x:Class="IS307.Views.RegisterPage">
-    <ContentPage.Content>
-        <!-- 1. Market body-->
-        <Grid BackgroundColor="#0097e6">
+  <ContentPage.Content>
+    <!-- 1. Market body -->
+    <Grid BackgroundColor="#0097e6">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="120"></RowDefinition>
+        <RowDefinition Height="*"></RowDefinition>
+      </Grid.RowDefinitions>
+      <Image Source="logo.png"></Image>
+      <pc:PancakeView Grid.Row="1"
+                      BackgroundColor="#F0F2F5"
+                      CornerRadius="25, 25, 0,0"
+                      IsClippedToBounds="true"
+                      HorizontalOptions="FillAndExpand">
+        <ScrollView VerticalScrollBarVisibility="Never">
+          <Grid Padding="50,65,50,0">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"></ColumnDefinition>
+              <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="120"/>
-                <RowDefinition Height="*"/>
+              <RowDefinition Height="Auto"></RowDefinition>
+              <RowDefinition Height="Auto"></RowDefinition>
+              <RowDefinition Height="Auto"></RowDefinition>
+              <RowDefinition Height="Auto"></RowDefinition>
+              <RowDefinition Height="Auto"></RowDefinition>
+              <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <Image Source="logo.png" />
-            <pc:PancakeView Grid.Row="1" BackgroundColor="#F0F2F5" CornerRadius="25, 25, 0,0" IsClippedToBounds="true" HorizontalOptions="FillAndExpand">
-                <ScrollView VerticalScrollBarVisibility="Never">
-                    <Grid Padding="50,65,50,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Label FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Center" Grid.Row="0" Text="SIGN UP" Margin="0, 0, 0, 50"/>
-                        <Frame Grid.Row="1" CornerRadius="30" Padding="0" HasShadow="False"  Margin="0, 0, 0, 20">
-                            <controls:CustomEntry Text="{Binding RegisterModel.name, Mode=TwoWay}" Placeholder="Your Name" BorderColor="WhiteSmoke" BackgroundColor="WhiteSmoke" FontSize="15" HeightRequest="50" Image="card" ImageAlignment="Right" ImageWidth="20" ImageHeight="20" CornerRadius="30" IsCurvedCornersEnabled="True"/>
-                        </Frame>
-                        <Frame Grid.Row="2" CornerRadius="30" Padding="0" HasShadow="False"  Margin="0, 0, 0, 20">
-                            <controls:CustomEntry Text="{Binding RegisterModel.username, Mode=TwoWay}" Placeholder="Username" BorderColor="WhiteSmoke" BackgroundColor="WhiteSmoke" FontSize="15" HeightRequest="50" Image="icon_user" ImageAlignment="Right" ImageWidth="20" ImageHeight="20" CornerRadius="30" IsCurvedCornersEnabled="True"/>
-                        </Frame>
-                        <Frame Grid.Row="3" CornerRadius="30" Padding="0" HasShadow="False"  Margin="0, 0, 0, 20">
-                            <controls:CustomEntry Text="{Binding RegisterModel.password, Mode=TwoWay}" Placeholder="Password" IsPassword="True" BorderColor="WhiteSmoke" BackgroundColor="WhiteSmoke" FontSize="15" HeightRequest="50" Image="key" ImageAlignment="Right" ImageWidth="20" ImageHeight="20" CornerRadius="30" IsCurvedCornersEnabled="True"/>
-                        </Frame>
-                        <Frame Grid.Row="4" CornerRadius="30" Padding="0" HasShadow="False"  Margin="0, 0, 0, 20">
-                            <controls:CustomEntry Text="{Binding RegisterModel.passwordConfirm, Mode=TwoWay}" Placeholder="Password Confirm" IsPassword="True" BorderColor="WhiteSmoke" BackgroundColor="WhiteSmoke" FontSize="15" HeightRequest="50" Image="key" ImageAlignment="Right" ImageWidth="20" ImageHeight="20" CornerRadius="30" IsCurvedCornersEnabled="True"/>
-                        </Frame>
-                        <Button Grid.Row="5" Command="{Binding Register}" CommandParameter="{Binding RegisterModel}" CornerRadius="15" Text="Sign Up" Margin="0, 0, 0, 20" BackgroundColor="#0097e6"/>
-                        <Label Grid.Row="6" HorizontalTextAlignment="Center" Text="Sign In" TextColor="#0097e6">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding ShowLogin}" />
-                            </Label.GestureRecognizers>
-                        </Label>
-                    </Grid>
-                </ScrollView>
-            </pc:PancakeView>
-        </Grid>
-    </ContentPage.Content>
+            <Label FontSize="Large"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   Grid.Row="0"
+                   Text="SIGN UP"
+                   Margin="0, 0, 0, 50"></Label>
+            <Frame Grid.Row="1"
+                   CornerRadius="30"
+                   Padding="0"
+                   HasShadow="False"
+                   Margin="0, 0, 0, 20">
+              <controls:CustomEntry Text="{Binding RegisterModel.name, Mode=TwoWay}"
+                                    Placeholder="Your Name"
+                                    BorderColor="WhiteSmoke"
+                                    BackgroundColor="WhiteSmoke"
+                                    FontSize="15"
+                                    HeightRequest="50"
+                                    Image="card"
+                                    ImageAlignment="Right"
+                                    ImageWidth="20"
+                                    ImageHeight="20"
+                                    CornerRadius="30"
+                                    IsCurvedCornersEnabled="True"></controls:CustomEntry>
+            </Frame>
+            <Frame Grid.Row="2"
+                   CornerRadius="30"
+                   Padding="0"
+                   HasShadow="False"
+                   Margin="0, 0, 0, 20">
+              <controls:CustomEntry Text="{Binding RegisterModel.username, Mode=TwoWay}"
+                                    Placeholder="Username"
+                                    BorderColor="WhiteSmoke"
+                                    BackgroundColor="WhiteSmoke"
+                                    FontSize="15"
+                                    HeightRequest="50"
+                                    Image="icon_user"
+                                    ImageAlignment="Right"
+                                    ImageWidth="20"
+                                    ImageHeight="20"
+                                    CornerRadius="30"
+                                    IsCurvedCornersEnabled="True"></controls:CustomEntry>
+            </Frame>
+            <Frame Grid.Row="3"
+                   CornerRadius="30"
+                   Padding="0"
+                   HasShadow="False"
+                   Margin="0, 0, 0, 20">
+              <controls:CustomEntry Text="{Binding RegisterModel.password, Mode=TwoWay}"
+                                    Placeholder="Password"
+                                    IsPassword="True"
+                                    BorderColor="WhiteSmoke"
+                                    BackgroundColor="WhiteSmoke"
+                                    FontSize="15"
+                                    HeightRequest="50"
+                                    Image="key"
+                                    ImageAlignment="Right"
+                                    ImageWidth="20"
+                                    ImageHeight="20"
+                                    CornerRadius="30"
+                                    IsCurvedCornersEnabled="True"></controls:CustomEntry>
+            </Frame>
+            <Frame Grid.Row="4"
+                   CornerRadius="30"
+                   Padding="0"
+                   HasShadow="False"
+                   Margin="0, 0, 0, 20">
+              <controls:CustomEntry Text="{Binding RegisterModel.passwordConfirm, Mode=TwoWay}"
+                                    Placeholder="Password Confirm"
+                                    IsPassword="True"
+                                    BorderColor="WhiteSmoke"
+                                    BackgroundColor="WhiteSmoke"
+                                    FontSize="15"
+                                    HeightRequest="50"
+                                    Image="key"
+                                    ImageAlignment="Right"
+                                    ImageWidth="20"
+                                    ImageHeight="20"
+                                    CornerRadius="30"
+                                    IsCurvedCornersEnabled="True"></controls:CustomEntry>
+            </Frame>
+            <Button Grid.Row="5"
+                    Command="{Binding Register}"
+                    CommandParameter="{Binding RegisterModel}"
+                    CornerRadius="15"
+                    Text="Sign Up"
+                    Margin="0, 0, 0, 20"
+                    BackgroundColor="#0097e6"></Button>
+            <Label Grid.Row="6"
+                   HorizontalTextAlignment="Center"
+                   Text="Sign In"
+                   TextColor="#0097e6">
+              <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ShowLogin}"></TapGestureRecognizer>
+              </Label.GestureRecognizers>
+            </Label>
+          </Grid>
+        </ScrollView>
+      </pc:PancakeView>
+    </Grid>
+  </ContentPage.Content>
 </ContentPage>

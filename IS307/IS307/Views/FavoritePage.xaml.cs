@@ -1,5 +1,4 @@
 ﻿using IS307.ViewModels;
-using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,18 +10,12 @@ namespace IS307.Views
         public FavoritePage()
         {
             InitializeComponent();
-            var vm = new FavoriteViewModel(Navigation);
-            BindingContext = vm;
-            (BindingContext as INotifyPropertyChanged).PropertyChanged += FavoritePage_PropertyChanged; ;
+            BindingContext = new FavoriteViewModel(Navigation);
         }
-
-        private void FavoritePage_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void OnAppearing()
         {
-            var vm = BindingContext as FavoriteViewModel;
-            if (e.PropertyName == "UnFavorite")
-            {
-                Products.ItemsSource = vm.Products;
-            }
+            base.OnAppearing();
+            (BindingContext as FavoriteViewModel).OnAppearing();
         }
     }
 }

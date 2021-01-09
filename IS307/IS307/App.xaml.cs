@@ -26,7 +26,15 @@ namespace IS307
             InitializeComponent();
             MainPage = new AppShell();
 
-            var token = App.Current.Properties["token"];
+            string token = null;
+            try
+            {
+               token =  App.Current.Properties["token"].ToString();
+            }
+            catch
+            {
+                App.Current.Properties["token"] = null;
+            }
 
             if (token == null)
                 Shell.Current.GoToAsync("//LoginPage");

@@ -7,9 +7,9 @@ namespace IS307.Services
 {
     public class CategoryService
     {
-        public List<CategoryModel> GetAllCategory()
+        public async Task<List<CategoryModel>> GetAllCategory()
         {
-            var response = Singleton.HttpClient.GetStringAsync("/product/categories").Result;
+            var response = await Singleton.HttpClient.GetStringAsync("/product/categories");
             var result = JsonConvert.DeserializeObject<List<CategoryModel>>(response);
             return result;
         }

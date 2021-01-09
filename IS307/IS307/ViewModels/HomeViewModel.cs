@@ -1,19 +1,26 @@
-﻿using Bogus;
-using IS307.Models;
+﻿using IS307.Models;
 using IS307.Services;
 using IS307.Views;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace IS307.ViewModels
 {
-    class HomeViewModel
+    class HomeViewModel : BaseViewModel
     {
-        public ObservableCollection<ProductModel> Products { get; set; }
-        public ObservableCollection<CategoryModel> Categories { get; set; }
-   
+        private ObservableCollection<ProductModel> products;
+        public ObservableCollection<ProductModel> Products
+        {
+            get => products;
+            set => SetProperty(ref products, value);
+        }
+        private ObservableCollection<CategoryModel> categories;
+        public ObservableCollection<CategoryModel> Categories
+        {
+            get => categories;
+            set=>SetProperty(ref categories, value);
+        }
         public ICommand ViewProductDetailCommand { get; set; }
         public ICommand ViewProductInCategoryCommand { get; set; }
 
@@ -22,11 +29,16 @@ namespace IS307.ViewModels
 
         public HomeViewModel(INavigation navigation)
         {
-            Categories = new ObservableCollection<CategoryModel>(CategoryService.GetAllCategory());
-            Products = new ObservableCollection<ProductModel>(ProductService.GetTopProduct());
+            LoadPageCommand = new Command(async () =>
+            {
+                Categories = new ObservableCollection<CategoryModel>(await CategoryService.GetAllCategory());
+                Products = new ObservableCollection<ProductModel>(await ProductService.GetTopProduct());
+                IsBusy = false;
+            });
+
             ViewProductDetailCommand = new Command<ProductModel>(product =>
             {
-                 navigation.PushAsync(new ProductDetailPage(product));
+                navigation.PushAsync(new ProductDetailPage(product));
             });
 
             ViewProductInCategoryCommand = new Command<CategoryModel>(category =>
@@ -35,6 +47,9 @@ namespace IS307.ViewModels
             });
         }
 
-
+        public void OnAppearing()
+        {
+            IsBusy = true;
+        }
     }
 }
