@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IS307.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,8 @@ namespace IS307.Views
         public AccountPage()
         {
             InitializeComponent();
+            var vm = new AccountViewModel(Navigation);
+            BindingContext = vm;
         }
     }
 }

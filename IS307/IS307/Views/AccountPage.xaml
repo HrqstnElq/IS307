@@ -1,12 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IS307.Views.AccountPage">
+             x:Class="IS307.Views.AccountPage"
+             xmlns:pc="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:res="clr-namespace:IS307.Resources"
+             x:Name="root"
+             BackgroundColor="#F0F2F5">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid BackgroundColor="#10ac84">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Text="Accout" FontSize="Title" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White"/>
+            <pc:PancakeView Grid.Row="1" BackgroundColor="#F0F2F5" CornerRadius="15, 15, 0,0" IsClippedToBounds="true" HorizontalOptions="FillAndExpand">
+                <Grid BackgroundColor="#F0F2F5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="400" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Frame Grid.Row="0" Scale="1.2" CornerRadius="1000" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Image Source="https://i.pinimg.com/564x/79/1d/91/791d91c6b328a27c08b7b2f039d5f193.jpg" VerticalOptions="Start" />
+                    </Frame>
+                    <Frame Grid.Row="1" TranslationY="-100" CornerRadius="100" HasShadow="False" BackgroundColor="White" HorizontalOptions="Center">
+                        <Label FontFamily="Material" Text="{Static res:IconFont.Logout}" VerticalOptions="Center" FontSize="Title" TextColor="#d63031" HorizontalOptions="Center" >
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Logout}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Frame>
+                    <StackLayout TranslationY="-50" Grid.Row="2" BackgroundColor="Transparent" VerticalOptions="CenterAndExpand">
+                        <Grid Padding="25,10,25,0" RowSpacing="10" ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Nhóm 20" 
+                                    FontAttributes="Bold" FontSize="30"/>
+                            <Label Grid.Row="1" Grid.Column="0" Text="Võ Hữu Trí - 18521531" TextColor="#a5a2a2" 
+                                    FontSize="16"/>
+                            <Label Grid.Row="2" Grid.Column="0" Text="Lê Thành Vinh - 18521648" TextColor="#a5a2a2" 
+                                    FontSize="16"/>
+                            <Button Grid.Row="3" Grid.Column="0" 
+                                    TextColor="White" FontFamily="Material" Text="{Static res:IconFont.Heart}"
+                                    FontAttributes="Bold" FontSize="17" HeightRequest="45"
+                                    VerticalOptions="End" BackgroundColor="#ff7979" HorizontalOptions="Center"
+                                    Command="{Binding FavoritePage}"/>
+                            <Button Grid.Row="3" Grid.Column="1" 
+                                    TextColor="White" FontFamily="Material" Text="{Static res:IconFont.ClipboardList}"
+                                    FontAttributes="Bold" FontSize="17" HeightRequest="45"
+                                    VerticalOptions="End" HorizontalOptions="Center"
+                                    Command="{Binding OrderPage}"/>
+                        </Grid>
+                    </StackLayout>
+                </Grid>
+            </pc:PancakeView>
+        </Grid>
+
     </ContentPage.Content>
 </ContentPage>
