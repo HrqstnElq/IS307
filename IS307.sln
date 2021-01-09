@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IS307.Android", "IS307\IS30
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IS307", "IS307\IS307\IS307.csproj", "{658848CE-97AF-4722-BD4C-DAFFD7003AC9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IS307.iOS", "IS307\IS307.iOS\IS307.iOS.csproj", "{BEF08A73-1749-4569-8A6A-877C49D44BE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,16 @@ Global
 		{658848CE-97AF-4722-BD4C-DAFFD7003AC9}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{658848CE-97AF-4722-BD4C-DAFFD7003AC9}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{658848CE-97AF-4722-BD4C-DAFFD7003AC9}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
+		{BEF08A73-1749-4569-8A6A-877C49D44BE1}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
+		{BEF08A73-1749-4569-8A6A-877C49D44BE1}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{BEF08A73-1749-4569-8A6A-877C49D44BE1}.Debug|iPhone.Build.0 = Debug|iPhone
+		{BEF08A73-1749-4569-8A6A-877C49D44BE1}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{BEF08A73-1749-4569-8A6A-877C49D44BE1}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{BEF08A73-1749-4569-8A6A-877C49D44BE1}.Release|Any CPU.ActiveCfg = Release|iPhoneSimulator
+		{BEF08A73-1749-4569-8A6A-877C49D44BE1}.Release|iPhone.ActiveCfg = Release|iPhone
+		{BEF08A73-1749-4569-8A6A-877C49D44BE1}.Release|iPhone.Build.0 = Release|iPhone
+		{BEF08A73-1749-4569-8A6A-877C49D44BE1}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{BEF08A73-1749-4569-8A6A-877C49D44BE1}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

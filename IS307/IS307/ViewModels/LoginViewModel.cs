@@ -43,7 +43,7 @@ namespace IS307.ViewModels
                         await Application.Current.MainPage.DisplayAlert("Error !", "Login fail", "Again");
                     else
                     {
-                        Application.Current.Properties["token"] = token;
+                        App.Current.Properties["token"] = token;
                         App.Current.MainPage = new AppShell();
                     };
                 }

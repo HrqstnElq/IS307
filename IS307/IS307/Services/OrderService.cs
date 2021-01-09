@@ -10,7 +10,7 @@ namespace IS307.Services
 {
     public class OrderService
     {
-        public void PostOrder(string token, OrderModel order)
+        public void PostOrder(string  token, OrderModel order)
         {
             var content = new StringContent(JsonConvert.SerializeObject(order), Encoding.UTF8, "application/json");
             Singleton.HttpClient.DefaultRequestHeaders.Add("x-auth-token", token);

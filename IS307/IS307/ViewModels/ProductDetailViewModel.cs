@@ -15,6 +15,7 @@ namespace IS307.ViewModels
     public class ProductDetailViewModel : INotifyPropertyChanged
     {
         public static event EventHandler<EventArgs> AddProductEvent;
+        public static event EventHandler<EventArgs> UnFavoriteEvent;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand GoBackCommand { get; set; }
@@ -73,10 +74,13 @@ namespace IS307.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AddToCart)));
             });
 
-            Favorite = new Command(() =>
+            Favorite = new Command(async () =>
             {
                 if (isFavorite)
-                    productService.UnFavoriteProduct(Product._id, token);
+                {
+                    UnFavoriteEvent?.Invoke(this, new EventArgs());
+                    await productService.UnFavoriteProduct(Product._id, token);
+                }
                 else
                     productService.FavoriteProduct(Product._id, token);
                 isFavorite = !isFavorite;

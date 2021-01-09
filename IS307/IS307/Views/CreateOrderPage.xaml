@@ -53,7 +53,7 @@
                         </Frame>
                     </StackLayout>
 
-                    <Button Grid.Row="3" Text="Create order"  Command="{Binding OrderCommand}"/>
+                    <Button Margin="20" Grid.Row="3" Text="Create order"  Command="{Binding OrderCommand}"/>
                 </Grid>
             </pc:PancakeView>
 

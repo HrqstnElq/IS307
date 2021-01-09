@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System.Net;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace IS307.Services
 {
@@ -40,11 +41,20 @@ namespace IS307.Services
             Singleton.HttpClient.DefaultRequestHeaders.Remove("x-auth-token");
         }
 
-        public void UnFavoriteProduct(string ProductId, string token)
+        public async Task UnFavoriteProduct(string ProductId, string token)
         {
             Singleton.HttpClient.DefaultRequestHeaders.Add("x-auth-token", token);
-            Singleton.HttpClient.DeleteAsync($"/user/favorite/{ProductId}");
+            await Singleton.HttpClient.DeleteAsync($"/user/favorite/{ProductId}");
             Singleton.HttpClient.DefaultRequestHeaders.Remove("x-auth-token");
+        }
+
+        public List<ProductModel> GetUserFavoriteProduct(string token)
+        {
+            Singleton.HttpClient.DefaultRequestHeaders.Add("x-auth-token", token);
+            var response = Singleton.HttpClient.GetStringAsync("/user/favorite").Result;
+            var result = JsonConvert.DeserializeObject<List<ProductModel>>(response);
+            Singleton.HttpClient.DefaultRequestHeaders.Remove("x-auth-token");
+            return result;
         }
     }
 }

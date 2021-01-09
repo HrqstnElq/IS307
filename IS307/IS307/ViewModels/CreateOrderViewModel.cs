@@ -20,7 +20,7 @@ namespace IS307.ViewModels
         private readonly OrderService orderService = new OrderService();
         public CreateOrderViewModel(INavigation navigation)
         {
-            var token = Application.Current.Properties["token"].ToString();
+            var token = App.Current.Properties["token"].ToString();
             Order = new OrderModel()
             {
                 products = App.Database.GetCart().Result,
@@ -35,17 +35,17 @@ namespace IS307.ViewModels
                 navigation.PopAsync();
             });
 
-            OrderCommand = new Command(async () =>
+            OrderCommand = new Command(() =>
             {
                 if(string.IsNullOrEmpty(Order.phone) || string.IsNullOrEmpty(Order.address))
                 {
-                    await App.Current.MainPage.DisplayAlert("Waring !", "Phone number or address is required", "Ok");
+                    App.Current.MainPage.DisplayAlert("Waring !", "Phone number or address is required", "Ok");
                 }
                 else
                 {
                     orderService.PostOrder(token, Order);
-                    await App.Current.MainPage.DisplayAlert("Success !", "Create order completed", "Ok");
-                    await App.Database.ClearCartItem();
+                    App.Current.MainPage.DisplayAlert("Success !", "Create order completed", "Ok");
+                    App.Database.ClearCartItem();
                     App.Current.MainPage = new AppShell();
                 }
             });
