@@ -46,20 +46,28 @@ namespace IS307.ViewModels
                 }
                 else
                 {
-                    var result = await AccountService.RegisterService(data);
-                    if (result == 1)
+                    try
                     {
-                        await Application.Current.MainPage.DisplayAlert("Waring !", "Username already exists", "Ok");
+                        var result = await AccountService.RegisterService(data);
+                        if (result == 1)
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Waring !", "Username already exists", "Ok");
+                        }
+                        else if (result == -1)
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Error !", "Bad request", "Ok");
+                        }
+                        else
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Success !", "Register successfully", "Login");
+                            await navigation.PopAsync();
+                        }
                     }
-                    else if (result == -1)
+                    catch
                     {
-                        await Application.Current.MainPage.DisplayAlert("Error !", "Bad request", "Ok");
+                        await App.Current.MainPage.DisplayAlert("Lổi !", "Không có kết nối mạng", "Ok");
                     }
-                    else
-                    {
-                        await Application.Current.MainPage.DisplayAlert("Success !", "Register successfully", "Login");
-                        await navigation.PopAsync();
-                    }
+                    
                 }
             });
         }

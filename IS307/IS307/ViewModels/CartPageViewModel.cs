@@ -42,13 +42,22 @@ namespace IS307.ViewModels
         {
             LoadPageCommand = new Command(async () =>
             {
-                CartItems = new ObservableCollection<CartItemModel>(await App.Database.GetCart());
-                TotalPrice = CartItems.Sum(x => x.price * x.quantity);
-                IsBusy = false;
-                if (cartItems.Count > 0)
-                    HasItem = true;
-                else
-                    HasItem = false;
+                try
+                {
+                    CartItems = new ObservableCollection<CartItemModel>(await App.Database.GetCart());
+                    TotalPrice = CartItems.Sum(x => x.price * x.quantity);
+                    IsBusy = false;
+                    if (cartItems.Count > 0)
+                        HasItem = true;
+                    else
+                        HasItem = false;
+                }
+                catch
+                {
+                    await App.Current.MainPage.DisplayAlert("Lổi !", "Không có kết nối mạng", "Ok");
+                    await Shell.Current.GoToAsync("//LoginPage");
+
+                }
             });
 
             Increment = new Command<CartItemModel>(async (item) =>

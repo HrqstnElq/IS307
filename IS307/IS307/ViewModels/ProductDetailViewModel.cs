@@ -45,10 +45,19 @@ namespace IS307.ViewModels
 
             LoadPageCommand = new Command(async () =>
             {
-                Product = productModel;
-                isFavorite = await productService.IsFavoriteProduct(Product._id, token);
-                OnPropertyChanged(nameof(Favorite));
-                IsBusy = false;
+                try
+                {
+                    Product = productModel;
+                    isFavorite = await productService.IsFavoriteProduct(Product._id, token);
+                    OnPropertyChanged(nameof(Favorite));
+                    IsBusy = false;
+                }
+                catch
+                {
+                    await App.Current.MainPage.DisplayAlert("Lổi !", "Không có kết nối mạng", "Ok");
+                    await Shell.Current.GoToAsync("//LoginPage");
+                }
+
             });
 
 
@@ -83,19 +92,28 @@ namespace IS307.ViewModels
 
             Favorite = new Command(() =>
             {
-                OnPropertyChanged("Loading");
-                if (isFavorite)
+                try
                 {
-                   productService.UnFavoriteProduct(Product._id, token);
+                    OnPropertyChanged("Loading");
+                    if (isFavorite)
+                    {
+                        productService.UnFavoriteProduct(Product._id, token);
+                    }
+                    else
+                    {
+                        productService.FavoriteProduct(Product._id, token);
+                    }
+
+                    isFavorite = !isFavorite;
+                    OnPropertyChanged(nameof(Favorite));
+                    OnPropertyChanged("Complete");
                 }
-                else
+                catch
                 {
-                    productService.FavoriteProduct(Product._id, token);
+                    App.Current.MainPage.DisplayAlert("Lổi !", "Không có kết nối mạng", "Ok");
+                    Shell.Current.GoToAsync("//LoginPage");
                 }
                 
-                isFavorite = !isFavorite;
-                OnPropertyChanged(nameof(Favorite));
-                OnPropertyChanged("Complete");
             });
         }
         public void OnAppearing()

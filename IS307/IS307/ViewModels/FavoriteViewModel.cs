@@ -26,6 +26,16 @@ namespace IS307.ViewModels
         {
             LoadPageCommand = new Command(async () =>
             {
+                try
+                {
+                    Products = new ObservableCollection<ProductModel>(await productService.GetUserFavoriteProduct(App.Current.Properties["token"].ToString()));
+                    IsBusy = false;
+                }
+                catch
+                {
+                    await App.Current.MainPage.DisplayAlert("Lổi !", "Không có kết nối mạng", "Ok");
+                    await Shell.Current.GoToAsync("//LoginPage");
+                }
                 Products = new ObservableCollection<ProductModel>(await productService.GetUserFavoriteProduct(App.Current.Properties["token"].ToString()));
                 IsBusy = false;
             });

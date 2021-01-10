@@ -36,24 +36,32 @@ namespace IS307.ViewModels
                 navigation.PopAsync();
             });
 
-            OrderCommand = new Command(() =>
+            OrderCommand = new Command(async () =>
             {
                 if (string.IsNullOrEmpty(Order.phone) || string.IsNullOrEmpty(Order.address))
                 {
-                    App.Current.MainPage.DisplayAlert("Lỗi !", "Vui lòng điền đầy đủ thông tin", "Ok");
+                    await App.Current.MainPage.DisplayAlert("Lỗi !", "Vui lòng điền đầy đủ thông tin", "Ok");
                 }
                 else
                 {
                     var regex = new Regex(@"^(84|0[3|2|5|7|8|9])+([0-9]{8})$");
                     if (regex.IsMatch(Order.phone))
                     {
-                        orderService.PostOrder(token, Order);
-                        App.Current.MainPage.DisplayAlert("Thành công !", "Create order completed", "Ok");
-                        App.Database.ClearCartItem();
-                        App.Current.MainPage = new AppShell();
+                        try
+                        {
+                            orderService.PostOrder(token, Order);
+                            await App.Current.MainPage.DisplayAlert("Thành công !", "Create order completed", "Ok");
+                            await App.Database.ClearCartItem();
+                            App.Current.MainPage = new AppShell();
+                        }
+                        catch
+                        {
+                            await App.Current.MainPage.DisplayAlert("Lổi !", "Không có kết nối mạng", "Ok");
+                        }
+                        
                     }
                     else
-                        App.Current.MainPage.DisplayAlert("Lỗi !", "Số điện thoại không hợp lệ", "Ok");
+                        await App.Current.MainPage.DisplayAlert("Lỗi !", "Số điện thoại không hợp lệ", "Ok");
                 }
             });
         }

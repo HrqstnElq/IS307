@@ -70,16 +70,17 @@
                      HorizontalOptions="Center"
                      Text="Nhóm 20"
                      FontAttributes="Bold"
+                     TextColor="#ee5253"
                      FontSize="30"></Label>
               <Label Grid.Row="1"
                      Text="Võ Hữu Trí - 18521531"
                      HorizontalOptions="Center"
-                     TextColor="#a5a2a2"
+                     TextColor="#8e44ad"
                      FontSize="16"></Label>
               <Label Grid.Row="2"
                      Text="Lê Thành Vinh - 18521648"
                      HorizontalOptions="Center"
-                     TextColor="#a5a2a2"
+                     TextColor="#8e44ad"
                      FontSize="16"></Label>
             </Grid>
           </StackLayout>

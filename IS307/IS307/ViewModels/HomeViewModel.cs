@@ -32,9 +32,17 @@ namespace IS307.ViewModels
         {
             LoadPageCommand = new Command(async () =>
             {
-                Categories = new ObservableCollection<CategoryModel>(await CategoryService.GetAllCategory());
-                Products = new ObservableCollection<ProductModel>(await ProductService.GetTopProduct());
-                IsBusy = false;
+                try
+                {
+                    Categories = new ObservableCollection<CategoryModel>(await CategoryService.GetAllCategory());
+                    Products = new ObservableCollection<ProductModel>(await ProductService.GetTopProduct());
+                    IsBusy = false;
+                }
+                catch
+                {
+                    await App.Current.MainPage.DisplayAlert("Lổi !", "Không có kết nối mạng", "Ok");
+                    await Shell.Current.GoToAsync("//LoginPage");
+                }
             });
 
             ViewProductDetailCommand = new Command<ProductModel>(product =>

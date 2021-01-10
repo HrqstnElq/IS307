@@ -8,7 +8,6 @@
              BackgroundColor="#F0F2F5">
   <RefreshView IsRefreshing="{Binding IsBusy}"
                Command="{Binding LoadPageCommand}">
-      <AbsoluteLayout>
         <Grid BackgroundColor="#130f40">
           <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
@@ -162,22 +161,5 @@
                     </pc:PancakeView>
                 </ScrollView>
         </Grid>
-        <ContentView x:Name="Loading"
-                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-                     AbsoluteLayout.LayoutFlags="All"
-                     IsVisible="False">
-          <StackLayout VerticalOptions="Center"
-                       HorizontalOptions="Center">
-            <StackLayout Orientation="Vertical"
-                         HeightRequest="150"
-                         WidthRequest="200">
-              <ActivityIndicator IsRunning="True"
-                                 Color="Orange"
-                                 VerticalOptions="Center"
-                                 HorizontalOptions="Center"></ActivityIndicator>
-            </StackLayout>
-          </StackLayout>
-        </ContentView>
-      </AbsoluteLayout>
   </RefreshView>
 </ContentPage>

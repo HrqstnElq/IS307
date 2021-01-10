@@ -44,18 +44,24 @@ namespace IS307.ViewModels
                 }
                 else
                 {
-                    var token = await AccountService.LoginService(data);
-                    if (string.IsNullOrEmpty(token))
+                    try
                     {
-                        await Application.Current.MainPage.DisplayAlert("Error !", "Login fail", "Again");
-                        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Complete"));
+                        var token = await AccountService.LoginService(data);
+                        if (string.IsNullOrEmpty(token))
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Error !", "Login fail", "Again");
+                        }
+                        else
+                        {
+                            App.Current.Properties["token"] = token;
+                            App.Current.MainPage = new AppShell();
+                        };
                     }
-                    else
+                    catch
                     {
-                        App.Current.Properties["token"] = token;
-                        App.Current.MainPage = new AppShell();
-                        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Complete"));
-                    };
+                        await App.Current.MainPage.DisplayAlert("Lổi !", "Không có kết nối mạng", "Ok");
+                    }
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Complete"));
                 }
             });
         }
