@@ -8,9 +8,8 @@
   <ContentPage.Content>
     <RefreshView IsRefreshing="{Binding IsBusy}"
                  Command="{Binding LoadPageCommand}">
-      <ScrollView>
         <AbsoluteLayout>
-          <Grid BackgroundColor="#10ac84">
+          <Grid BackgroundColor="#222f3e">
             <Grid.RowDefinitions>
               <RowDefinition Height="60"></RowDefinition>
               <RowDefinition Height="*"></RowDefinition>
@@ -29,127 +28,129 @@
                 <TapGestureRecognizer Command="{Binding GoBackCommand}"></TapGestureRecognizer>
               </Label.GestureRecognizers>
             </Label>
-            <pc:PancakeView Grid.Row="1"
+                    <ScrollView Grid.Row="1">
+                        <pc:PancakeView 
                             BackgroundColor="#F0F2F5"
                             CornerRadius="15, 15, 0,0"
                             IsClippedToBounds="true"
                             HorizontalOptions="FillAndExpand">
-              <Grid Padding="0, 20">
-                <Grid.RowDefinitions>
-                  <RowDefinition Height="auto"></RowDefinition>
-                  <RowDefinition Height="auto"></RowDefinition>
-                  <RowDefinition Height="350"></RowDefinition>
-                  <RowDefinition Height="auto"></RowDefinition>
-                  <RowDefinition Height="auto"></RowDefinition>
-                  <RowDefinition Height="60"></RowDefinition>
-                  <RowDefinition Height="auto"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Label Grid.Row="0"
+                            <Grid Padding="0, 20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="350"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="60"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0"
                        MaxLines="1"
                        Margin="20, 0"
                        HorizontalOptions="Center"
                        Text="{Binding Product.name}"
                        FontAttributes="Bold"
                        FontSize="Title"></Label>
-                <Label Grid.Row="1"
+                                <Label Grid.Row="1"
                        HorizontalOptions="Center"
                        Text="{Binding Product.category}"
                        FontSize="Subtitle"></Label>
-                <Frame Grid.Row="2"
+                                <Frame Grid.Row="2"
                        Grid.RowSpan="2"
                        HasShadow="False"
                        Margin="20, 0, 20, 0"
                        Padding="0"
                        CornerRadius="10">
-                  <Image Source="{Binding Product.pictureUrl}"
+                                    <Image Source="{Binding Product.pictureUrl}"
                          Aspect="AspectFill"></Image>
-                </Frame>
-                <StackLayout Grid.Row="4"
+                                </Frame>
+                                <StackLayout Grid.Row="4"
                              Margin="20, 0, 20, 0"
                              Orientation="Horizontal">
-                  <Label HorizontalOptions="StartAndExpand"
+                                    <Label HorizontalOptions="StartAndExpand"
                          FontAttributes="Bold"
                          VerticalTextAlignment="Center"
                          FontSize="Title"
                          TextColor="#b71540"
                          Text="{Binding Product.price, StringFormat='{0:##,0}.000đ'}"></Label>
-                  <Frame CornerRadius="100"
+                                    <Frame CornerRadius="100"
                          Padding="10"
                          HasShadow="False">
-                    <Label x:Name="Heart"
+                                        <Label x:Name="Heart"
                            FontFamily="Material"
                            Text="{Static res:IconFont.HeartOutline}"
                            VerticalOptions="Center"
                            FontSize="Title"
                            TextColor="#d63031"
                            HorizontalOptions="Center">
-                      <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding Favorite}"></TapGestureRecognizer>
-                      </Label.GestureRecognizers>
-                    </Label>
-                  </Frame>
-                </StackLayout>
-                <pc:PancakeView Padding="10, 0"
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Favorite}"></TapGestureRecognizer>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </Frame>
+                                </StackLayout>
+                                <pc:PancakeView Padding="10, 0"
                                 Margin="10"
                                 HorizontalOptions="Center"
                                 Grid.Row="5"
                                 BorderColor="DarkCyan"
                                 BorderThickness="1"
                                 CornerRadius="24">
-                  <Grid>
-                    <Grid.ColumnDefinitions>
-                      <ColumnDefinition></ColumnDefinition>
-                      <ColumnDefinition></ColumnDefinition>
-                      <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Label VerticalTextAlignment="Center"
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Label VerticalTextAlignment="Center"
                            FontFamily="Material"
                            Text="{Static res:IconFont.Minus}"
                            FontSize="30"
                            HorizontalTextAlignment="Center"
                            FontAttributes="Bold">
-                      <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding Decrement}"></TapGestureRecognizer>
-                      </Label.GestureRecognizers>
-                    </Label>
-                    <Label x:Name="quantity"
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Decrement}"></TapGestureRecognizer>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        <Label x:Name="quantity"
                            VerticalOptions="Center"
                            Grid.Column="1"
                            Text="{Binding Quantity}"
                            FontSize="20"
                            HorizontalTextAlignment="Center"
                            FontAttributes="Bold"></Label>
-                    <Label VerticalTextAlignment="Center"
+                                        <Label VerticalTextAlignment="Center"
                            Grid.Column="2"
                            FontFamily="Material"
                            Text="{Static res:IconFont.Plus}"
                            FontSize="20"
                            HorizontalTextAlignment="Center"
                            FontAttributes="Bold">
-                      <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding Increment}"></TapGestureRecognizer>
-                      </Label.GestureRecognizers>
-                    </Label>
-                  </Grid>
-                </pc:PancakeView>
-                <Frame Grid.Row="6"
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Increment}"></TapGestureRecognizer>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </Grid>
+                                </pc:PancakeView>
+                                <Frame Grid.Row="6"
                        CornerRadius="100"
                        Padding="10"
                        HasShadow="False"
                        HorizontalOptions="Center">
-                  <Label FontFamily="Material"
+                                    <Label FontFamily="Material"
                          Text="{Static res:IconFont.CartPlus}"
                          VerticalOptions="Center"
                          FontSize="Title"
                          TextColor="#ff9f43"
                          HorizontalOptions="Center">
-                    <Label.GestureRecognizers>
-                      <TapGestureRecognizer Command="{Binding AddToCart}"></TapGestureRecognizer>
-                    </Label.GestureRecognizers>
-                  </Label>
-                </Frame>
-              </Grid>
-            </pc:PancakeView>
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding AddToCart}"></TapGestureRecognizer>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </Frame>
+                            </Grid>
+                        </pc:PancakeView>
+                    </ScrollView>
           </Grid>
           <ContentView x:Name="Loading"
                        AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
@@ -168,7 +169,6 @@
             </StackLayout>
           </ContentView>
         </AbsoluteLayout>
-      </ScrollView>
     </RefreshView>
   </ContentPage.Content>
 </ContentPage>

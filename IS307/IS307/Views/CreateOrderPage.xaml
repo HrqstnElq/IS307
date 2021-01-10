@@ -32,7 +32,7 @@
       <pc:PancakeView Grid.Row="1"
                       BackgroundColor="#F0F2F5"
                       Padding="5, 20"
-                      CornerRadius="15, 15, 0,0"
+                      CornerRadius="25, 25, 0,0"
                       IsClippedToBounds="true"
                       HorizontalOptions="FillAndExpand">
         <Grid RowSpacing="30">
@@ -45,8 +45,8 @@
           <StackLayout Grid.Row="0"
                        Orientation="Horizontal"
                        Margin="10, 10, 10, 10">
-            <Label Text="Total :"
-                   Margin="0, 0, 25, 0"
+            <Label Text="Tổng :"
+                   Margin="0, 0, 55, 0"
                    HorizontalOptions="Start"
                    VerticalOptions="Center"
                    FontAttributes="Bold"
@@ -55,14 +55,15 @@
             <Label Text="{Binding TotalPrice, StringFormat='{0:##,0}.000đ'}"
                    HorizontalOptions="Start"
                    VerticalOptions="Center"
-                   FontAttributes="None"
-                   FontSize="15"
-                   TextColor="Black"></Label>
+                   FontSize="Medium"
+                   FontAttributes="Bold"
+                   TextColor="#ee5253"></Label>
           </StackLayout>
           <StackLayout Grid.Row="1"
                        Orientation="Horizontal"
                        Margin="10, 0, 10, 10">
-            <Label Text="Address :"
+            <Label Text="Địa chỉ :"
+                   Margin="0, 0, 35, 0"
                    HorizontalOptions="Start"
                    VerticalOptions="Center"
                    FontAttributes="Bold"
@@ -88,7 +89,7 @@
           <StackLayout Grid.Row="2"
                        Orientation="Horizontal"
                        Margin="10, 0, 10, 10">
-            <Label Text="Phone :"
+            <Label Text="Điện thoại :"
                    Margin="0, 0, 15, 0"
                    HorizontalOptions="Start"
                    VerticalOptions="Center"
@@ -115,7 +116,8 @@
           </StackLayout>
           <Button Margin="20"
                   Grid.Row="3"
-                  Text="Create order"
+                  Text="Đặt hàng"
+                  CornerRadius="10"
                   Command="{Binding OrderCommand}"></Button>
         </Grid>
       </pc:PancakeView>

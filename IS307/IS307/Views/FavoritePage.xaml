@@ -8,8 +8,7 @@
   <ContentPage.Content>
     <RefreshView IsRefreshing="{Binding IsBusy}"
                  Command="{Binding LoadPageCommand}">
-      <ScrollView>
-        <Grid BackgroundColor="#10ac84">
+        <Grid BackgroundColor="#c0392b">
           <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -18,88 +17,92 @@
                  FontSize="Medium"
                  TextColor="White"
                  HorizontalTextAlignment="Center"
-                 VerticalOptions="Center"></Label>
-          <pc:PancakeView Grid.Row="1"
+                 VerticalTextAlignment="Center"></Label>
+                <ScrollView  Grid.Row="1">
+                    <pc:PancakeView
                           BackgroundColor="#F0F2F5"
-                          CornerRadius="15, 15, 0,0"
+                          CornerRadius="25, 25, 0,0"
                           Padding="5, 10"
                           IsClippedToBounds="true"
                           HorizontalOptions="FillAndExpand">
-            <CollectionView x:Name="Products"
+                        <CollectionView x:Name="Products"
                             Margin="10"
                             IsGrouped="False"
                             ItemsSource="{Binding Products}"
                             ItemSizingStrategy="{OnPlatform Android=MeasureAllItems,iOS=MeasureFirstItem}">
-              <CollectionView.ItemsLayout>
-                <GridItemsLayout Span="2"
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Span="2"
                                  VerticalItemSpacing="5"
                                  HorizontalItemSpacing="5"
                                  Orientation="Vertical"></GridItemsLayout>
-              </CollectionView.ItemsLayout>
-              <CollectionView.ItemTemplate>
-                <DataTemplate>
-                  <AbsoluteLayout>
-                    <Frame WidthRequest="170"
-                           Padding="10"
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <AbsoluteLayout>
+                                        <Frame  Padding="10"
                            HasShadow="False"
                            BackgroundColor="White"
                            CornerRadius="10">
-                      <Grid Padding="0,8"
+                                            <Grid Padding="0,8"
                             RowSpacing="0">
-                        <Grid.RowDefinitions>
-                          <RowDefinition Height="120"></RowDefinition>
-                          <RowDefinition Height="30"></RowDefinition>
-                          <RowDefinition Height="30"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Image Margin="0, 0, 0, 10"
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="120"></RowDefinition>
+                                                    <RowDefinition Height="30"></RowDefinition>
+                                                    <RowDefinition Height="30"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Image Margin="0, 0, 0, 10"
                                Aspect="AspectFit"
                                VerticalOptions="Center"
                                HorizontalOptions="Center"
                                Source="{Binding pictureUrl}"></Image>
-                        <Label Grid.Row="1"
+                                                <Label Grid.Row="1"
                                MaxLines="2"
                                FontSize="Small"
                                VerticalTextAlignment="End"
                                FontAttributes="Bold"
                                Text="{Binding name}"></Label>
-                        <Label Grid.Row="2"
+                                                <Label Grid.Row="2"
                                HorizontalOptions="StartAndExpand"
                                FontAttributes="Bold"
                                VerticalTextAlignment="Center"
                                FontSize="Small"
                                TextColor="#b71540"
                                Text="{Binding price, StringFormat='{0:##,0}.000đ'}"></Label>
-                      </Grid>
-                    </Frame>
-                    <pc:PancakeView BackgroundColor="#c7ecee"
+                                            </Grid>
+                                        </Frame>
+                                        <pc:PancakeView BackgroundColor="#c7ecee"
                                     AbsoluteLayout.LayoutFlags="PositionProportional"
                                     AbsoluteLayout.LayoutBounds="0.97, 0.03"
                                     CornerRadius="15">
-                      <Grid RowSpacing="0"
+                                            <Grid RowSpacing="0"
                             ColumnSpacing="0">
-                        <Grid.ColumnDefinitions>
-                          <ColumnDefinition Width="30"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                          <RowDefinition Height="30"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Label FontFamily="Material"
-                               Text="{Static res:IconFont.DotsVertical}"
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="30"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="30"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Label FontFamily="Material"
+                               Text="{Static res:IconFont.Plus}"
                                VerticalOptions="Center"
                                HorizontalOptions="Center"></Label>
-                        <Grid.GestureRecognizers>
-                          <TapGestureRecognizer Command="{Binding BindingContext.ViewProductDetailCommand, Source={Reference root}}"
+                                                <Grid.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding BindingContext.AddToCart, Source={Reference root}}"
                                                 CommandParameter="{Binding .}"></TapGestureRecognizer>
-                        </Grid.GestureRecognizers>
-                      </Grid>
+                                                </Grid.GestureRecognizers>
+                                            </Grid>
+                                        </pc:PancakeView>
+                                        <AbsoluteLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.ViewProductDetailCommand, Source={Reference root}}"
+                                                CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                        </AbsoluteLayout.GestureRecognizers>
+                                    </AbsoluteLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
                     </pc:PancakeView>
-                  </AbsoluteLayout>
-                </DataTemplate>
-              </CollectionView.ItemTemplate>
-            </CollectionView>
-          </pc:PancakeView>
+                </ScrollView>
         </Grid>
-      </ScrollView>
     </RefreshView>
   </ContentPage.Content>
 </ContentPage>

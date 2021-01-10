@@ -6,42 +6,43 @@
              x:Class="IS307.Views.LoginPage"
              BackgroundColor="#F0F2F5">
   <ContentPage.Content>
-    <AbsoluteLayout>
-      <Grid BackgroundColor="#10ac84">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="120"></RowDefinition>
-          <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Image Source="logo.png"></Image>
-        <pc:PancakeView Grid.Row="1"
+        <ScrollView>
+            <AbsoluteLayout>
+                <Grid BackgroundColor="#10ac84">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="120"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Image Source="logo.png"></Image>
+                    <pc:PancakeView Grid.Row="1"
                         BackgroundColor="#F0F2F5"
                         CornerRadius="25, 25, 0,0"
                         IsClippedToBounds="true"
                         HorizontalOptions="FillAndExpand">
-          <ScrollView VerticalScrollBarVisibility="Never">
-            <Grid Padding="50,65,50,0">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-              </Grid.ColumnDefinitions>
-              <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-              </Grid.RowDefinitions>
-              <Label FontSize="Large"
-                     FontAttributes="Bold"
-                     HorizontalTextAlignment="Center"
-                     Grid.Row="0"
-                     Text="SIGN IN"
-                     Margin="0, 0, 0, 50"></Label>
-              <Frame Grid.Row="1"
-                     CornerRadius="30"
-                     Padding="0"
-                     HasShadow="False"
-                     Margin="0, 0, 0, 20">
-                <controls:CustomEntry Text="{Binding LoginData.username, Mode=TwoWay}"
+                        <StackLayout>
+                            <Grid Padding="50,65,50,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label FontSize="Large"
+                             FontAttributes="Bold"
+                             HorizontalTextAlignment="Center"
+                             Grid.Row="0"
+                             Text="SIGN IN"
+                             Margin="0, 0, 0, 50"></Label>
+                                <Frame Grid.Row="1"
+                             CornerRadius="30"
+                             Padding="0"
+                             HasShadow="False"
+                             Margin="0, 0, 0, 20">
+                                    <controls:CustomEntry Text="{Binding LoginData.username, Mode=TwoWay}"
                                       Placeholder="Username"
                                       BorderColor="WhiteSmoke"
                                       BackgroundColor="WhiteSmoke"
@@ -52,14 +53,15 @@
                                       ImageWidth="20"
                                       ImageHeight="20"
                                       CornerRadius="30"
+                                      TabIndex="1"
                                       IsCurvedCornersEnabled="True"></controls:CustomEntry>
-              </Frame>
-              <Frame Grid.Row="2"
+                                </Frame>
+                                <Frame Grid.Row="2"
                      CornerRadius="30"
                      Padding="0"
                      HasShadow="False"
                      Margin="0, 0, 0, 20">
-                <controls:CustomEntry Text="{Binding LoginData.password, Mode=TwoWay}"
+                                    <controls:CustomEntry Text="{Binding LoginData.password, Mode=TwoWay}"
                                       Placeholder="Password"
                                       IsPassword="True"
                                       BorderColor="WhiteSmoke"
@@ -72,42 +74,43 @@
                                       ImageHeight="20"
                                       CornerRadius="30"
                                       IsCurvedCornersEnabled="True"></controls:CustomEntry>
-              </Frame>
-              <Button Command="{Binding Login}"
+                                </Frame>
+                                <Button Command="{Binding Login}"
                       CommandParameter="{Binding LoginData}"
                       Grid.Row="3"
                       CornerRadius="15"
                       Text="Sign in"
                       Margin="0, 0, 0, 20"
                       BackgroundColor="#1dd1a1"></Button>
-              <Label Grid.Row="4"
+                                <Label Grid.Row="4"
                      HorizontalTextAlignment="Center"
                      Text="Sign Up"
                      TextColor="#0abde3">
-                <Label.GestureRecognizers>
-                  <TapGestureRecognizer Command="{Binding ShowRegister}"></TapGestureRecognizer>
-                </Label.GestureRecognizers>
-              </Label>
-            </Grid>
-          </ScrollView>
-        </pc:PancakeView>
-      </Grid>
-      <ContentView x:Name="Loading"
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ShowRegister}"></TapGestureRecognizer>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                        </StackLayout>
+                    </pc:PancakeView>
+                </Grid>
+                <ContentView x:Name="Loading"
                    AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                    AbsoluteLayout.LayoutFlags="All"
                    IsVisible="False">
-        <StackLayout VerticalOptions="Center"
+                    <StackLayout VerticalOptions="Center"
                      HorizontalOptions="Center">
-          <StackLayout Orientation="Vertical"
+                        <StackLayout Orientation="Vertical"
                        HeightRequest="150"
                        WidthRequest="200">
-            <ActivityIndicator IsRunning="True"
+                            <ActivityIndicator IsRunning="True"
                                Color="Orange"
                                VerticalOptions="Center"
                                HorizontalOptions="Center"></ActivityIndicator>
-          </StackLayout>
-        </StackLayout>
-      </ContentView>
-    </AbsoluteLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </ContentView>
+            </AbsoluteLayout>
+        </ScrollView>
   </ContentPage.Content>
 </ContentPage>

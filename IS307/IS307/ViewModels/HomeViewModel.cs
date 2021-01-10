@@ -23,6 +23,7 @@ namespace IS307.ViewModels
         }
         public ICommand ViewProductDetailCommand { get; set; }
         public ICommand ViewProductInCategoryCommand { get; set; }
+        public ICommand AddToCart { get; set; }
 
         private readonly CategoryService CategoryService = new CategoryService();
         private readonly ProductService ProductService = new ProductService();
@@ -44,6 +45,19 @@ namespace IS307.ViewModels
             ViewProductInCategoryCommand = new Command<CategoryModel>(category =>
             {
                 navigation.PushAsync(new ProductsPage(category));
+            });
+
+            AddToCart = new Command<ProductModel>(async (product) =>
+            {
+                await App.Database.SaveCart(new CartItemModel()
+                {
+                    productId = product._id,
+                    name = product.name,
+                    pictureUrl = product.pictureUrl,
+                    price = product.price,
+                    quantity = 1
+                });
+                await App.Current.MainPage.DisplayAlert("Thành công !", "Đã thêm vào giỏ hàng ", "Ok");
             });
         }
 

@@ -22,7 +22,16 @@ namespace IS307.ViewModels
         {
             get => totalPrice;
             set => SetProperty(ref totalPrice, value);
-        } 
+        }
+
+        public bool hasItem = false;
+        public bool HasItem
+        {
+
+            get => hasItem;
+            set => SetProperty(ref hasItem, value);
+        }
+
         public ICommand Increment { get; set; }
         public ICommand Decrement { get; set; }
         public ICommand RemoveCartItem { get; set; }
@@ -35,8 +44,11 @@ namespace IS307.ViewModels
             {
                 CartItems = new ObservableCollection<CartItemModel>(await App.Database.GetCart());
                 TotalPrice = CartItems.Sum(x => x.price * x.quantity);
-                OnPropertyChanged(nameof(CartItems));
                 IsBusy = false;
+                if (cartItems.Count > 0)
+                    HasItem = true;
+                else
+                    HasItem = false;
             });
 
             Increment = new Command<CartItemModel>(async (item) =>
@@ -60,6 +72,10 @@ namespace IS307.ViewModels
                 await App.Database.DeleteCartItem(item);
                 CartItems = new ObservableCollection<CartItemModel>(await App.Database.GetCart());
                 TotalPrice = CartItems.Sum(x => x.price * x.quantity);
+                if (cartItems.Count > 0)
+                    HasItem = true;
+                else
+                    HasItem = false;
             });
 
             Order = new Command(async () =>
@@ -67,7 +83,7 @@ namespace IS307.ViewModels
                 if (CartItems.Count > 0)
                     await navigation.PushAsync(new CreateOrderPage());
                 else
-                    await App.Current.MainPage.DisplayAlert("Error !", "Cart empty", "Cancel");
+                    await App.Current.MainPage.DisplayAlert("Lổ !", " Giỏ hàng trống", "Hủy");
             });
         }
 

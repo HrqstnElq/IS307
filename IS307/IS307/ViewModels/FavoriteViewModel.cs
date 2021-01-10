@@ -18,6 +18,7 @@ namespace IS307.ViewModels
 
         public ICommand ViewProductDetailCommand { get; set; }
         public ICommand GoBackCommand { get; set; }
+        public ICommand AddToCart { get; set; }
 
         private readonly ProductService productService = new ProductService();
 
@@ -39,6 +40,18 @@ namespace IS307.ViewModels
                 navigation.PopAsync();
             });
 
+            AddToCart = new Command<ProductModel>(async (product) =>
+            {
+                await App.Database.SaveCart(new CartItemModel()
+                {
+                    productId = product._id,
+                    name = product.name,
+                    pictureUrl = product.pictureUrl,
+                    price = product.price,
+                    quantity = 1
+                });
+                await App.Current.MainPage.DisplayAlert("Thành công !", "Đã thêm vào giỏ hàng ", "Ok");
+            });
         }
 
         public void OnAppearing()

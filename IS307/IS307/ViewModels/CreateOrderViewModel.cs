@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -37,16 +38,22 @@ namespace IS307.ViewModels
 
             OrderCommand = new Command(() =>
             {
-                if(string.IsNullOrEmpty(Order.phone) || string.IsNullOrEmpty(Order.address))
+                if (string.IsNullOrEmpty(Order.phone) || string.IsNullOrEmpty(Order.address))
                 {
-                    App.Current.MainPage.DisplayAlert("Waring !", "Phone number or address is required", "Ok");
+                    App.Current.MainPage.DisplayAlert("Lỗi !", "Vui lòng điền đầy đủ thông tin", "Ok");
                 }
                 else
                 {
-                    orderService.PostOrder(token, Order);
-                    App.Current.MainPage.DisplayAlert("Success !", "Create order completed", "Ok");
-                    App.Database.ClearCartItem();
-                    App.Current.MainPage = new AppShell();
+                    var regex = new Regex(@"^(84|0[3|2|5|7|8|9])+([0-9]{8})$");
+                    if (regex.IsMatch(Order.phone))
+                    {
+                        orderService.PostOrder(token, Order);
+                        App.Current.MainPage.DisplayAlert("Thành công !", "Create order completed", "Ok");
+                        App.Database.ClearCartItem();
+                        App.Current.MainPage = new AppShell();
+                    }
+                    else
+                        App.Current.MainPage.DisplayAlert("Lỗi !", "Số điện thoại không hợp lệ", "Ok");
                 }
             });
         }

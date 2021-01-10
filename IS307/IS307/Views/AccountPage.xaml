@@ -7,9 +7,9 @@
              x:Name="root"
              BackgroundColor="#F0F2F5">
   <ContentPage.Content>
-    <Grid BackgroundColor="#10ac84">
+        <Grid BackgroundColor="#8e44ad">
       <Grid.RowDefinitions>
-        <RowDefinition Height="60"></RowDefinition>
+        <RowDefinition Height="50"></RowDefinition>
         <RowDefinition Height="*"></RowDefinition>
       </Grid.RowDefinitions>
       <Label Text="Hồ sơ"
@@ -19,7 +19,7 @@
              VerticalOptions="Center"></Label>
       <pc:PancakeView Grid.Row="1"
                       BackgroundColor="#F0F2F5"
-                      CornerRadius="15, 15, 0,0"
+                      CornerRadius="25, 25, 0,0"
                       IsClippedToBounds="true"
                       HorizontalOptions="FillAndExpand">
         <Grid BackgroundColor="#F0F2F5">

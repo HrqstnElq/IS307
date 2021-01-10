@@ -27,7 +27,7 @@ namespace IS307.Views
             var vm = BindingContext as ProductDetailViewModel;
             if (e.PropertyName == nameof(ProductDetailViewModel.AddToCart))
             {
-                DisplayAlert("Success", "Add product to cart successfuly", "Ok");
+                DisplayAlert("Thành công", "Đã thêm vào giỏ hàng", "Ok");
                 Navigation.PopAsync();
             }
             else if (e.PropertyName == nameof(ProductDetailViewModel.Favorite))

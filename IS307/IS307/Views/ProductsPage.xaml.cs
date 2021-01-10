@@ -9,16 +9,20 @@ namespace IS307.Views
 {
     public partial class ProductsPage : ContentPage
     {
-        public ProductsPage()
-        {
-            InitializeComponent();
-            BindingContext = new ProductsViewModel();
-        }
-
+        private bool isInit = false;
         public ProductsPage(CategoryModel category)
         {
             InitializeComponent();
             BindingContext = new ProductsViewModel(Navigation,category);
+        }
+
+        protected override void OnAppearing()
+        {
+            if(isInit == false)
+            {
+                (BindingContext as ProductsViewModel).OnAppearing();
+                isInit = true;
+            }
         }
     }
 }

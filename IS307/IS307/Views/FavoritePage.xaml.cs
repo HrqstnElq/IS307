@@ -7,6 +7,7 @@ namespace IS307.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FavoritePage : ContentPage
     {
+        private bool isInit = false;
         public FavoritePage()
         {
             InitializeComponent();
@@ -14,8 +15,11 @@ namespace IS307.Views
         }
         protected override void OnAppearing()
         {
-            base.OnAppearing();
-            (BindingContext as FavoriteViewModel).OnAppearing();
+            if(isInit == false)
+            {
+                (BindingContext as FavoriteViewModel).OnAppearing();
+                isInit = true;
+            }
         }
     }
 }
