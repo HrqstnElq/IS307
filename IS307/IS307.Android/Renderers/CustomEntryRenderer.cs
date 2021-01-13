@@ -12,15 +12,16 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRenderer(typeof(CustomEntry), typeof(CustomEntryRenderer))]
+
 namespace IS307.Droid.Renderers
 {
     [Preserve(AllMembers = true)]
     public class CustomEntryRenderer : EntryRenderer
     {
-        CustomEntry element;
+        private CustomEntry element;
+
         public CustomEntryRenderer(Context context) : base(context)
         {
-
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
@@ -32,7 +33,6 @@ namespace IS307.Droid.Renderers
 
             element = (CustomEntry)this.Element;
 
-
             var editText = this.Control;
             if (!string.IsNullOrEmpty(element.Image))
             {
@@ -41,6 +41,7 @@ namespace IS307.Droid.Renderers
                     case ImageAlignment.Left:
                         editText.SetCompoundDrawablesWithIntrinsicBounds(GetDrawable(element.Image), null, null, null);
                         break;
+
                     case ImageAlignment.Right:
                         editText.SetCompoundDrawablesWithIntrinsicBounds(null, null, GetDrawable(element.Image), null);
                         break;
@@ -52,22 +53,22 @@ namespace IS307.Droid.Renderers
 
             if (element.IsCurvedCornersEnabled)
             {
-                // creating gradient drawable for the curved background  
+                // creating gradient drawable for the curved background
                 var _gradientBackground = new GradientDrawable();
                 _gradientBackground.SetShape(ShapeType.Rectangle);
                 _gradientBackground.SetColor(element.BackgroundColor.ToAndroid());
 
-                // Thickness of the stroke line  
+                // Thickness of the stroke line
                 _gradientBackground.SetStroke(element.BorderWidth, element.BorderColor.ToAndroid());
 
-                // Radius for the curves  
+                // Radius for the curves
                 _gradientBackground.SetCornerRadius(
                     DpToPixels(this.Context, Convert.ToSingle(element.CornerRadius)));
 
-                // set the background of the   
+                // set the background of the
                 Control.SetBackground(_gradientBackground);
             }
-            // Set padding for the internal text from border  
+            // Set padding for the internal text from border
             Control.SetPadding(
                     (int)DpToPixels(this.Context, Convert.ToSingle(12)), Control.PaddingTop,
                     (int)DpToPixels(this.Context, Convert.ToSingle(12)), Control.PaddingBottom);

@@ -1,8 +1,8 @@
 ﻿using IS307.Models;
 using Newtonsoft.Json;
-using System.Net;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace IS307.Services
@@ -33,6 +33,7 @@ namespace IS307.Services
             else
                 return false;
         }
+
         public void FavoriteProduct(string ProductId, string token)
         {
             Singleton.HttpClient.DefaultRequestHeaders.Add("x-auth-token", token);

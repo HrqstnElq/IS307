@@ -1,9 +1,4 @@
-﻿using IS307.Views;
-using System;
-using System.Collections.Generic;
-using Xamarin.Forms;
-
-namespace IS307
+﻿namespace IS307
 {
     public partial class AppShell : Xamarin.Forms.Shell
     {
@@ -13,6 +8,5 @@ namespace IS307
             //Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
             //Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
         }
-
     }
 }

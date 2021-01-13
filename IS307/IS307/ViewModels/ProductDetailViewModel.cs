@@ -1,12 +1,5 @@
 ﻿using IS307.Models;
 using IS307.Services;
-using IS307.Views;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -20,21 +13,22 @@ namespace IS307.ViewModels
         public ICommand AddToCart { get; set; }
         public ICommand Favorite { get; set; }
 
-
         private ProductModel product;
+
         public ProductModel Product
         {
             get => product;
             set => SetProperty(ref product, value);
-
         }
 
         private int quantity = 1;
+
         public int Quantity
         {
             get => quantity;
             set => SetProperty(ref quantity, value);
         }
+
         public bool isFavorite { get; set; }
 
         private readonly ProductService productService = new ProductService();
@@ -57,20 +51,17 @@ namespace IS307.ViewModels
                     await App.Current.MainPage.DisplayAlert("Lổi !", "Không có kết nối mạng", "Ok");
                     await Shell.Current.GoToAsync("//LoginPage");
                 }
-
             });
-
 
             GoBackCommand = new Command(() =>
             {
                 navigation.PopAsync();
             });
-            
+
             Increment = new Command(() =>
             {
                 Quantity = Quantity + 1;
             });
-
 
             Decrement = new Command(() =>
             {
@@ -113,9 +104,9 @@ namespace IS307.ViewModels
                     App.Current.MainPage.DisplayAlert("Lổi !", "Không có kết nối mạng", "Ok");
                     Shell.Current.GoToAsync("//LoginPage");
                 }
-                
             });
         }
+
         public void OnAppearing()
         {
             IsBusy = true;

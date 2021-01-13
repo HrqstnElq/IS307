@@ -8,14 +8,16 @@ namespace IS307.Views
     public partial class FavoritePage : ContentPage
     {
         private bool isInit = false;
+
         public FavoritePage()
         {
             InitializeComponent();
             BindingContext = new FavoriteViewModel(Navigation);
         }
+
         protected override void OnAppearing()
         {
-            if(isInit == false)
+            if (isInit == false)
             {
                 (BindingContext as FavoriteViewModel).OnAppearing();
                 isInit = true;

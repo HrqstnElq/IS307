@@ -1,9 +1,9 @@
 ﻿using IS307.Models;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace IS307.Services
 {
@@ -11,22 +11,20 @@ namespace IS307.Services
     {
         public async Task<string> LoginService(LoginModel loginModel)
         {
-            using(var content = new StringContent(JsonConvert.SerializeObject(loginModel), Encoding.UTF8, "application/json"))
+            using (var content = new StringContent(JsonConvert.SerializeObject(loginModel), Encoding.UTF8, "application/json"))
             {
                 //Singleton.HttpClient.DefaultRequestHeaders.Add("x-auth-token", "1");
                 var response = await Singleton.HttpClient.PostAsync("/user/login", content);
-                if(response.StatusCode == HttpStatusCode.OK)
+                if (response.StatusCode == HttpStatusCode.OK)
                     return JsonConvert.DeserializeObject<LoginResultModel>(await response.Content.ReadAsStringAsync()).token;
                 else
                     return null;
-                
             }
         }
 
-
         /// <param name="registerModel"></param>
         /// <returns>
-        ///  0 : Success 
+        ///  0 : Success
         ///  1 : Username already exists
         ///  -1 : Bad request
         /// </returns>
@@ -40,7 +38,7 @@ namespace IS307.Services
                 {
                     return 0;
                 }
-                else if(response.StatusCode == HttpStatusCode.Forbidden)
+                else if (response.StatusCode == HttpStatusCode.Forbidden)
                 {
                     return 1;
                 }
@@ -48,7 +46,6 @@ namespace IS307.Services
                 {
                     return -1;
                 }
-
             }
         }
     }

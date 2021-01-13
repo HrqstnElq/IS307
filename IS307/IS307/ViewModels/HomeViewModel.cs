@@ -7,20 +7,24 @@ using Xamarin.Forms;
 
 namespace IS307.ViewModels
 {
-    class HomeViewModel : BaseViewModel
+    internal class HomeViewModel : BaseViewModel
     {
         private ObservableCollection<ProductModel> products;
+
         public ObservableCollection<ProductModel> Products
         {
             get => products;
             set => SetProperty(ref products, value);
         }
+
         private ObservableCollection<CategoryModel> categories;
+
         public ObservableCollection<CategoryModel> Categories
         {
             get => categories;
-            set=>SetProperty(ref categories, value);
+            set => SetProperty(ref categories, value);
         }
+
         public ICommand ViewProductDetailCommand { get; set; }
         public ICommand ViewProductInCategoryCommand { get; set; }
         public ICommand AddToCart { get; set; }

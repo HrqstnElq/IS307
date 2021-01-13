@@ -1,15 +1,13 @@
-﻿using IS307.Views;
-using System;
+﻿using System;
 using System.IO;
-using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace IS307
 {
     public partial class App : Application
     {
         private static Database database;
+
         public static Database Database
         {
             get
@@ -21,6 +19,7 @@ namespace IS307
                 return database;
             }
         }
+
         public App()
         {
             InitializeComponent();
@@ -29,7 +28,7 @@ namespace IS307
             string token = null;
             try
             {
-               token =  App.Current.Properties["token"].ToString();
+                token = App.Current.Properties["token"].ToString();
             }
             catch
             {

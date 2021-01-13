@@ -7,7 +7,7 @@ namespace IS307
 {
     public class Database
     {
-        readonly SQLiteAsyncConnection _database;
+        private readonly SQLiteAsyncConnection _database;
 
         public Database(string dbPath)
         {
@@ -19,7 +19,7 @@ namespace IS307
 
         public Task<int> SaveCart(CartItemModel cartItem)
         {
-            if(cartItem.ID == 0)
+            if (cartItem.ID == 0)
             {
                 var item = _database.FindAsync<CartItemModel>(x => x.productId == cartItem.productId).Result;
                 if (item != null)
@@ -31,7 +31,7 @@ namespace IS307
             }
             else
             {
-                if(cartItem.quantity == 0)
+                if (cartItem.quantity == 0)
                 {
                     return _database.DeleteAsync(cartItem);
                 }

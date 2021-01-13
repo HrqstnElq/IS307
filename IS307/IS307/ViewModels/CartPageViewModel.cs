@@ -1,8 +1,6 @@
 ﻿using IS307.Models;
 using IS307.Views;
-using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -12,12 +10,15 @@ namespace IS307.ViewModels
     public class CartPageViewModel : BaseViewModel
     {
         private ObservableCollection<CartItemModel> cartItems;
+
         public ObservableCollection<CartItemModel> CartItems
         {
             get => cartItems;
             set => SetProperty(ref cartItems, value);
         }
+
         private double totalPrice;
+
         public double TotalPrice
         {
             get => totalPrice;
@@ -25,9 +26,9 @@ namespace IS307.ViewModels
         }
 
         public bool hasItem = false;
+
         public bool HasItem
         {
-
             get => hasItem;
             set => SetProperty(ref hasItem, value);
         }
@@ -36,7 +37,6 @@ namespace IS307.ViewModels
         public ICommand Decrement { get; set; }
         public ICommand RemoveCartItem { get; set; }
         public ICommand Order { get; set; }
-
 
         public CartPageViewModel(INavigation navigation)
         {
@@ -56,7 +56,6 @@ namespace IS307.ViewModels
                 {
                     await App.Current.MainPage.DisplayAlert("Lổi !", "Không có kết nối mạng", "Ok");
                     await Shell.Current.GoToAsync("//LoginPage");
-
                 }
             });
 

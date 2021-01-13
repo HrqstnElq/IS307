@@ -3,7 +3,6 @@ using IS307.Services;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-
 namespace IS307.ViewModels
 {
     public class RegisterViewModel
@@ -67,7 +66,6 @@ namespace IS307.ViewModels
                     {
                         await App.Current.MainPage.DisplayAlert("Lổi !", "Không có kết nối mạng", "Ok");
                     }
-                    
                 }
             });
         }

@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-
 namespace IS307.ViewModels
 {
     public class LoginViewModel : INotifyPropertyChanged

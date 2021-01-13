@@ -46,6 +46,7 @@ namespace IS307.Views
                 Loading.IsVisible = false;
             }
         }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();

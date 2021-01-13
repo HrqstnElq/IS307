@@ -10,6 +10,7 @@ namespace IS307.ViewModels
     public class FavoriteViewModel : BaseViewModel
     {
         private ObservableCollection<ProductModel> products;
+
         public ObservableCollection<ProductModel> Products
         {
             get => products;
@@ -68,6 +69,5 @@ namespace IS307.ViewModels
         {
             IsBusy = true;
         }
-
     }
 }

@@ -6,6 +6,7 @@ namespace IS307.Models
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
+
         public string productId { get; set; }
         public string name { get; set; }
         public double price { get; set; }

@@ -31,6 +31,7 @@ namespace IS307.iOS.Renderers
                         textField.LeftViewMode = UITextFieldViewMode.Always;
                         textField.LeftView = GetImageView(element.Image, element.ImageHeight, element.ImageWidth);
                         break;
+
                     case ImageAlignment.Right:
                         textField.RightViewMode = UITextFieldViewMode.Always;
                         textField.RightView = GetImageView(element.Image, element.ImageHeight, element.ImageWidth);
@@ -54,11 +55,11 @@ namespace IS307.iOS.Renderers
 
             Control.KeyboardAppearance = UIKeyboardAppearance.Dark;
             Control.ReturnKeyType = UIReturnKeyType.Done;
-            // Radius for the curves  
+            // Radius for the curves
             Control.Layer.CornerRadius = Convert.ToSingle(element.CornerRadius);
-            // Thickness of the Border Color  
+            // Thickness of the Border Color
             Control.Layer.BorderColor = element.BorderColor.ToCGColor();
-            // Thickness of the Border Width  
+            // Thickness of the Border Width
             Control.Layer.BorderWidth = element.BorderWidth;
             Control.ClipsToBounds = true;
         }

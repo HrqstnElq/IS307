@@ -1,9 +1,7 @@
-﻿using Bogus;
-using IS307.Models;
+﻿using IS307.Models;
 using IS307.Services;
 using IS307.Views;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -11,7 +9,8 @@ namespace IS307.ViewModels
 {
     public class ProductsViewModel : BaseViewModel
     {
-        public ObservableCollection<ProductModel> products; 
+        public ObservableCollection<ProductModel> products;
+
         public ObservableCollection<ProductModel> Products
         {
             get => products;
@@ -19,6 +18,7 @@ namespace IS307.ViewModels
         }
 
         public CategoryModel category;
+
         public CategoryModel Category
         {
             get => category;
@@ -50,9 +50,7 @@ namespace IS307.ViewModels
                     await App.Current.MainPage.DisplayAlert("Lổi !", "Không có kết nối mạng", "Ok");
                     await Shell.Current.GoToAsync("//LoginPage");
                 }
-               
             });
-
 
             ViewProductDetailCommand = new Command<ProductModel>(product =>
             {
@@ -76,8 +74,8 @@ namespace IS307.ViewModels
                 });
                 await App.Current.MainPage.DisplayAlert("Thành công !", "Đã thêm vào giỏ hàng ", "Ok");
             });
-
         }
+
         public void OnAppearing()
         {
             IsBusy = true;

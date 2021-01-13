@@ -1,10 +1,4 @@
-﻿using IS307.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace IS307.ViewModels
@@ -12,6 +6,7 @@ namespace IS307.ViewModels
     public class AccountViewModel
     {
         public ICommand Logout { get; set; }
+
         public AccountViewModel(INavigation navigation)
         {
             Logout = new Command(() =>

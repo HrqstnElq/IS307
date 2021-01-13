@@ -1,165 +1,165 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:pc="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:res="clr-namespace:IS307.Resources"
+             xmlns:pc="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              x:Class="IS307.Views.HomePage"
              x:Name="root"
              BackgroundColor="#F0F2F5">
-  <RefreshView IsRefreshing="{Binding IsBusy}"
+    <RefreshView IsRefreshing="{Binding IsBusy}"
                Command="{Binding LoadPageCommand}">
         <Grid BackgroundColor="#130f40">
-          <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-          </Grid.RowDefinitions>
-          <Label Text="Trang chủ"
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Text="Trang chủ"
                  FontSize="Medium"
                  TextColor="White"
                  HorizontalTextAlignment="Center"
                  VerticalOptions="Center"></Label>
-                <ScrollView Grid.Row="1">
-                    <pc:PancakeView
+            <ScrollView Grid.Row="1">
+                <pc:PancakeView
                           BackgroundColor="#F0F2F5"
                           CornerRadius="25, 25, 0,0"
                           IsClippedToBounds="true"
                           HorizontalOptions="FillAndExpand">
-                        <CollectionView ItemsSource="{Binding Products}"
+                    <CollectionView ItemsSource="{Binding Products}"
                             Margin="10">
-                            <CollectionView.ItemsLayout>
-                                <GridItemsLayout Span="2"
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Span="2"
                                  VerticalItemSpacing="5"
                                  HorizontalItemSpacing="5"
                                  Orientation="Vertical"></GridItemsLayout>
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.Header>
-                                <Grid Margin="0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="220"></RowDefinition>
-                                        <RowDefinition Height="auto"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <StackLayout Grid.Row="0">
-                                        <Label Text="Danh mục"
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.Header>
+                            <Grid Margin="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="220"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <StackLayout Grid.Row="0">
+                                    <Label Text="Danh mục"
                            FontAttributes="Bold"
                            TextColor="Black"
                            FontSize="Title"></Label>
-                                        <CarouselView ItemsSource="{Binding Categories}">
-                                            <CarouselView.ItemTemplate>
-                                                <DataTemplate>
-                                                    <StackLayout Padding="10, 0">
-                                                        <Frame HasShadow="False"
+                                    <CarouselView ItemsSource="{Binding Categories}">
+                                        <CarouselView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackLayout Padding="10, 0">
+                                                    <Frame HasShadow="False"
                                    BackgroundColor="{Binding color}"
                                    CornerRadius="15">
-                                                            <Grid RowSpacing="0">
-                                                                <Grid.RowDefinitions>
-                                                                    <RowDefinition Height="2*"></RowDefinition>
-                                                                    <RowDefinition Height="8*"></RowDefinition>
-                                                                </Grid.RowDefinitions>
-                                                                <StackLayout Grid.Row="0"
+                                                        <Grid RowSpacing="0">
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="2*"></RowDefinition>
+                                                                <RowDefinition Height="8*"></RowDefinition>
+                                                            </Grid.RowDefinitions>
+                                                            <StackLayout Grid.Row="0"
                                              Orientation="Horizontal">
-                                                                    <Label MaxLines="1"
+                                                                <Label MaxLines="1"
                                          FontSize="Small"
                                          TextColor="White"
                                          TextTransform="Uppercase"
                                          HorizontalOptions="StartAndExpand"
                                          FontAttributes="Bold"
                                          Text="{Binding name}"></Label>
-                                                                    <Label FontFamily="Material"
+                                                                <Label FontFamily="Material"
                                          FontSize="Large"
                                          Text="{Static res:IconFont.DotsHorizontal}"
                                          TextColor="White"
                                          HorizontalOptions="End">
-                                                                    </Label>
-                                                                </StackLayout>
-                                                                <Image Grid.Row="1"
-                                       Aspect="AspectFit"
-                                       VerticalOptions="Center"
-                                       HorizontalOptions="Center"
-                                       Source="{Binding pictureUrl}"></Image>
-                                                            </Grid>
-                                                        </Frame>
-                                                        <StackLayout.GestureRecognizers>
-                                                            <TapGestureRecognizer Command="{Binding BindingContext.ViewProductInCategoryCommand, Source={Reference root}}"
+                                                                </Label>
+                                                            </StackLayout>
+                                                            <Image Grid.Row="1"
+                                               Aspect="AspectFit"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center"
+                                               Source="{Binding pictureUrl}"></Image>
+                                                        </Grid>
+                                                    </Frame>
+                                                    <StackLayout.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding BindingContext.ViewProductInCategoryCommand, Source={Reference root}}"
                                                         CommandParameter="{Binding .}"></TapGestureRecognizer>
-                                                        </StackLayout.GestureRecognizers>
-                                                    </StackLayout>
-                                                </DataTemplate>
-                                            </CarouselView.ItemTemplate>
-                                        </CarouselView>
-                                    </StackLayout>
-                                    <Label Grid.Row="2"
+                                                    </StackLayout.GestureRecognizers>
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </CarouselView.ItemTemplate>
+                                    </CarouselView>
+                                </StackLayout>
+                                <Label Grid.Row="2"
                          Text="Nổi bật"
                          FontAttributes="Bold"
                          TextColor="Black"
                          FontSize="Title"></Label>
-                                </Grid>
-                            </CollectionView.Header>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <AbsoluteLayout>
-                                        <Frame Padding="10"
+                            </Grid>
+                        </CollectionView.Header>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <AbsoluteLayout>
+                                    <Frame Padding="10"
                            HasShadow="False"
                            BackgroundColor="White"
                            CornerRadius="10">
-                                            <Grid Padding="0,8"
+                                        <Grid Padding="0,8"
                             RowSpacing="0">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="120"></RowDefinition>
-                                                    <RowDefinition Height="30"></RowDefinition>
-                                                    <RowDefinition Height="30"></RowDefinition>
-                                                </Grid.RowDefinitions>
-                                                <Image Margin="0, 0, 0, 10"
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="120"></RowDefinition>
+                                                <RowDefinition Height="30"></RowDefinition>
+                                                <RowDefinition Height="30"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Image Margin="0, 0, 0, 10"
                                Aspect="AspectFit"
                                VerticalOptions="Center"
                                HorizontalOptions="Center"
                                Source="{Binding pictureUrl}"></Image>
-                                                <Label Grid.Row="1"
+                                            <Label Grid.Row="1"
                                MaxLines="2"
                                FontSize="Small"
                                VerticalTextAlignment="End"
                                FontAttributes="Bold"
                                Text="{Binding name}"></Label>
-                                                <Label Grid.Row="2"
+                                            <Label Grid.Row="2"
                                HorizontalOptions="StartAndExpand"
                                FontAttributes="Bold"
                                VerticalTextAlignment="Center"
                                FontSize="Small"
                                TextColor="#b71540"
                                Text="{Binding price, StringFormat='{0:##,0}.000đ'}"></Label>
-                                            </Grid>
-                                        </Frame>
-                                        <pc:PancakeView BackgroundColor="#c7ecee"
+                                        </Grid>
+                                    </Frame>
+                                    <pc:PancakeView BackgroundColor="#c7ecee"
                                     AbsoluteLayout.LayoutFlags="PositionProportional"
                                     AbsoluteLayout.LayoutBounds="0.97, 0.03"
                                     CornerRadius="15">
-                                            <Grid RowSpacing="0"
+                                        <Grid RowSpacing="0"
                             ColumnSpacing="0">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="30"></ColumnDefinition>
-                                                </Grid.ColumnDefinitions>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="30"></RowDefinition>
-                                                </Grid.RowDefinitions>
-                                                <Label FontFamily="Material"
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="30"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="30"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Label FontFamily="Material"
                                Text="{Static res:IconFont.Plus}"
                                VerticalOptions="Center"
                                HorizontalOptions="Center"></Label>
-                                                <Grid.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding BindingContext.AddToCart, Source={Reference root}}"
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.AddToCart, Source={Reference root}}"
                                                 CommandParameter="{Binding .}"></TapGestureRecognizer>
-                                                </Grid.GestureRecognizers>
-                                            </Grid>
-                                        </pc:PancakeView>
-                                        <AbsoluteLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding BindingContext.ViewProductDetailCommand, Source={Reference root}}"
+                                            </Grid.GestureRecognizers>
+                                        </Grid>
+                                    </pc:PancakeView>
+                                    <AbsoluteLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.ViewProductDetailCommand, Source={Reference root}}"
                                                 CommandParameter="{Binding .}"></TapGestureRecognizer>
-                                        </AbsoluteLayout.GestureRecognizers>
-                                    </AbsoluteLayout>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    </pc:PancakeView>
-                </ScrollView>
+                                    </AbsoluteLayout.GestureRecognizers>
+                                </AbsoluteLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </pc:PancakeView>
+            </ScrollView>
         </Grid>
-  </RefreshView>
+    </RefreshView>
 </ContentPage>

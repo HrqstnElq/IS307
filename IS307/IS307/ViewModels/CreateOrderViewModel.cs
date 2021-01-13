@@ -1,11 +1,7 @@
 ﻿using IS307.Models;
 using IS307.Services;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -19,6 +15,7 @@ namespace IS307.ViewModels
         public ICommand OrderCommand { get; set; }
 
         private readonly OrderService orderService = new OrderService();
+
         public CreateOrderViewModel(INavigation navigation)
         {
             var token = App.Current.Properties["token"].ToString();
@@ -58,7 +55,6 @@ namespace IS307.ViewModels
                         {
                             await App.Current.MainPage.DisplayAlert("Lổi !", "Không có kết nối mạng", "Ok");
                         }
-                        
                     }
                     else
                         await App.Current.MainPage.DisplayAlert("Lỗi !", "Số điện thoại không hợp lệ", "Ok");

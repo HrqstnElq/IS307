@@ -7,7 +7,8 @@ namespace IS307.Controls
         public static readonly BindableProperty BorderColorProperty =
       BindableProperty.Create(nameof(BorderColor),
           typeof(Color), typeof(CustomEntry), Color.Gray);
-        // Gets or sets BorderColor value  
+
+        // Gets or sets BorderColor value
         public Color BorderColor
         {
             get => (Color)GetValue(BorderColorProperty);
@@ -18,9 +19,10 @@ namespace IS307.Controls
         BindableProperty.Create(nameof(BorderWidth), typeof(int),
 #pragma warning disable CS0618 // Type or member is obsolete
             typeof(CustomEntry), Device.OnPlatform<int>(1, 2, 2));
+
 #pragma warning restore CS0618 // Type or member is obsolete
 
-        // Gets or sets BorderWidth value  
+        // Gets or sets BorderWidth value
         public int BorderWidth
         {
             get => (int)GetValue(BorderWidthProperty);
@@ -31,18 +33,21 @@ namespace IS307.Controls
         BindableProperty.Create(nameof(CornerRadius),
 #pragma warning disable CS0618 // Type or member is obsolete
             typeof(double), typeof(CustomEntry), Device.OnPlatform<double>(6, 7, 7));
+
 #pragma warning restore CS0618 // Type or member is obsolete
 
-        // Gets or sets CornerRadius value  
+        // Gets or sets CornerRadius value
         public double CornerRadius
         {
             get => (double)GetValue(CornerRadiusProperty);
             set => SetValue(CornerRadiusProperty, value);
         }
+
         public static readonly BindableProperty IsCurvedCornersEnabledProperty =
         BindableProperty.Create(nameof(IsCurvedCornersEnabled),
             typeof(bool), typeof(CustomEntry), true);
-        // Gets or sets IsCurvedCornersEnabled value  
+
+        // Gets or sets IsCurvedCornersEnabled value
         public bool IsCurvedCornersEnabled
         {
             get => (bool)GetValue(IsCurvedCornersEnabledProperty);

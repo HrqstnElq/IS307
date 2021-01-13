@@ -1,5 +1,4 @@
 ﻿using IS307.ViewModels;
-using System.ComponentModel;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -19,6 +18,5 @@ namespace IS307.Views
         {
             (BindingContext as CartPageViewModel).OnAppearing();
         }
-
     }
 }
