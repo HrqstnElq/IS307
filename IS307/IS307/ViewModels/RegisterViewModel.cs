@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace IS307.ViewModels
 {
-    public class RegisterViewModel
+    public class RegisterViewModel : BaseViewModel
     {
         public RegisterModel RegisterModel { get; set; }
 
@@ -33,6 +33,7 @@ namespace IS307.ViewModels
 
             Register = new Command<RegisterModel>(async (data) =>
             {
+                OnPropertyChanged("Loading");
                 if (string.IsNullOrEmpty(data.name) || string.IsNullOrEmpty(data.username) ||
                     string.IsNullOrEmpty(data.password) || string.IsNullOrEmpty(data.passwordConfirm)
                 )
@@ -67,6 +68,7 @@ namespace IS307.ViewModels
                         await App.Current.MainPage.DisplayAlert("Lổi !", "Không có kết nối mạng", "Ok");
                     }
                 }
+                OnPropertyChanged("Complete");
             });
         }
     }
