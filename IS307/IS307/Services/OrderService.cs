@@ -1,7 +1,9 @@
 ﻿using IS307.Models;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace IS307.Services
 {
@@ -13,6 +15,15 @@ namespace IS307.Services
             Singleton.HttpClient.DefaultRequestHeaders.Add("x-auth-token", token);
             Singleton.HttpClient.PostAsync("/order", content);
             Singleton.HttpClient.DefaultRequestHeaders.Remove("x-auth-token");
+        }
+
+        public async Task<List<ViewOrderModel>> GetOrders(string token)
+        {
+            Singleton.HttpClient.DefaultRequestHeaders.Add("x-auth-token", token);
+            var result = await Singleton.HttpClient.GetStringAsync("/order");
+            var orders = JsonConvert.DeserializeObject<List<ViewOrderModel>>(result);
+            Singleton.HttpClient.DefaultRequestHeaders.Remove("x-auth-token");
+            return orders;
         }
     }
 }

@@ -1,12 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IS307.Views.OrderPage">
+             x:Class="IS307.Views.OrderPage"
+             xmlns:res="clr-namespace:IS307.Resources"
+             xmlns:pc="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Name="root"
+             BackgroundColor="#F0F2F5">
   <ContentPage.Content>
-    <StackLayout>
-      <Label Text="Welcome to Xamarin.Forms!"
-             VerticalOptions="CenterAndExpand"
-             HorizontalOptions="CenterAndExpand"></Label>
-    </StackLayout>
-  </ContentPage.Content>
+        <RefreshView IsRefreshing="{Binding IsBusy}" Command="{Binding LoadPageCommand}">
+            <Grid BackgroundColor="#3B3B98">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Text="Đơn hàng" FontSize="Medium" TextColor="White" HorizontalTextAlignment="Center" VerticalOptions="Center"></Label>
+                <ScrollView Grid.Row="1">
+                    <pc:PancakeView BackgroundColor="#F0F2F5" CornerRadius="25, 25, 0,0" IsClippedToBounds="true" HorizontalOptions="FillAndExpand">
+                        <CollectionView BackgroundColor="Transparent" ItemsSource="{Binding Orders}" Margin="10, 30">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="20" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame BackgroundColor="White" CornerRadius="10" HasShadow="False">
+                                        <AbsoluteLayout>
+                                            <Grid BackgroundColor="Transparent">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="auto"></RowDefinition>
+                                                    <RowDefinition Height="auto"></RowDefinition>
+                                                    <RowDefinition Height="auto"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0" FontAttributes="Bold" TextColor="Black" Text="Mã ĐH:"/>
+                                                <Label Grid.Column="1" Text="{Binding _id}" TextColor="Black"/>
+
+                                                <Label Grid.Row="1" Grid.Column="0" FontAttributes="Bold"  VerticalOptions="Center" TextColor="Black" Text="Ngày ĐH:"/>
+                                                <DatePicker Grid.Row="1" Date="{Binding dateCreated}" Grid.Column="1" TextColor="Black" IsEnabled="False" ></DatePicker>
+
+                                                <Label Grid.Row="2" Grid.Column="0" FontAttributes="Bold" HorizontalOptions="End" FontSize="Medium" TextColor="#c0392b" Text="Tổng tiền:"/>
+                                                <Label Grid.Row="2" Grid.Column="1" Text="{Binding total, StringFormat='{0:#,###,###}.000đ'}" FontSize="Medium" TextColor="#c0392b"/>
+                                            </Grid>
+                                            <pc:PancakeView BackgroundColor="#c7ecee" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1, 0" CornerRadius="15">
+                                                <Grid RowSpacing="0" ColumnSpacing="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="30"></ColumnDefinition>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="30"></RowDefinition>
+                                                    </Grid.RowDefinitions>
+                                                    <Label FontFamily="Material" Text="{Static res:IconFont.DotsVertical}" VerticalOptions="Center" HorizontalOptions="Center"></Label>
+                                                </Grid>
+                                            </pc:PancakeView>
+                                        </AbsoluteLayout>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.OnClickCommand, Source={Reference root}}" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </pc:PancakeView>
+                </ScrollView>
+            </Grid>
+        </RefreshView>
+    </ContentPage.Content>
 </ContentPage>

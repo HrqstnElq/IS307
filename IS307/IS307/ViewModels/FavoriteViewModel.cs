@@ -30,7 +30,6 @@ namespace IS307.ViewModels
                 try
                 {
                     Products = new ObservableCollection<ProductModel>(await productService.GetUserFavoriteProduct(App.Current.Properties["token"].ToString()));
-                    IsBusy = false;
                 }
                 catch
                 {

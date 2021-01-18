@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using IS307.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace IS307.Views
@@ -9,6 +10,12 @@ namespace IS307.Views
         public OrderPage()
         {
             InitializeComponent();
+            BindingContext = new OrderViewModel(Navigation);
+        }
+
+        protected override void OnAppearing()
+        {
+            (BindingContext as OrderViewModel).OnAppearing();
         }
     }
 }

@@ -43,13 +43,13 @@ namespace IS307.ViewModels
                 {
                     Category = category;
                     Products = new ObservableCollection<ProductModel>(await ProductService.GetProductInCategory(category.name));
-                    IsBusy = false;
                 }
                 catch
                 {
                     await App.Current.MainPage.DisplayAlert("Lổi !", "Không có kết nối mạng", "Ok");
                     await Shell.Current.GoToAsync("//LoginPage");
                 }
+                IsBusy = false;
             });
 
             ViewProductDetailCommand = new Command<ProductModel>(product =>

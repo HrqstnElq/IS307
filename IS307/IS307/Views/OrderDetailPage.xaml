@@ -1,12 +1,86 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IS307.Views.OrderDetailPage">
-  <ContentPage.Content>
-    <StackLayout>
-      <Label Text="Welcome to Xamarin.Forms!"
-             VerticalOptions="CenterAndExpand"
-             HorizontalOptions="CenterAndExpand"></Label>
-    </StackLayout>
-  </ContentPage.Content>
+             xmlns:controls="clr-namespace:IS307.Controls"
+             xmlns:res="clr-namespace:IS307.Resources"
+             xmlns:pc="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="IS307.Views.OrderDetailPage"
+             BackgroundColor="#F0F2F5"
+             x:Name="root">
+    <ContentPage.Content>
+        <Grid BackgroundColor="#3B3B98">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Text="{Binding ViewOrder._id, StringFormat='DH: {0}'}"
+             FontSize="Default" TextColor="White" HorizontalTextAlignment="Center" VerticalOptions="Center"></Label>
+            <Label FontFamily="Material" BackgroundColor="Transparent" Padding="16" FontSize="24" HorizontalOptions="Start" VerticalOptions="Start" Text="{Static res:IconFont.ArrowLeft}" TextColor="White">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoBackCommand}"></TapGestureRecognizer>
+                </Label.GestureRecognizers>
+            </Label>
+            <pc:PancakeView Grid.Row="1" BackgroundColor="#F0F2F5" Padding="5, 20" CornerRadius="25, 25, 0,0" IsClippedToBounds="true" HorizontalOptions="FillAndExpand">
+                <CollectionView ItemsSource="{Binding ViewOrder.products}" Margin="10">
+                    <CollectionView.Header>
+                        <StackLayout>
+                            <Grid BackgroundColor="Transparent">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" FontAttributes="Bold" TextColor="Black" Text="Mã ĐH:"/>
+                                <Label Grid.Column="1" Text="{Binding ViewOrder._id}" TextColor="Black"/>
+
+                                <Label Grid.Row="1" Grid.Column="0" FontAttributes="Bold"  VerticalOptions="Center" TextColor="Black" Text="Ngày ĐH:"/>
+                                <DatePicker Grid.Row="1" Date="{Binding ViewOrder.dateCreated}" Grid.Column="1" TextColor="Black" IsEnabled="False" ></DatePicker>
+
+                                <Label Grid.Row="2" Grid.Column="0" FontAttributes="Bold" TextColor="Black" Text="Địa chỉ GH:"/>
+                                <Label Grid.Row="2" Grid.Column="1" Text="{Binding ViewOrder.address}" TextColor="Black"/>
+
+                                <Label Grid.Row="3" Grid.Column="0" FontAttributes="Bold" TextColor="Black" Text="SĐT:"/>
+                                <Label Grid.Row="3" Grid.Column="1" Text="{Binding ViewOrder.phone}" TextColor="Black"/>
+
+                                <Label Grid.ColumnSpan="2" Grid.Row="4" Grid.Column="1" HorizontalTextAlignment="End" Text="{Binding ViewOrder.total, StringFormat='Tổng tiền: {0:#,###,###}.000đ'}" FontSize="Medium" TextColor="#c0392b"/>
+                            </Grid>
+                            <Label TextColor="Black" FontAttributes="Bold" FontSize="Medium" Margin="0, 20, 0, 0" Text="DS sản phẩm:"></Label>
+                        </StackLayout>
+                    </CollectionView.Header>
+
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Span="2" VerticalItemSpacing="5" HorizontalItemSpacing="5" Orientation="Vertical"></GridItemsLayout>
+                    </CollectionView.ItemsLayout>
+                    
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="10" HasShadow="False" BackgroundColor="White" CornerRadius="10">
+                                <Grid Padding="0,8" RowSpacing="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="120"></RowDefinition>
+                                        <RowDefinition Height="30"></RowDefinition>
+                                        <RowDefinition Height="30"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.ColumnSpan="2" Margin="0, 0, 0, 10" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Center" Source="{Binding Product.pictureUrl}"></Image>
+                                    <Label Grid.ColumnSpan="2" Grid.Row="1" MaxLines="2" FontSize="Small" VerticalTextAlignment="End" FontAttributes="Bold" Text="{Binding Product.name}"></Label>
+                                    <Label Grid.ColumnSpan="2" Grid.Row="2" HorizontalOptions="StartAndExpand" FontAttributes="Bold" VerticalTextAlignment="Center" FontSize="Small" TextColor="#b71540" Text="{Binding Product.price, StringFormat='{0:##,0}.000đ'}"></Label>
+                                    <Label Grid.Column="1" Grid.Row="2" HorizontalOptions="StartAndExpand" FontAttributes="Bold" VerticalTextAlignment="Center" FontSize="Small" TextColor="Black" Text="{Binding quantity, StringFormat='x{0}'}"></Label>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </pc:PancakeView>
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>

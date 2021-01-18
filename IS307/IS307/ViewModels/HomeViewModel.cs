@@ -40,13 +40,13 @@ namespace IS307.ViewModels
                 {
                     Categories = new ObservableCollection<CategoryModel>(await CategoryService.GetAllCategory());
                     Products = new ObservableCollection<ProductModel>(await ProductService.GetTopProduct());
-                    IsBusy = false;
                 }
                 catch
                 {
                     await App.Current.MainPage.DisplayAlert("Lổi !", "Không có kết nối mạng", "Ok");
                     await Shell.Current.GoToAsync("//LoginPage");
                 }
+                IsBusy = false;
             });
 
             ViewProductDetailCommand = new Command<ProductModel>(product =>
@@ -61,15 +61,22 @@ namespace IS307.ViewModels
 
             AddToCart = new Command<ProductModel>(async (product) =>
             {
-                await App.Database.SaveCart(new CartItemModel()
+                try
                 {
-                    productId = product._id,
-                    name = product.name,
-                    pictureUrl = product.pictureUrl,
-                    price = product.price,
-                    quantity = 1
-                });
-                await App.Current.MainPage.DisplayAlert("Thành công !", "Đã thêm vào giỏ hàng ", "Ok");
+                    await App.Database.SaveCart(new CartItemModel()
+                    {
+                        productId = product._id,
+                        name = product.name,
+                        pictureUrl = product.pictureUrl,
+                        price = product.price,
+                        quantity = 1
+                    });
+                    await App.Current.MainPage.DisplayAlert("Thành công !", "Đã thêm vào giỏ hàng ", "Ok");
+                }
+                catch
+                {
+
+                }
             });
         }
 

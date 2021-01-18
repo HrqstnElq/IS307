@@ -44,13 +44,13 @@ namespace IS307.ViewModels
                     Product = productModel;
                     isFavorite = await productService.IsFavoriteProduct(Product._id, token);
                     OnPropertyChanged(nameof(Favorite));
-                    IsBusy = false;
                 }
                 catch
                 {
                     await App.Current.MainPage.DisplayAlert("Lổi !", "Không có kết nối mạng", "Ok");
                     await Shell.Current.GoToAsync("//LoginPage");
                 }
+                IsBusy = false;
             });
 
             GoBackCommand = new Command(() =>
