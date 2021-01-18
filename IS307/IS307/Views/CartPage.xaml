@@ -14,18 +14,9 @@
           <RowDefinition Height="50"></RowDefinition>
           <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Text="Giỏ Hàng"
-               FontSize="Medium"
-               TextColor="White"
-               HorizontalTextAlignment="Center"
-               VerticalOptions="Center"></Label>
+        <Label Text="Giỏ Hàng" FontSize="Medium" TextColor="White" HorizontalTextAlignment="Center" VerticalOptions="Center"></Label>
             <ScrollView Grid.Row="1">
-                <pc:PancakeView 
-                       BackgroundColor="#F0F2F5"
-                          CornerRadius="25, 25, 0,0"
-                          Padding="5, 10"
-                          IsClippedToBounds="true"
-                          HorizontalOptions="FillAndExpand">
+                <pc:PancakeView BackgroundColor="#F0F2F5" CornerRadius="25, 25, 0,0" Padding="5, 10" IsClippedToBounds="true" HorizontalOptions="FillAndExpand">
                     <AbsoluteLayout>
                         <StackLayout AbsoluteLayout.LayoutBounds="0.5, 0" AbsoluteLayout.LayoutFlags="PositionProportional">
                             <Label Margin="0, 20"  Text="Giỏ hàng rỗng" FontSize="Medium" />
@@ -71,48 +62,22 @@
                                                         <Grid.RowDefinitions>
                                                             <RowDefinition Height="40"></RowDefinition>
                                                         </Grid.RowDefinitions>
-                                                        <Label VerticalTextAlignment="Center"
-                               FontFamily="Material"
-                               Text="{Static res:IconFont.Minus}"
-                               FontSize="20"
-                               HorizontalTextAlignment="Center"
-                               FontAttributes="Bold">
+                                                        <Label VerticalTextAlignment="Center" FontFamily="Material" Text="{Static res:IconFont.Minus}" FontSize="20" HorizontalTextAlignment="Center" FontAttributes="Bold">
                                                             <Label.GestureRecognizers>
-                                                                <TapGestureRecognizer Command="{Binding BindingContext.Decrement, Source={Reference root}}"
-                                                  CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                                                <TapGestureRecognizer Command="{Binding BindingContext.Decrement, Source={Reference root}}" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                             </Label.GestureRecognizers>
                                                         </Label>
-                                                        <Label VerticalOptions="Center"
-                               Grid.Column="1"
-                               Text="{Binding quantity, FallbackValue='0'}"
-                               HorizontalTextAlignment="Center"
-                               FontAttributes="Bold"></Label>
-                                                        <Label VerticalTextAlignment="Center"
-                               Grid.Column="2"
-                               FontFamily="Material"
-                               Text="{Static res:IconFont.Plus}"
-                               FontSize="20"
-                               HorizontalTextAlignment="Center"
-                               FontAttributes="Bold">
+                                                        <Label VerticalOptions="Center" Grid.Column="1" Text="{Binding quantity, FallbackValue='0'}" HorizontalTextAlignment="Center" FontAttributes="Bold"></Label> <Label VerticalTextAlignment="Center" Grid.Column="2" FontFamily="Material" Text="{Static res:IconFont.Plus}" FontSize="20" HorizontalTextAlignment="Center" FontAttributes="Bold">
                                                             <Label.GestureRecognizers>
-                                                                <TapGestureRecognizer Command="{Binding BindingContext.Increment, Source={Reference root}}"
-                                                  CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                                                <TapGestureRecognizer Command="{Binding BindingContext.Increment, Source={Reference root}}" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                             </Label.GestureRecognizers>
                                                         </Label>
                                                     </Grid>
                                                 </pc:PancakeView>
-                                                <Frame Grid.Column="1"
-                           Padding="5"
-                           Margin="0"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center">
-                                                    <Label FontFamily="Material"
-                             Text="{Static res:IconFont.Close}"
-                             FontAttributes="Bold"
-                             TextColor="#ee5253">
+                                                <Frame Grid.Column="1" Padding="5" Margin="0" HorizontalOptions="Center" VerticalOptions="Center">
+                                                    <Label FontFamily="Material" Text="{Static res:IconFont.Close}" FontAttributes="Bold" TextColor="#ee5253">
                                                         <Label.GestureRecognizers>
-                                                            <TapGestureRecognizer Command="{Binding BindingContext.RemoveCartItem, Source={Reference root}}"
-                                                CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                                            <TapGestureRecognizer Command="{Binding BindingContext.RemoveCartItem, Source={Reference root}}" CommandParameter="{Binding .}"></TapGestureRecognizer>
                                                         </Label.GestureRecognizers>
                                                     </Label>
                                                 </Frame>
@@ -129,22 +94,10 @@
                                             <RowDefinition></RowDefinition>
                                         </Grid.RowDefinitions>
                                         <StackLayout Orientation="Horizontal">
-                                            <Label HorizontalOptions="StartAndExpand"
-                           Text="Tổng tiền :"
-                           FontSize="20"
-                           FontAttributes="Bold"></Label>
-                                            <Label x:Name="Total"
-                           HorizontalOptions="Center"
-                            FontSize="Medium"
-                            FontAttributes="Bold"
-                             TextColor="#ee5253"
-                           Text="{Binding BindingContext.TotalPrice, FallbackValue='0', StringFormat='{0:#,###,###}.000đ', Source={Reference root}}"></Label>
+                                            <Label HorizontalOptions="StartAndExpand" Text="Tổng tiền :" FontSize="20" FontAttributes="Bold"></Label>
+                                            <Label x:Name="Total" HorizontalOptions="Center" FontSize="Medium" FontAttributes="Bold" TextColor="#ee5253" Text="100"></Label>
                                         </StackLayout>
-                                        <Button Grid.Row="1"
-                          Text="Đặt hàng"
-                          BackgroundColor="#2980b9"
-                          CornerRadius="10"
-                          Command="{Binding BindingContext.Order, Source={Reference root}}"></Button>
+                                        <Button Grid.Row="1" Text="Đặt hàng" BackgroundColor="#2980b9" CornerRadius="10" Command="{Binding BindingContext.Order, Source={Reference root}}"></Button>
                                     </Grid>
                                 </DataTemplate>
                             </CollectionView.FooterTemplate>
