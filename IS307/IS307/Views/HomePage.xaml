@@ -6,9 +6,8 @@
              x:Class="IS307.Views.HomePage"
              x:Name="root"
              BackgroundColor="#F0F2F5">
-    <RefreshView IsRefreshing="{Binding IsBusy}"
-               Command="{Binding LoadPageCommand}">
-        <Grid BackgroundColor="#130f40">
+    <RefreshView IsRefreshing="{Binding IsBusy}" Command="{Binding LoadPageCommand}">
+        <Grid BackgroundColor="#ee5253">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -22,7 +21,7 @@
                             <GridItemsLayout Span="2" VerticalItemSpacing="5" HorizontalItemSpacing="5" Orientation="Vertical"></GridItemsLayout>
                         </CollectionView.ItemsLayout>
                         <CollectionView.Header>
-                            <Grid Margin="0">
+                            <Grid Margin="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="250"></RowDefinition>
                                     <RowDefinition Height="auto"></RowDefinition>

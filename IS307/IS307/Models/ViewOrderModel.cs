@@ -15,6 +15,8 @@ namespace IS307.Models
         public double total { get; set; }
         public string address { get; set; }
         public string phone { get; set; }
+        public bool isReceive { get; set; }
+
     }
 
     public class ProductInOrderModel

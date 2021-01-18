@@ -18,9 +18,9 @@ namespace IS307.Services
 
         public async Task<List<ProductModel>> GetTopProduct()
         {
-            var response = await Singleton.HttpClient.GetStringAsync("/product");
+            var response = await Singleton.HttpClient.GetStringAsync("/product/top");
             var result = JsonConvert.DeserializeObject<List<ProductModel>>(response);
-            return result.Take(15).ToList();
+            return result.ToList();
         }
 
         public async Task<bool> IsFavoriteProduct(string ProductId, string token)

@@ -19,7 +19,7 @@
     </Shell.Resources>
 
     <TabBar>
-        <ShellContent Shell.TabBarTitleColor="#130f40" Title="Home" Icon="icon_home.png" Route="HomePage" ContentTemplate="{DataTemplate local:HomePage}" />
+        <ShellContent Shell.TabBarTitleColor="#ee5253" Title="Home" Icon="icon_home.png" Route="HomePage" ContentTemplate="{DataTemplate local:HomePage}" />
         <ShellContent Shell.TabBarTitleColor="#c0392b" Title="Favorite" Icon="heart.png" Route="FavoritePage" ContentTemplate="{DataTemplate local:FavoritePage}" />
         <ShellContent Shell.TabBarTitleColor="#2980b9" Title="Cart" Icon="icon_cart.png" Route="CartPage" ContentTemplate="{DataTemplate local:CartPage}" />
         <ShellContent Shell.TabBarTitleColor="#3B3B98" Title="Order" Icon="clipboard" Route="OrderPage" ContentTemplate="{DataTemplate local:OrderPage}" />

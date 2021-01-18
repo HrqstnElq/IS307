@@ -4,6 +4,8 @@ using IS307.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace IS307.ViewModels
 {
@@ -19,22 +21,32 @@ namespace IS307.ViewModels
         public ICommand OnClickCommand { get; set; }
 
         private readonly OrderService orderService = new OrderService();
-        public OrderViewModel(INavigation navigation)
+        public OrderViewModel(INavigation navigation, bool isReceive)
         {
+            var token = App.Current.Properties["token"]?.ToString();
+
             LoadPageCommand = new Command(async () =>
             {
-                IsBusy = true;
-                var token = App.Current.Properties["token"]?.ToString();
-                if(token != null)
+                try
                 {
-                    Orders = new ObservableCollection<ViewOrderModel>(await orderService.GetOrders(token));
+                    IsBusy = true;
+                    if (token != null)
+                    {
+                        Orders = new ObservableCollection<ViewOrderModel>((await orderService.GetOrders(token)).Where(x => x.isReceive == isReceive));
+                    }
+                    else
+                    {
+                        await App.Current.MainPage.DisplayAlert("Lổi !", "Token invalid", "Ok");
+                        await Shell.Current.GoToAsync("//LoginPage");
+                    }
                 }
-                else
+                catch
                 {
                     await App.Current.MainPage.DisplayAlert("Lổi !", "Không có kết nối mạng", "Ok");
                     await Shell.Current.GoToAsync("//LoginPage");
                 }
                 IsBusy = false;
+
             });
 
             OnClickCommand = new Command<ViewOrderModel>(async (order) =>
