@@ -69,10 +69,14 @@ namespace IS307.ViewModels
 
             Decrement = new Command<CartItemModel>(async (item) =>
             {
-                item.quantity = item.quantity < 2 ? item.quantity : item.quantity - 1;
-                await App.Database.SaveCart(item);
-                CartItems = new ObservableCollection<CartItemModel>(await App.Database.GetCart());
-                TotalPrice = CartItems.Sum(x => x.price * x.quantity);
+                if (item.quantity > 1)
+                {
+                    item.quantity = item.quantity - 1;
+                    await App.Database.SaveCart(item);
+                    CartItems = new ObservableCollection<CartItemModel>(await App.Database.GetCart());
+
+                    OnPropertyChanged("ChangeCart");
+                }
             });
 
             RemoveCartItem = new Command<CartItemModel>(async (item) =>
