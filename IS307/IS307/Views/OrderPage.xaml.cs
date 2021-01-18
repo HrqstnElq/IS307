@@ -1,5 +1,4 @@
 ﻿using IS307.ViewModels;
-using System.Collections.Specialized;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

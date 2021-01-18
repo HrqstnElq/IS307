@@ -74,8 +74,7 @@ namespace IS307.ViewModels
                     item.quantity = item.quantity - 1;
                     await App.Database.SaveCart(item);
                     CartItems = new ObservableCollection<CartItemModel>(await App.Database.GetCart());
-
-                    OnPropertyChanged("ChangeCart");
+                    TotalPrice = CartItems.Sum(x => x.price * x.quantity);
                 }
             });
 
