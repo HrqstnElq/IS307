@@ -1,18 +1,22 @@
-﻿using System.Windows.Input;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace IS307.ViewModels
 {
-    public class AccountViewModel
+    public class AccountViewModel : BaseViewModel
     {
         public ICommand Logout { get; set; }
 
         public AccountViewModel(INavigation navigation)
         {
-            Logout = new Command(() =>
+            Logout = new Command(async () =>
             {
+                OnPropertyChanged("Loading");
+                await Task.Delay(500);
                 App.Current.Properties["token"] = null;
-                Shell.Current.GoToAsync("//LoginPage");
+                await Shell.Current.GoToAsync("//LoginPage");
+                OnPropertyChanged("Complete");
             });
         }
     }

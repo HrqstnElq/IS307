@@ -11,8 +11,19 @@ namespace IS307.Views
         public AccountPage()
         {
             InitializeComponent();
-            var vm = new AccountViewModel(Navigation);
-            BindingContext = vm;
+            BindingContext = new AccountViewModel(Navigation);
+            (BindingContext as AccountViewModel).PropertyChanged += Vm_PropertyChanged;
+        }
+
+        private void Vm_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == "Loading")
+            {
+                Loading.IsVisible = true;
+            }else if(e.PropertyName == "Complete")
+            {
+                Loading.IsVisible = false;
+            }
         }
     }
 }

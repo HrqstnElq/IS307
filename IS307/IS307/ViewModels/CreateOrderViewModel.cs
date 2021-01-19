@@ -49,6 +49,7 @@ namespace IS307.ViewModels
                             orderService.PostOrder(token, Order);
                             await App.Current.MainPage.DisplayAlert("Thành công !", "Create order completed", "Ok");
                             await App.Database.ClearCartItem();
+                            await navigation.PopAsync();
                             await Shell.Current.GoToAsync("//OrderPage");
                         }
                         catch

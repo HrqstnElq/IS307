@@ -7,85 +7,103 @@
              x:Name="root"
              BackgroundColor="#F0F2F5">
   <ContentPage.Content>
-        <Grid BackgroundColor="#8e44ad">
-      <Grid.RowDefinitions>
-        <RowDefinition Height="50"></RowDefinition>
-        <RowDefinition Height="*"></RowDefinition>
-      </Grid.RowDefinitions>
-      <Label Text="Hồ sơ"
+        <AbsoluteLayout>
+            <Grid BackgroundColor="#8e44ad">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Text="Hồ sơ"
              FontSize="Medium"
              TextColor="White"
              HorizontalTextAlignment="Center"
              VerticalOptions="Center"></Label>
-      <pc:PancakeView Grid.Row="1"
+                <pc:PancakeView Grid.Row="1"
                       BackgroundColor="#F0F2F5"
                       CornerRadius="25, 25, 0,0"
                       IsClippedToBounds="true"
                       HorizontalOptions="FillAndExpand">
-        <Grid BackgroundColor="#F0F2F5">
-          <Grid.RowDefinitions>
-            <RowDefinition Height="400"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-          </Grid.RowDefinitions>
-          <Frame Grid.Row="0"
+                    <Grid BackgroundColor="#F0F2F5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="400"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Frame Grid.Row="0"
                  Scale="1.2"
                  CornerRadius="1000"
                  HorizontalOptions="Center"
                  VerticalOptions="Center">
-            <Image Source="https://i.pinimg.com/564x/79/1d/91/791d91c6b328a27c08b7b2f039d5f193.jpg"
+                            <Image Source="https://i.pinimg.com/564x/79/1d/91/791d91c6b328a27c08b7b2f039d5f193.jpg"
                    VerticalOptions="Start"></Image>
-          </Frame>
-          <Frame Grid.Row="1"
+                        </Frame>
+                        <Frame Grid.Row="1"
                  TranslationY="-100"
                  CornerRadius="100"
                  HasShadow="False"
                  BackgroundColor="White"
                  HorizontalOptions="Center">
-            <Label FontFamily="Material"
+                            <Label FontFamily="Material"
                    Text="{Static res:IconFont.Logout}"
                    VerticalOptions="Center"
                    FontSize="Title"
                    TextColor="#d63031"
                    HorizontalOptions="Center">
-              <Label.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding Logout}"></TapGestureRecognizer>
-              </Label.GestureRecognizers>
-            </Label>
-          </Frame>
-          <StackLayout TranslationY="-50"
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Logout}"></TapGestureRecognizer>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Frame>
+                        <StackLayout TranslationY="-50"
                        Grid.Row="2"
                        BackgroundColor="Transparent"
                        VerticalOptions="CenterAndExpand">
-            <Grid Padding="25,10,25,0"
+                            <Grid Padding="25,10,25,0"
                   RowSpacing="10"
                   ColumnSpacing="10">
-              <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-              </Grid.RowDefinitions>
-              <Label Grid.Row="0"
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0"
                      HorizontalOptions="Center"
                      Text="Nhóm 20"
                      FontAttributes="Bold"
                      TextColor="#ee5253"
                      FontSize="30"></Label>
-              <Label Grid.Row="1"
+                                <Label Grid.Row="1"
                      Text="Võ Hữu Trí - 18521531"
                      HorizontalOptions="Center"
                      TextColor="#8e44ad"
                      FontSize="16"></Label>
-              <Label Grid.Row="2"
+                                <Label Grid.Row="2"
                      Text="Lê Thành Vinh - 18521648"
                      HorizontalOptions="Center"
                      TextColor="#8e44ad"
                      FontSize="16"></Label>
+                            </Grid>
+                        </StackLayout>
+                    </Grid>
+                </pc:PancakeView>
             </Grid>
-          </StackLayout>
-        </Grid>
-      </pc:PancakeView>
-    </Grid>
+            <ContentView x:Name="Loading"
+                   AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                   AbsoluteLayout.LayoutFlags="All"
+                   IsVisible="false">
+                <StackLayout VerticalOptions="Center"
+                     HorizontalOptions="Center">
+                    <StackLayout Orientation="Vertical"
+                       HeightRequest="150"
+                       WidthRequest="200">
+                        <ActivityIndicator IsRunning="True"
+                               Color="Orange"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"></ActivityIndicator>
+                    </StackLayout>
+                </StackLayout>
+            </ContentView>
+        </AbsoluteLayout>
   </ContentPage.Content>
 </ContentPage>
