@@ -56,5 +56,12 @@ namespace IS307.Services
             Singleton.HttpClient.DefaultRequestHeaders.Remove("x-auth-token");
             return result;
         }
+
+        public async Task<List<ProductModel>> SearchProduct(string search)
+        {
+            var response = await Singleton.HttpClient.GetStringAsync($"/product/?search={search}");
+            var result = JsonConvert.DeserializeObject<List<ProductModel>>(response);
+            return result;
+        }
     }
 }

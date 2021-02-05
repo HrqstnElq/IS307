@@ -67,87 +67,45 @@
                                 <StackLayout Grid.Row="4"
                              Margin="20, 0, 20, 0"
                              Orientation="Horizontal">
-                                    <Label HorizontalOptions="StartAndExpand"
-                         FontAttributes="Bold"
-                         VerticalTextAlignment="Center"
-                         FontSize="Title"
-                         TextColor="#b71540"
-                         Text="{Binding Product.price, StringFormat='{0:##,0}.000đ'}"></Label>
-                                    <Frame CornerRadius="100"
-                         Padding="10"
-                         HasShadow="False">
-                                        <Label x:Name="Heart"
-                           FontFamily="Material"
-                           Text="{Static res:IconFont.HeartOutline}"
-                           VerticalOptions="Center"
-                           FontSize="Title"
-                           TextColor="#d63031"
-                           HorizontalOptions="Center">
+                                    <Label HorizontalOptions="StartAndExpand" FontAttributes="Bold" VerticalTextAlignment="Center" FontSize="Title" TextColor="#b71540" Text="{Binding Product.price, StringFormat='{0:##,0}.000đ'}"></Label>
+                                    <Frame CornerRadius="100" Padding="10" HasShadow="False">
+                                        <Label x:Name="Heart" FontFamily="Material" Text="{Static res:IconFont.HeartOutline}" VerticalOptions="Center" FontSize="Title" TextColor="#d63031" HorizontalOptions="Center">
                                             <Label.GestureRecognizers>
                                                 <TapGestureRecognizer Command="{Binding Favorite}"></TapGestureRecognizer>
                                             </Label.GestureRecognizers>
                                         </Label>
                                     </Frame>
                                 </StackLayout>
-                                <pc:PancakeView Padding="10, 0"
-                                Margin="10"
-                                HorizontalOptions="Center"
-                                Grid.Row="5"
-                                BorderColor="DarkCyan"
-                                BorderThickness="1"
-                                CornerRadius="24">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition></ColumnDefinition>
-                                            <ColumnDefinition></ColumnDefinition>
-                                            <ColumnDefinition></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Label VerticalTextAlignment="Center"
-                           FontFamily="Material"
-                           Text="{Static res:IconFont.Minus}"
-                           FontSize="30"
-                           HorizontalTextAlignment="Center"
-                           FontAttributes="Bold">
+                                <StackLayout Grid.Row="5" Orientation="Horizontal" Margin="20, 0, 20, 0">
+                                    <pc:PancakeView Padding="10, 0" Margin="0, 10" HorizontalOptions="StartAndExpand" BorderColor="DarkCyan" BorderThickness="1" CornerRadius="24">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Label VerticalTextAlignment="Center" FontFamily="Material" Text="{Static res:IconFont.Minus}" FontSize="30" HorizontalTextAlignment="Center" FontAttributes="Bold">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Decrement}"></TapGestureRecognizer>
+                                                </Label.GestureRecognizers>
+                                            </Label>
+                                            <Label x:Name="quantity" VerticalOptions="Center" Grid.Column="1" Text="{Binding Quantity}" FontSize="20" HorizontalTextAlignment="Center" FontAttributes="Bold"></Label>
+                                            <Label VerticalTextAlignment="Center" Grid.Column="2" FontFamily="Material" Text="{Static res:IconFont.Plus}" FontSize="20" HorizontalTextAlignment="Center" FontAttributes="Bold">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Increment}"></TapGestureRecognizer>
+                                                </Label.GestureRecognizers>
+                                            </Label>
+                                        </Grid>
+                                    </pc:PancakeView>
+                                    <Frame CornerRadius="100" Padding="10" HasShadow="False" VerticalOptions="Center">
+                                        <Label FontFamily="Material" Text="{Static res:IconFont.CartPlus}"  FontSize="Title" TextColor="#ff9f43" HorizontalOptions="Center">
                                             <Label.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding Decrement}"></TapGestureRecognizer>
+                                                <TapGestureRecognizer Command="{Binding AddToCart}"></TapGestureRecognizer>
                                             </Label.GestureRecognizers>
                                         </Label>
-                                        <Label x:Name="quantity"
-                           VerticalOptions="Center"
-                           Grid.Column="1"
-                           Text="{Binding Quantity}"
-                           FontSize="20"
-                           HorizontalTextAlignment="Center"
-                           FontAttributes="Bold"></Label>
-                                        <Label VerticalTextAlignment="Center"
-                           Grid.Column="2"
-                           FontFamily="Material"
-                           Text="{Static res:IconFont.Plus}"
-                           FontSize="20"
-                           HorizontalTextAlignment="Center"
-                           FontAttributes="Bold">
-                                            <Label.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding Increment}"></TapGestureRecognizer>
-                                            </Label.GestureRecognizers>
-                                        </Label>
-                                    </Grid>
-                                </pc:PancakeView>
-                                <Frame Grid.Row="6"
-                       CornerRadius="100"
-                       Padding="10"
-                       HasShadow="False"
-                       HorizontalOptions="Center">
-                                    <Label FontFamily="Material"
-                         Text="{Static res:IconFont.CartPlus}"
-                         VerticalOptions="Center"
-                         FontSize="Title"
-                         TextColor="#ff9f43"
-                         HorizontalOptions="Center">
-                                        <Label.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding AddToCart}"></TapGestureRecognizer>
-                                        </Label.GestureRecognizers>
-                                    </Label>
-                                </Frame>
+                                    </Frame>
+                                </StackLayout>
+                                <Label Grid.Row="6" Margin="20, 0, 20, 0" FontSize="Body" Text="{Binding Product.description, StringFormat='Description: {0}'}"></Label>
                             </Grid>
                         </pc:PancakeView>
                     </ScrollView>

@@ -7,5 +7,6 @@
         public double price { get; set; }
         public string pictureUrl { get; set; }
         public string category { get; set; }
+        public string description { get; set; }
     }
 }
